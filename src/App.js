@@ -8,6 +8,7 @@ import React from 'react'
 const App = () => {
   return (
     <div className='App'>
+      note added by Phil to test Zeit github auto deploy
     </div>
   )
 }
