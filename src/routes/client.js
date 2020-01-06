@@ -5,7 +5,9 @@ export default {
     signup   : () => `/auth/sign-up`,
     signin   : () => `/auth/sign-in`,
     signout  : () => `/auth/sign-out`,
-    users    : (id) => `/users/${id}`,
-    graphs   : (id) => `/graphs/${id}`,
+    users    : () => `/users`,
+    user     : (id) => `/users/${id}`,
+    graphs   : () => `/graphs`,
+    graph    : (id) => `/graphs/${id}`,
   },
 }
