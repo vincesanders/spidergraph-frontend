@@ -6,18 +6,18 @@
 
 /// branch ///
 export const branch = ($name, $trunk) => {
-  const $pathname = ($trunk) ? ($trunk.$fullname + '/') : ('');
-  const $fullname = $pathname + $name;
+  const $pathname = ($trunk) ? ($trunk.$fullname + '/') : ('')
+  const $fullname = $pathname + $name
 
-  return ({ $name, $pathname, $fullname });
-};
+  return ({ $name, $pathname, $fullname })
+}
 
 /// root ///
-export const root = ($name) => (branch ($name));
+export const root = ($name) => (branch ($name))
 
 /**************************************/
 
 export default {
   branch,
   root,
-};
+}

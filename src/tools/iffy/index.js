@@ -9,14 +9,14 @@
 ***************************************/
 
 /// existence ///
-export const is    = (x) => (x !== undefined && x !== null);
+export const is    = (x) => (x !== undefined && x !== null)
 export const isnt  = (x) => (!is (x)); /* (x === undefined || x === null); */
-export const maybe = (x) => (is (x) || isnt (x));
+export const maybe = (x) => (is (x) || isnt (x))
 
 /// boolean ///
-export const yes     = (x) => (x === true);
-export const no      = (x) => (x === false);
-export const boolean = (x) => (yes (x) || no (x));
+export const yes     = (x) => (x === true)
+export const no      = (x) => (x === false)
+export const boolean = (x) => (yes (x) || no (x))
 
 /// types ///
 /*--------------------------------------
@@ -25,8 +25,8 @@ export const boolean = (x) => (yes (x) || no (x));
 --------------------------------------*/
 export const like = (t, x) => (
   is (x) && (toString.call (x) === '[object ' + t + ']')
-);
-export const unlike = (t, x) => (!like (t, x));
+)
+export const unlike = (t, x) => (!like (t, x))
 
 // export const type = {
 //   // simple
@@ -51,4 +51,4 @@ export default {
   is, isnt, maybe,
   yes, no, boolean,
   like, unlike
-};
+}

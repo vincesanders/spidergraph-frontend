@@ -6,11 +6,11 @@
 
 /// flag ///
 export const flag = (method, message) => {
-  console[method] (`>>> ${message} <<<`);
+  console[method] (`>>> ${message} <<<`)
 }
 
 /**************************************/
 
 export default {
   flag,
-};
+}

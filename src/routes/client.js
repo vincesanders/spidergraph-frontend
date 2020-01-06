@@ -8,4 +8,4 @@ export default {
     users    : (id) => `/users/${id}`,
     graphs   : (id) => `/graphs/${id}`,
   },
-};
+}

@@ -1,6 +1,6 @@
-import $tree from 'tools/$tree';
-import $trunk from '../$';
+import $tree from 'tools/$tree'
+import $trunk from '../$'
 
-const $this = $tree.branch ('iffy', $trunk);
+const $this = $tree.branch ('iffy', $trunk)
 
-export default $this;
+export default $this
