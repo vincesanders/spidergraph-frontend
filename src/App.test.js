@@ -1,9 +1,15 @@
-import React from 'react';
-import { render } from '@testing-library/react';
+/// components ///
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+/// testers ///
+import renders from 'testers/renders';
+
+/***************************************
+  TESTING
+***************************************/
+const what = {
+  name : 'App',
+  Component : App,
+};
+
+renders (what.name, what.Component);

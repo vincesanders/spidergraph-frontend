@@ -1,0 +1,117 @@
+/*******************************************************************************
+  TAILWIND : COLORS
+--------------------------------------------------------------------------------
+  from: https://tailwindcss.com/
+*******************************************************************************/
+
+:root {
+  /*/ Gray /*/
+  --tailwind-gray-100 : #F7FAFC;
+  --tailwind-gray-200 : #EDF2F7;
+  --tailwind-gray-300 : #E2E8F0;
+  --tailwind-gray-400 : #CBD5E0;
+  --tailwind-gray-500 : #A0AEC0;
+  --tailwind-gray-600 : #718096;
+  --tailwind-gray-700 : #4A5568;
+  --tailwind-gray-800 : #2D3748;
+  --tailwind-gray-900 : #1A202C;
+
+  /*/ Red /*/
+  --tailwind-red-100 : #FFF5F5;
+  --tailwind-red-200 : #FED7D7;
+  --tailwind-red-300 : #FEB2B2;
+  --tailwind-red-400 : #FC8181;
+  --tailwind-red-500 : #F56565;
+  --tailwind-red-600 : #E53E3E;
+  --tailwind-red-700 : #C53030;
+  --tailwind-red-800 : #9B2C2C;
+  --tailwind-red-900 : #742A2A;
+
+  /*/ Orange /*/
+  --tailwind-orange-100 : #FFFAF0;
+  --tailwind-orange-200 : #FEEBC8;
+  --tailwind-orange-300 : #FBD38D;
+  --tailwind-orange-400 : #F6AD55;
+  --tailwind-orange-500 : #ED8936;
+  --tailwind-orange-600 : #DD6B20;
+  --tailwind-orange-700 : #C05621;
+  --tailwind-orange-800 : #9C4221;
+  --tailwind-orange-900 : #7B341E;
+
+  /*/ Yellow /*/
+  --tailwind-yellow-100 : #FFFFF0;
+  --tailwind-yellow-200 : #FEFCBF;
+  --tailwind-yellow-300 : #FAF089;
+  --tailwind-yellow-400 : #F6E05E;
+  --tailwind-yellow-500 : #ECC94B;
+  --tailwind-yellow-600 : #D69E2E;
+  --tailwind-yellow-700 : #B7791F;
+  --tailwind-yellow-800 : #975A16;
+  --tailwind-yellow-900 : #744210;
+
+  /*/ Green /*/
+  --tailwind-green-100 : #F0FFF4;
+  --tailwind-green-200 : #C6F6D5;
+  --tailwind-green-300 : #9AE6B4;
+  --tailwind-green-400 : #68D391;
+  --tailwind-green-500 : #48BB78;
+  --tailwind-green-600 : #38A169;
+  --tailwind-green-700 : #2F855A;
+  --tailwind-green-800 : #276749;
+  --tailwind-green-900 : #22543D;
+
+  /*/ Teal /*/
+  --tailwind-teal-100 : #E6FFFA;
+  --tailwind-teal-200 : #B2F5EA;
+  --tailwind-teal-300 : #81E6D9;
+  --tailwind-teal-400 : #4FD1C5;
+  --tailwind-teal-500 : #38B2AC;
+  --tailwind-teal-600 : #319795;
+  --tailwind-teal-700 : #2C7A7B;
+  --tailwind-teal-800 : #285E61;
+  --tailwind-teal-900 : #234E52;
+
+  /*/ Blue /*/
+  --tailwind-blue-100 : #EBF8FF;
+  --tailwind-blue-200 : #BEE3F8;
+  --tailwind-blue-300 : #90CDF4;
+  --tailwind-blue-400 : #63B3ED;
+  --tailwind-blue-500 : #4299E1;
+  --tailwind-blue-600 : #3182CE;
+  --tailwind-blue-700 : #2B6CB0;
+  --tailwind-blue-800 : #2C5282;
+  --tailwind-blue-900 : #2A4365;
+
+  /*/ Indigo /*/
+  --tailwind-indigo-100 : #EBF4FF;
+  --tailwind-indigo-200 : #C3DAFE;
+  --tailwind-indigo-300 : #A3BFFA;
+  --tailwind-indigo-400 : #7F9CF5;
+  --tailwind-indigo-500 : #667EEA;
+  --tailwind-indigo-600 : #5A67D8;
+  --tailwind-indigo-700 : #4C51BF;
+  --tailwind-indigo-800 : #434190;
+  --tailwind-indigo-900 : #3C366B;
+
+  /*/ Purple /*/
+  --tailwind-purple-100 : #FAF5FF;
+  --tailwind-purple-200 : #E9D8FD;
+  --tailwind-purple-300 : #D6BCFA;
+  --tailwind-purple-400 : #B794F4;
+  --tailwind-purple-500 : #9F7AEA;
+  --tailwind-purple-600 : #805AD5;
+  --tailwind-purple-700 : #6B46C1;
+  --tailwind-purple-800 : #553C9A;
+  --tailwind-purple-900 : #44337A;
+
+  /*/ Pink /*/
+  --tailwind-pink-100 : #FFF5F7;
+  --tailwind-pink-200 : #FED7E2;
+  --tailwind-pink-300 : #FBB6CE;
+  --tailwind-pink-400 : #F687B3;
+  --tailwind-pink-500 : #ED64A6;
+  --tailwind-pink-600 : #D53F8C;
+  --tailwind-pink-700 : #B83280;
+  --tailwind-pink-800 : #97266D;
+  --tailwind-pink-900 : #702459;
+}
