@@ -1,0 +1,92 @@
+{
+/// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+/// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+/// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+/// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+/// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+/// Placeholders with the same ids are connected.
+/// Example:
+/// "Print to console": {
+/// 	"scope": "javascript,typescript",
+/// 	"prefix": "log",
+/// 	"body": [
+/// 		"console.log('$1');",
+/// 		"$2"
+/// 	],
+/// 	"description": "Log output to console"
+/// }
+
+///%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/// END ELEMENTS
+///%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/// MARGIN
+///=========================================================
+"margin -top,-bottom of ends" : {
+	"scope"  : "css,less,sass,scss",
+	"prefix" : "ma-tb-ends",
+	"body"   : [
+		"${1:selector} {",
+		"  margin-top: ${2:16px};",
+		"  margin-bottom: ${3:${2}};",
+		"}",
+		"${1}:first-child {",
+		"  margin-top: ${4:0};",
+		"}",
+		"${1}:last-child {",
+		"  margin-bottom: ${5:${4}};",
+		"}",
+	],
+},
+"margin -left,-right of ends" : {
+	"scope"  : "css,less,sass,scss",
+	"prefix" : "ma-lr-ends",
+	"body"   : [
+		"${1:selector} {",
+		"  margin-left: ${2:16px};",
+		"  margin-right: ${3:${2}};",
+		"}",
+		"${1}:first-child {",
+		"  margin-left: ${4:0};",
+		"}",
+		"${1}:last-child {",
+		"  margin-right: ${5:${4}};",
+		"}",
+	],
+},
+///=========================================================
+/// PADDING
+///=========================================================
+"padding -top,-bottom of ends" : {
+	"scope"  : "css,less,sass,scss",
+	"prefix" : "pa-tb-ends",
+	"body"   : [
+		"${1:selector} {",
+		"  padding-top: ${2:16px};",
+		"  padding-bottom: ${3:${2}};",
+		"}",
+		"${1}:first-child {",
+		"  padding-top: ${4:0};",
+		"}",
+		"${1}:last-child {",
+		"  padding-bottom: ${5:${4}};",
+		"}",
+	],
+},
+"padding -left,-right of ends" : {
+	"scope"  : "css,less,sass,scss",
+	"prefix" : "pa-lr-ends",
+	"body"   : [
+		"${1:selector} {",
+		"  padding-left: ${2:16px};",
+		"  padding-right: ${3:${2}};",
+		"}",
+		"${1}:first-child {",
+		"  padding-left: ${4:0};",
+		"}",
+		"${1}:last-child {",
+		"  padding-right: ${5:${4}};",
+		"}",
+	],
+},
+///%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+}
