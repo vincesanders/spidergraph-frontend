@@ -8,6 +8,18 @@ export default () => {
     const [retypedPassword, setRetypedPassword] = useState('');
     const [isNewUser, setIsNewUser] = useState(false);
 
+    const usernameSchema = Yup.string()
+        .required('This field is required')
+        .min(4, 'Too short!')
+        .max(50, 'Too long!');
+    const passwordSchema = Yup.string()
+        .required('This field is required')
+        .min(8, 'Too short!')
+        .max(50, 'Too long!');
+    const retypedPasswordSchema =  Yup.string()
+        .required('This field is required')
+        .matches(password, 'The 2 passwords must match!');
+
     function handleSubmit(e) {
         e.preventDefault();
         const values = {};
