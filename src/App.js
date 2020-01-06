@@ -8,7 +8,17 @@ import {
 } from 'react-router-dom'
 
 /// components ///
-import PrivateRoute from 'components/PrivateRoute'
+import {
+  PrivateRoute,
+  Home,
+  Users,
+  User,
+  Graphs,
+  Graph,
+  SignUp,
+  SignIn,
+  SignOut,
+} from 'components'
 
 /// routes ///
 import { client } from 'routes';
@@ -25,49 +35,42 @@ const App = () => {
           {/* Home | redirect to Sign In */}
           <PrivateRoute
           exact path={[ client.ends.root (), client.ends.home () ]}
-          component={<React.Fragment/>}
+          component={Home}
           />
           {/* View All Users */}
           <Route
           exact path={client.ends.users ()}
-          render={() => <div>View All Users</div>}
-          // component={<React.Fragment/>}
+          component={Users}
           />
           {/* View User */}
           <Route
           exact path={client.ends.user (':id')}
-          render={() => <div>View User</div>}
-          // component={<React.Fragment/>}
+          component={User}
           />
           {/* View All Graphs */}
           <Route
           exact path={client.ends.graphs ()}
-          render={() => <div>View All Graphs</div>}
-          // component={<React.Fragment/>}
+          component={Graphs}
           />
           {/* View Graph */}
           <Route
           exact path={client.ends.graph (':id')}
-          render={() => <div>View Graph</div>}
-          // component={<React.Fragment/>}
+          component={Graph}
           />
           {/* Sign Up */}
           <Route
           exact path={client.ends.signup ()}
-          render={() => <div>Sign Up</div>}
-          // component={<React.Fragment/>}
+          component={SignUp}
           />
           {/* Sign In */}
           <Route
           exact path={client.ends.signin ()}
-          render={() => <div>Sign In</div>}
-          // component={<React.Fragment/>}
+          component={SignIn}
           />
           {/* Sign Out */}
           <Route
           exact path={client.ends.signout ()}
-          render={() => <div>Sign Out</div>}
-          // component={<React.Fragment/>}
+          component={SignOut}
           />
           {/* default */}
           <Redirect to={client.ends.home ()}/>
