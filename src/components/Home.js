@@ -1,5 +1,5 @@
 /// external modules ///
-import React from 'react';
+import React from 'react'
 
 /***************************************
   MAIN
@@ -7,9 +7,9 @@ import React from 'react';
 const Home = (props) => {
   return (
     <div className='Home'>Home</div>
-  );
-};
+  )
+}
 
 /**************************************/
 
-export default Home;
+export default Home
