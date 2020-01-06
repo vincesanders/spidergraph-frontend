@@ -10,7 +10,7 @@
 /// 	"scope": "javascript,typescript",
 /// 	"prefix": "log",
 /// 	"body": [
-/// 		"console.log('$1');",
+/// 		"console.log('$1')",
 /// 		"$2"
 /// 	],
 /// 	"description": "Log output to console"
@@ -23,11 +23,11 @@
   "scope"  : "javascript,javascriptreact",
   "prefix" : "$tree--root",
   "body"   : [
-    "import $tree from 'tools/$tree';",
+    "import $tree from 'tools/$tree'",
     "",
-    "const $this = $tree.root ('tools');",
+    "const $this = $tree.root ('tools')",
     "",
-    "export default $this;",
+    "export default $this",
     "",
   ],
 },
@@ -35,12 +35,12 @@
   "scope"  : "javascript,javascriptreact",
   "prefix" : "$tree--branch",
   "body"   : [
-    "import $tree from 'tools/$tree';",
-    "import $trunk from '../$';",
+    "import $tree from 'tools/$tree'",
+    "import $trunk from '../$'",
     "",
-    "const $this = $tree.branch ('klaxios', $trunk);",
+    "const $this = $tree.branch ('klaxios', $trunk)",
     "",
-    "export default $this;",
+    "export default $this",
     "",
   ],
 },

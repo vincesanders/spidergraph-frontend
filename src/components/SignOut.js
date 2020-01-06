@@ -1,5 +1,5 @@
 /// external modules ///
-import React from 'react';
+import React from 'react'
 
 /***************************************
   MAIN
@@ -7,9 +7,9 @@ import React from 'react';
 const SignOut = (props) => {
   return (
     <div className='SignOut'>SignOut</div>
-  );
-};
+  )
+}
 
 /**************************************/
 
-export default SignOut;
+export default SignOut

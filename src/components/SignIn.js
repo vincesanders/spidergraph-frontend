@@ -1,5 +1,5 @@
 /// external modules ///
-import React from 'react';
+import React from 'react'
 
 /***************************************
   MAIN
@@ -7,9 +7,9 @@ import React from 'react';
 const SignIn = (props) => {
   return (
     <div className='SignIn'>SignIn</div>
-  );
-};
+  )
+}
 
 /**************************************/
 
-export default SignIn;
+export default SignIn
