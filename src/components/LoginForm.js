@@ -9,11 +9,29 @@ export default () => {
 
     function handleSubmit(e) {
         e.preventDefault();
-
+        const values = {};
         if (isNewUser) {
+            if(password === retypedPassword) {
+                values = {
+                    username: username,
+                    password: password
+                }
+                // axios
+            //     .post('/api/auth/register/', values)
+            //     .then(res => {
+            //         console.log(res);
+            //     })
+            //     .catch(err => {
+            //         console.log(err);
+            //     });
+            } else {
+                
+            }
+
+            
 
         } else {
-            const values = {
+            values = {
                 username: username,
                 password: password
             }
