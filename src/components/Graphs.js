@@ -1,5 +1,5 @@
 /// external modules ///
-import React from 'react';
+import React from 'react'
 
 /***************************************
   MAIN
@@ -7,9 +7,9 @@ import React from 'react';
 const Graphs = (props) => {
   return (
     <div className='Graphs'>Graphs</div>
-  );
-};
+  )
+}
 
 /**************************************/
 
-export default Graphs;
+export default Graphs

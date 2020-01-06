@@ -21,7 +21,7 @@ import {
 } from 'components'
 
 /// routes ///
-import { client } from 'routes';
+import { client } from 'routes'
 
 /***************************************
   MAIN
