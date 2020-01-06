@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import * as Yup from 'yup';
 
 export default () => {
     const [username, setUsername] = useState('');
@@ -25,7 +26,7 @@ export default () => {
             //         console.log(err);
             //     });
             } else {
-                
+
             }
 
             
