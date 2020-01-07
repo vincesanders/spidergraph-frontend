@@ -36,13 +36,21 @@ const TopBar = () => {
     const dispatch = useDispatch();
     const spiders = useSelector(state => state.spiders);
 
+    const addNewGraph = () => {
+        dispatch({type: actions.ADD_GRAPH});
+    }
+
+    const openGraph = indexToOpen => {
+        dispatch({type: actions.OPEN_GRAPH, payload: indexToOpen});
+    }
+
     return(
         <Topbar>
             <h3>Spider.Graph</h3>
             {spiders.map((spider, index) => (
-                <GraphButton>{spider.title}</GraphButton>
+                <GraphButton onClick={() => openGraph(index)}>{spider.title}</GraphButton>
             ))}
-            <NewGraphButton onClick={() => dispatch({type: actions.ADD_GRAPH})}>+</NewGraphButton>
+            <NewGraphButton onClick={addNewGraph}>+</NewGraphButton>
         </Topbar>
     )
 }
