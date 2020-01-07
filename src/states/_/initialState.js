@@ -1,12 +1,12 @@
 /***************************************
   MAIN
 ----------------------------------------
-  - init : initial state
+  - initialState : initial state
 ***************************************/
 
-const init = {
+const initialState = {
 }
 
 /**************************************/
 
-export default init
+export default initialState

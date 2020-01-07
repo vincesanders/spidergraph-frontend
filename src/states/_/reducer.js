@@ -5,8 +5,10 @@ import hi from 'tools/hi'
 // import nullably from 'tools/nullably'
 
 /// internal modules ///
-import initState from './init'
-import { types } from './actions'
+import initialState from './inititalState'
+import {
+  DO_SOMETHING
+} from './actions'
 
 /***************************************
   MAIN
@@ -14,15 +16,15 @@ import { types } from './actions'
   - reducer : state reducer
 ***************************************/
 
-const reducer = (state = initState, action) => {
-  const { type, data } = action
+const reducer = (state = initialState, action) => {
+  const { type, payload } = action
 
   /// do it! ///
   try {
     /// actions ///
     switch (action.type) {
-      case types.DO_SOMETHING :
-        hi.flag ('log', 'doing something')
+      case DO_SOMETHING :
+        // hi.flag ('log', 'doing something')
         return (state)
       // else
       default :
