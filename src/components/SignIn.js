@@ -1,8 +1,8 @@
 /// external modules ///
 import React from 'react'
 
-import LoginForm from './LoginForm';
-import { client } from '../routes'
+import SignInForm from 'components/AuthForms/SignInForm'
+import { client } from 'routes'
 
 /***************************************
   MAIN
@@ -15,7 +15,7 @@ const SignIn = (props) => {
   return (
     <div className='SignIn'>
       SignIn
-      <LoginForm />
+      <SignInForm />
       <p>Don't have an account?</p>
       <button onClick={routeToSignUp}>Create One</button>
     </div>

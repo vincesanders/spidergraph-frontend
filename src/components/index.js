@@ -7,9 +7,9 @@
 //////////////////////////////////////*/
 export { default as PrivateRoute } from './PrivateRoute'
 export { default as Home } from './Home'
-export { default as Users } from './Users'
+// export { default as Users } from './Users'
 export { default as User } from './User'
-export { default as Graphs } from './Graphs'
+// export { default as Graphs } from './Graphs'
 export { default as Graph } from './Graph'
 export { default as SignUp } from './SignUp'
 export { default as SignIn } from './SignIn'
