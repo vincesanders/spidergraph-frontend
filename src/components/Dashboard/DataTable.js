@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { buildQueries } from "@testing-library/react";
 
 const DataTable = () => {
     const [dummy, setDummy] = useState(0);
@@ -22,9 +23,9 @@ const DataTable = () => {
     }
 
     //this function is not calling a rerender when chaging state
-    function removeCategory(index) {
+    function removeCategory(e) {
         const newData = data;
-        newData.splice(index, 1);
+        newData.splice(e.target.getAttribute('index'), 1);
         setData(newData);
         //this is a temp solution. Changing this state is calling a rerender
         setDummy(dummy + 1);
@@ -41,6 +42,7 @@ const DataTable = () => {
     }
 
     return (
+        // This dummy number has to be hidden if left in the final build.
         <div> {dummy}
             <table>
                 <thead>
@@ -66,7 +68,7 @@ const DataTable = () => {
                             <tr key={i+1}>
                                 {arr.map((cell, j) => (<td key={(i+1) * j}>{cell}</td>))}
                                 {/* TODO: When styling, display none until on hover */}
-                                <td><button index={i} onClick={() => removeCategory(i)}>-</button></td>
+                                <td><button index={i} onClick={removeCategory}>-</button></td>
                             </tr>
                         );
                     }
