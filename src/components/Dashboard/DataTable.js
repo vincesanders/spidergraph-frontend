@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const DataTable = () => {
     const [data, setData] = useState([
-        ['Categories', 'DataSet1', (<button onClick={addNewDataSet}>+</button>)],
+        ['Categories', 'DataSet1'],
         ['Category1', 5],
         ['Category2', 5],
         ['Category3', 5],
@@ -20,10 +20,11 @@ const DataTable = () => {
         setData(data => [...data, newCategory]);
     }
 
-    function addNewDataSet(e) {
-        let newData = data.map((arr, i) => {
+    function addNewDataSet() {
+        console.log(data)
+        const newData = data.map((arr, i) => {
             if (i === 0) {
-                return [...arr.slice(0, arr.length - 1), 'DataSet', arr[arr.length - 1]];
+                return [...arr, 'DataSet'];
             }
             return [...arr, 5]
         })
@@ -40,6 +41,7 @@ const DataTable = () => {
                                 <th key={i+1}>{item}</th>
                             );
                         })}
+                        <button onClick={addNewDataSet}>+</button>
                     </tr>
                 </thead>
                 <tbody>
