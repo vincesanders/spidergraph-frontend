@@ -5,7 +5,10 @@ import hi from 'tools/hi'
 // import nullably from 'tools/nullably'
 
 /// internal modules ///
-import initialState from './initialState'
+import {
+  initialState,
+  initialSpiderGraph,
+} from './initialState'
 import actions from './actions'
 
 /***************************************
@@ -16,6 +19,7 @@ import actions from './actions'
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action
+  let newState = {}
 
   /// do it! ///
   try {
@@ -23,33 +27,61 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
       /// client ///
       case (actions.ADD_GRAPH) :
-        return (state)
+        newState = {
+          ...state,
+          spiders : [
+            ...state.spiders,
+            initialSpiderGraph (),
+          ],
+        }
+        return (newState)
+
+      case (actions.OPEN_GRAPH) :
+        newState = {
+          ...state,
+          openedSpider : action.payload,
+        }
+        return (newState)
+
       case (actions.EDIT_GRAPH) :
-        return (state)
+        return (newState)
+
       case (actions.RESET_GRAPH) :
-        return (state)
+        return (newState)
+
       case (actions.EDIT_GRAPH_TITLE) :
-        return (state)
+        return (newState)
+
       case (actions.EDIT_GRAPH_THEME) :
-        return (state)
+        return (newState)
+
       case (actions.EDIT_GRAPH_SCALE) :
-        return (state)
+        return (newState)
+
       case (actions.ADD_GRAPH_ARM) :
-        return (state)
+        return (newState)
+
       case (actions.EDIT_GRAPH_ARM) :
-        return (state)
+        return (newState)
+
       case (actions.DELETE_GRAPH_ARM) :
-        return (state)
+        return (newState)
+
       case (actions.ADD_GRAPH_DATASET) :
-        return (state)
+        return (newState)
+
       case (actions.EDIT_GRAPH_DATASET) :
-        return (state)
+        return (newState)
+
       case (actions.DELETE_GRAPH_DATASET) :
-        return (state)
+        return (newState)
+
       case (actions.REORDER_GRAPH_ARMS) :
-        return (state)
+        return (newState)
+
       case (actions.REORDER_GRAPH_DATASETS) :
-        return (state)
+        return (newState)
+
       /// server ///
       // else
       default :
