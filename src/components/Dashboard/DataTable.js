@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const DataTable = () => {
     const [data, setData] = useState([
-        ['Categories', 'DataSet1'],
+        ['Categories', 'DataSet1', (<button onClick={addNewDataSet}>+</button>)],
         ['Category1', 5],
         ['Category2', 5],
         ['Category3', 5],
@@ -12,12 +12,16 @@ const DataTable = () => {
 
     function addNewCategory() {
         let newCategory = ['Category'];
-        data[0].forEach((col, i) => {
+        data[1].forEach((col, i) => {
             if (i > 0) {
                 newCategory.push(5);
             }
         })
         setData(data => [...data, newCategory]);
+    }
+
+    function addNewDataSet() {
+        
     }
     
     return (
