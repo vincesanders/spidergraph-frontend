@@ -21,6 +21,36 @@ const reducer = (state = initialState, action) => {
   try {
     /// actions ///
     switch (action.type) {
+      /// client ///
+      case (actions.ADD_GRAPH) :
+        return (state)
+      case (actions.EDIT_GRAPH) :
+        return (state)
+      case (actions.RESET_GRAPH) :
+        return (state)
+      case (actions.EDIT_GRAPH_TITLE) :
+        return (state)
+      case (actions.EDIT_GRAPH_THEME) :
+        return (state)
+      case (actions.EDIT_GRAPH_SCALE) :
+        return (state)
+      case (actions.ADD_GRAPH_ARM) :
+        return (state)
+      case (actions.EDIT_GRAPH_ARM) :
+        return (state)
+      case (actions.DELETE_GRAPH_ARM) :
+        return (state)
+      case (actions.ADD_GRAPH_DATASET) :
+        return (state)
+      case (actions.EDIT_GRAPH_DATASET) :
+        return (state)
+      case (actions.DELETE_GRAPH_DATASET) :
+        return (state)
+      case (actions.REORDER_GRAPH_ARMS) :
+        return (state)
+      case (actions.REORDER_GRAPH_DATASETS) :
+        return (state)
+      /// server ///
       // else
       default :
         hi.flag ('warn', 'action not defined')
