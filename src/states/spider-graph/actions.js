@@ -103,6 +103,7 @@ export const DELETE_GRAPH_FAILURE = 'DELETE_GRAPH_FAILURE'
 export default {
   /// client ///
   ADD_GRAPH,
+  OPEN_GRAPH,
   EDIT_GRAPH,
   RESET_GRAPH,
   EDIT_GRAPH_TITLE,
