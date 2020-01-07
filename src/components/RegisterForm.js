@@ -12,7 +12,7 @@ export default withFormik({
         }
     },
     handleSubmit(values, { resetForm }) {
-        const valuesToSubmit = {username: values.username, password: values.password}; //I don't want to send the retyped password to the bakend.
+        const valuesToSubmit = {username: values.username, password: values.password}; //I don't want to send the retyped password to the backend.
         console.log(valuesToSubmit);
 
         // axios
@@ -46,9 +46,9 @@ export default withFormik({
                     {touched.username && errors.username && (<p>{errors.username}</p>)}
                 </label>
                 <label>Password: 
-                    <Field type='text' name='password' />
+                    <Field type='password' name='password' />
                     {touched.password && errors.password && (<p>{errors.password}</p>)}
-                    <Field type='text' name='retypedPassword' />
+                    <Field type='password' name='retypedPassword' />
                     {touched.retypedPassword && errors.retypedPassword && (<p>{errors.retypedPassword}</p>)}
                 </label>
                 <button type='submit'>Submit</button>

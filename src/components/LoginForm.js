@@ -41,7 +41,7 @@ export default withFormik({
                     {touched.username && errors.username && (<p>{errors.username}</p>)}
                 </label>
                 <label>Password: 
-                    <Field type='text' name='password' />
+                    <Field type='password' name='password' />
                     {touched.password && errors.password && (<p>{errors.password}</p>)}
                 </label>
                 <button type='submit'>Submit</button>
