@@ -12,10 +12,11 @@ export default withFormik({
         }
     },
     handleSubmit(values, { resetForm }) {
-        console.log(values);
+        const valuesToSubmit = {username: values.username, password: values.password}; //I don't want to send the retyped password to the bakend.
+        console.log(valuesToSubmit);
 
         // axios
-        //     .post('/api/auth/register/', values)
+        //     .post('/api/auth/register/', valuesToSubmit)
         //     .then(res => {
         //         setStatus(res.data);
         //         resetForm();
