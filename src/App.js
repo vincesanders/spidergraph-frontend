@@ -12,14 +12,18 @@ import {
 import {
   PrivateRoute,
   Home,
-  Users,
+  // Users,
   User,
-  Graphs,
+  // Graphs,
   Graph,
   SignUp,
   SignIn,
   SignOut,
 } from 'components'
+import {
+  Users,
+  Graphs,
+} from 'components/_stretch_'
 
 /// routes ///
 import { client } from 'routes'
@@ -34,12 +38,7 @@ const App = () => {
       <div className='App'>
         <Switch>
           {/* Home | redirect to Sign In */}
-          {/* TEMP !!!! - making home non-private to test -Phil */}
-          {/* <PrivateRoute
-          exact path={[ client.ends.root (), client.ends.home () ]}
-          component={Home}
-          /> */}
-          <Route
+          <PrivateRoute
           exact path={[ client.ends.root (), client.ends.home () ]}
           component={Home}
           />

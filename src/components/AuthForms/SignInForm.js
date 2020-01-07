@@ -1,7 +1,7 @@
-import React from 'react';
-import axios from 'axios';
-import { withFormik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import React from 'react'
+import { authios } from 'tools/auth'
+import { withFormik, Form, Field } from 'formik'
+import * as Yup from 'yup'
 
 export default withFormik({
     mapPropsToValues() {
@@ -20,7 +20,7 @@ export default withFormik({
         //         resetForm();
         //     })
         //     .catch(err => console.log(err.response));
-        
+
         resetForm(); //remove when adding axios
     },
     validationSchema: Yup.object().shape({
@@ -36,11 +36,11 @@ export default withFormik({
     return (
         <div>
             <Form>
-                <label>Username: 
+                <label>Username:
                     <Field type='text' name='username' />
                     {touched.username && errors.username && (<p>{errors.username}</p>)}
                 </label>
-                <label>Password: 
+                <label>Password:
                     <Field type='text' name='password' />
                     {touched.password && errors.password && (<p>{errors.password}</p>)}
                 </label>
