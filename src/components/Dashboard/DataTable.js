@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const DataTable = () => {
+    const [dummy, setDummy] = useState(0);
     const [data, setData] = useState([
         ['Categories', 'DataSet1'],
         ['Category1', 5],
@@ -20,8 +21,16 @@ const DataTable = () => {
         setData(data => [...data, newCategory]);
     }
 
+    //this function is not calling a rerender when chaging state
+    function removeCategory(index) {
+        const newData = data;
+        newData.splice(index, 1);
+        setData(newData);
+        //this is a temp solution. Changing this state is calling a rerender
+        setDummy(dummy + 1);
+    } 
+
     function addNewDataSet() {
-        console.log(data)
         const newData = data.map((arr, i) => {
             if (i === 0) {
                 return [...arr, 'DataSet'];
@@ -30,18 +39,24 @@ const DataTable = () => {
         })
         setData(newData);
     }
-    
+
     return (
-        <div>
+        <div> {dummy}
             <table>
                 <thead>
                     <tr>
                         {data[0].map((item, i) => {
+                            if (i === 0) {
+                                return (
+                                    <th key={i+1}>{item}</th>
+                                );
+                            }
                             return (
-                                <th key={i+1}>{item}</th>
+                                <td key={i+1}>{item}<button>x</button></td>
                             );
                         })}
-                        <button onClick={addNewDataSet}>+</button>
+                        {/* TODO Add functionality that will only allow a max number of datasets */}
+                        <td><button onClick={addNewDataSet}>+</button></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,12 +65,15 @@ const DataTable = () => {
                         return (
                             <tr key={i+1}>
                                 {arr.map((cell, j) => (<td key={(i+1) * j}>{cell}</td>))}
+                                {/* TODO: When styling, display none until on hover */}
+                                <td><button index={i} onClick={() => removeCategory(i)}>-</button></td>
                             </tr>
                         );
                     }
                 })}
                 </tbody>
             </table>
+            {/* TODO Add functionality that will only allow a max number of categories */}
             <button onClick={addNewCategory}>+ New Category</button>
         </div>
     );
