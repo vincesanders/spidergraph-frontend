@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
         // payload : new openedSpider
         newState = {
           ...state,
-          openedSpider : action.payload,
+          openedSpider : payload,
         }
         return (newState)
 
@@ -54,12 +54,59 @@ const reducer = (state = initialState, action) => {
         return (newState)
 
       case (actions.EDIT_GRAPH_TITLE) :
+        // payload : edited title
+        newState = {
+          ...state,
+          spiders : Array.from (Object.values ({
+            ...state.spiders,
+            [state.openedSpider] : {
+              ...state.spiders[state.openedSpider],
+              title : payload,
+            },
+          })),
+        }
+        return (newState)
+
+      case (actions.EDIT_GRAPH_NOTES) :
+        // payload : edited notes
+        newState = {
+          ...state,
+          spiders : Array.from (Object.values ({
+            ...state.spiders,
+            [state.openedSpider] : {
+              ...state.spiders[state.openedSpider],
+              notes : payload,
+            },
+          })),
+        }
         return (newState)
 
       case (actions.EDIT_GRAPH_THEME) :
+        // payload : edited theme
+        newState = {
+          ...state,
+          spiders : Array.from (Object.values ({
+            ...state.spiders,
+            [state.openedSpider] : {
+              ...state.spiders[state.openedSpider],
+              theme : payload,
+            },
+          })),
+        }
         return (newState)
 
       case (actions.EDIT_GRAPH_SCALE) :
+        // payload : edited scale
+        newState = {
+          ...state,
+          spiders : Array.from (Object.values ({
+            ...state.spiders,
+            [state.openedSpider] : {
+              ...state.spiders[state.openedSpider],
+              scale : payload,
+            },
+          })),
+        }
         return (newState)
 
       case (actions.ADD_GRAPH_ARM) :
