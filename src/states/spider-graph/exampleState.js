@@ -5,7 +5,7 @@
 ***************************************/
 
 const exampleState = {
-  openedSpider : 0,
+  currentSpider : 0,
   spiders : [
     {
       title : 'Example Graph',

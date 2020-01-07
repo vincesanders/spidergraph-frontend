@@ -42,7 +42,7 @@ export const initialSpiderGraph = () => ({
 /**************************************/
 
 export const initialState = {
-  openedSpider : 0,
+  currentSpider : 0,
   spiders : [
     initialSpiderGraph (),
   ],
