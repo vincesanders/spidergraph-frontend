@@ -7,7 +7,7 @@ import hi from 'tools/hi'
 /// internal modules ///
 import initialState from './inititalState'
 import {
-  DO_SOMETHING
+  DO_SOMETHING,
 } from './actions'
 
 /***************************************
