@@ -10,7 +10,6 @@ import Dashboard from './Dashboard';
 const Home = (props) => {
   return (
     <div className='Home'>
-      Home
       <Dashboard />
     </div>
   )
