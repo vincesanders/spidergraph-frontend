@@ -1,4 +1,4 @@
-import act from 'states/act'
+// import act from 'states/act'
 
 /***************************************
   MAIN
@@ -14,3 +14,10 @@ export const DO_SOMETHING = 'DO_SOMETHING'
 *******************/
 
 /**************************************/
+
+export default {
+  basics : {
+    DO_SOMETHING,
+  },
+  composites : {},
+}

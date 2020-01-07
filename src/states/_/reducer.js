@@ -5,7 +5,7 @@ import hi from 'tools/hi'
 // import nullably from 'tools/nullably'
 
 /// internal modules ///
-import initialState from './inititalState'
+import initialState from './initialState'
 import {
   DO_SOMETHING,
 } from './actions'
