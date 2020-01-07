@@ -38,10 +38,10 @@ const reducer = (state = initialState, action) => {
         return (newState)
 
       case (actions.OPEN_GRAPH) :
-        // payload : new openedSpider
+        // payload : new currentSpider
         newState = {
           ...state,
-          openedSpider : payload,
+          currentSpider : payload,
         }
         return (newState)
 
@@ -59,8 +59,8 @@ const reducer = (state = initialState, action) => {
           ...state,
           spiders : Array.from (Object.values ({
             ...state.spiders,
-            [state.openedSpider] : {
-              ...state.spiders[state.openedSpider],
+            [state.currentSpider] : {
+              ...state.spiders[state.currentSpider],
               title : payload,
             },
           })),
@@ -73,8 +73,8 @@ const reducer = (state = initialState, action) => {
           ...state,
           spiders : Array.from (Object.values ({
             ...state.spiders,
-            [state.openedSpider] : {
-              ...state.spiders[state.openedSpider],
+            [state.currentSpider] : {
+              ...state.spiders[state.currentSpider],
               notes : payload,
             },
           })),
@@ -87,8 +87,8 @@ const reducer = (state = initialState, action) => {
           ...state,
           spiders : Array.from (Object.values ({
             ...state.spiders,
-            [state.openedSpider] : {
-              ...state.spiders[state.openedSpider],
+            [state.currentSpider] : {
+              ...state.spiders[state.currentSpider],
               theme : payload,
             },
           })),
@@ -101,8 +101,8 @@ const reducer = (state = initialState, action) => {
           ...state,
           spiders : Array.from (Object.values ({
             ...state.spiders,
-            [state.openedSpider] : {
-              ...state.spiders[state.openedSpider],
+            [state.currentSpider] : {
+              ...state.spiders[state.currentSpider],
               scale : payload,
             },
           })),
