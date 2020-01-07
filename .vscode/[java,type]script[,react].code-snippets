@@ -10,7 +10,7 @@
 /// 	"scope": "javascript,typescript",
 /// 	"prefix": "log",
 /// 	"body": [
-/// 		"console.log('$1');",
+/// 		"console.log('$1')",
 /// 		"$2"
 /// 	],
 /// 	"description": "Log output to console"
@@ -56,16 +56,16 @@
 		"/*//////////////////////////////////////",
 		"  exports : qualified short-names",
 		"//////////////////////////////////////*/",
-		"import __ShortName__ from './__ShortName__';",
+		"import __ShortName__ from './__ShortName__'",
 		"",
 		"export default {",
 		"  __ShortName__,",
-		"};",
+		"}",
 		"",
 		"/*//////////////////////////////////////",
 		"  exports : unqualified full-names",
 		"//////////////////////////////////////*/",
-		"export { default as __FullName__ } from './__FullName__';",
+		"export { default as __FullName__ } from './__FullName__'",
 		"",
 	],
 }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { server } from 'routes'
-import user from 'tools/user'
+import user from './user'
 
 const authios = () => {
   return axios.create ({

@@ -1,5 +1,5 @@
 export default {
-  base : 'https://example.com/api',
+  base : 'https://cors-anywhere.herokuapp.com/https://example.com/api',
   ends : {
     signup : {
       POST : () => `/auth/register`,
@@ -17,6 +17,9 @@ export default {
       GET : (id) => `/users/${id}/graphs`,
     },
     graphs : {
+      GET : (id) => `/graphs`,
+    },
+    graph : {
       GET : (id) => `/graphs/${id}`,
       POST : () => `/graphs`,
       PUT : (id) => `/graphs/${id}`,
