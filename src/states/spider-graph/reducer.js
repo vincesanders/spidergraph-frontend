@@ -7,7 +7,7 @@ import hi from 'tools/hi'
 /// internal modules ///
 import {
   initialState,
-  initialSpiderGraph,
+  initialSpider,
 } from './initialState'
 import actions from './actions'
 
@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
           ...state,
           spiders : [
             ...state.spiders,
-            initialSpiderGraph (),
+            initialSpider (),
           ],
         }
         return (newState)
