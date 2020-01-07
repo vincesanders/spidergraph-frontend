@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
         // payload : void
         newState = {
           ...state,
-          currentSpider : state.spiders.length + 1,
+          currentSpider : state.spiders.length,
           spiders : [
             ...state.spiders,
             initialSpider (),
