@@ -17,7 +17,7 @@ const exampleState = {
           borderColor : 'rgba(255, 82, 82, 0.5)',
           borderWidth : '2',
           data : [ 10, 11, 12, 13, 14 ],
-          legend : { position : 'bottom' }
+          legend : { position : 'bottom' },
         }
       ],
       notes : 'These are some notes!',
