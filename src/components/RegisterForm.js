@@ -7,14 +7,15 @@ export default withFormik({
     mapPropsToValues() {
         return {
             username: '',
-            password: ''
+            password: '',
+            retypedPassword: ''
         }
     },
     handleSubmit(values, { resetForm }) {
         console.log(values);
 
         // axios
-        //     .post('/api/auth/login/', values)
+        //     .post('/api/auth/register/', values)
         //     .then(res => {
         //         setStatus(res.data);
         //         resetForm();
@@ -30,7 +31,10 @@ export default withFormik({
             .max(50, 'Too long!'),
         password: Yup.string()
             .required('This field is required')
-            .min(8, 'Enter a password that is at least 8 characters long!')
+            .min(8, 'Enter a password that is at least 8 characters long!'),
+        retypedPassword: Yup.string()
+            .required('This field is required')
+            .oneOf([Yup.ref('password'), null], 'Passwords must match!!!')
     })
 })(({errors, touched}) => {
     return (
@@ -43,6 +47,8 @@ export default withFormik({
                 <label>Password: 
                     <Field type='text' name='password' />
                     {touched.password && errors.password && (<p>{errors.password}</p>)}
+                    <Field type='text' name='retypedPassword' />
+                    {touched.retypedPassword && errors.retypedPassword && (<p>{errors.retypedPassword}</p>)}
                 </label>
                 <button type='submit'>Submit</button>
             </Form>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
 
 export default () => {
     const [isNewUser, setIsNewUser] = useState(false);
@@ -16,6 +17,7 @@ export default () => {
         if (isNewUser) {
             return (
                 <div>
+                    <RegisterForm />
                     <p>Already have an account?</p>
                     <button onClick={handleNewUser}>Login</button>
                 </div>
