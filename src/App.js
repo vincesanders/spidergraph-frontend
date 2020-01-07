@@ -12,14 +12,18 @@ import {
 import {
   PrivateRoute,
   Home,
-  Users,
+  // Users,
   User,
-  Graphs,
+  // Graphs,
   Graph,
   SignUp,
   SignIn,
   SignOut,
 } from 'components'
+import {
+  Users,
+  Graphs,
+} from 'components/_stretch_'
 
 /// routes ///
 import { client } from 'routes'
