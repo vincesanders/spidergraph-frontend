@@ -6,9 +6,7 @@ import hi from 'tools/hi'
 
 /// internal modules ///
 import initialState from './initialState'
-import {
-  DO_SOMETHING,
-} from './actions'
+import actions from './actions'
 
 /***************************************
   MAIN
@@ -23,9 +21,6 @@ const reducer = (state = initialState, action) => {
   try {
     /// actions ///
     switch (action.type) {
-      case DO_SOMETHING :
-        // hi.flag ('log', 'doing something')
-        return (state)
       // else
       default :
         hi.flag ('warn', 'action not defined')
