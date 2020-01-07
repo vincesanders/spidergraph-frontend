@@ -5,7 +5,7 @@ import Styled from 'styled-components';
 const DataDesignTabs = () => {
     return(
         <div>
-            Data tab    ---   Design tab
+            Data tab / Design tab
         </div>
     )
 }

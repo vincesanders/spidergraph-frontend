@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import TopBar from './TopBar';
 import GraphDash from './GraphDash';
 import DataDesignTabs from './DataDesignTabs';
+import NotesInput from './NotesInput';
+import ExportButtonsPanel from './ExportButtonsPanel';
 
 const DashboardCont = styled.div`
     background: #ECEEF7;
@@ -27,11 +29,20 @@ const CardCont = styled.div`
     /* height: 80vh; */
 `
 
+const Row = styled.div`
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+`
+
 const Card = styled.div`
     background: #FAFAFA;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
     border-radius: 5px;
-    margin-bottom: 10px;
 `
 
 const GraphCard = styled(Card)`
@@ -42,16 +53,12 @@ const DataDesignCard = styled(Card)`
     width: 38%;
 `
 
-const NotesInput = styled.div`
-    background: #FAFAFA;
+const NotesDiv = styled.div`
     width: 60%;
-    height: 50px;
 `
 
 const ButtonPanel = styled.div`
-    background: lightgrey;
     width: 38%;
-    height: 50px;
 `
 
 const Dashboard = () => {
@@ -61,20 +68,23 @@ const Dashboard = () => {
             <DashboardBody>
                 <H2>Title of Your Spider Chart</H2>
                 <CardCont>
-                    <GraphCard>
-                        <GraphDash />
-                    </GraphCard>
-                    <DataDesignCard>
-                        <DataDesignTabs />
-                    </DataDesignCard>
-                    <NotesInput>
-                        
-                    </NotesInput>
-                    <ButtonPanel>
-
-                    </ButtonPanel>
+                    <Row>
+                        <GraphCard>
+                            <GraphDash />
+                        </GraphCard>
+                        <DataDesignCard>
+                            <DataDesignTabs />
+                        </DataDesignCard>
+                    </Row>
+                    <Row>
+                        <NotesDiv>
+                            <NotesInput />
+                        </NotesDiv>
+                        <ButtonPanel>
+                            <ExportButtonsPanel />
+                        </ButtonPanel>
+                    </Row>
                 </CardCont>
-
             </DashboardBody>
             {/* <Graph /> */}
         </DashboardCont>
