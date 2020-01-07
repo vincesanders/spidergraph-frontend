@@ -10,7 +10,7 @@
 
 export const ADD_GRAPH   = 'ADD_GRAPH'
 export const OPEN_GRAPH  = 'OPEN_GRAPH'
-export const EDIT_GRAPH  = 'EDIT_GRAPH'
+export const EDIT_GRAPH  = 'EDIT_GRAPH' // needed?
 export const RESET_GRAPH = 'RESET_GRAPH'
 
 export const EDIT_GRAPH_TITLE  = 'EDIT_GRAPH_TITLE'

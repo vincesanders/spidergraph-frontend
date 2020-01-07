@@ -27,6 +27,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
       /// client ///
       case (actions.ADD_GRAPH) :
+        // payload : void
         newState = {
           ...state,
           spiders : [
@@ -37,6 +38,7 @@ const reducer = (state = initialState, action) => {
         return (newState)
 
       case (actions.OPEN_GRAPH) :
+        // payload : new openedSpider
         newState = {
           ...state,
           openedSpider : action.payload,
@@ -44,9 +46,11 @@ const reducer = (state = initialState, action) => {
         return (newState)
 
       case (actions.EDIT_GRAPH) :
+        // payload : edited spider
         return (newState)
 
       case (actions.RESET_GRAPH) :
+        // payload : void
         return (newState)
 
       case (actions.EDIT_GRAPH_TITLE) :
