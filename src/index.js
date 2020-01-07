@@ -1,9 +1,17 @@
 /// external modules ///
 import React from 'react'
 import ReactDOM from 'react-dom'
+import * as redux from 'redux'
+import * as ReactRedux from 'react-redux'
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 
-/// internal modules ///
+/// components ///
 import App from './App'
+
+/// states ///
+import spider from 'states/spider-graph';
 
 /// styles ///
 import 'reset-css/reset.css'
@@ -15,6 +23,15 @@ import 'styles/index.css'
   MAIN
 ***************************************/
 
-ReactDOM.render (<App/>, document.getElementById ('root'))
+const spiderStore = spider.createStore (
+  composeWithDevTools (redux.applyMiddleware (thunk, logger))
+)
+
+ReactDOM.render (
+  <ReactRedux.Provider store={spiderStore}>
+    <App/>
+  </ReactRedux.Provider>
+, document.getElementById ('root')
+)
 
 /**************************************/

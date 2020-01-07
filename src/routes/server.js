@@ -17,6 +17,9 @@ export default {
       GET : (id) => `/users/${id}/graphs`,
     },
     graphs : {
+      GET : (id) => `/graphs`,
+    },
+    graph : {
       GET : (id) => `/graphs/${id}`,
       POST : () => `/graphs`,
       PUT : (id) => `/graphs/${id}`,
