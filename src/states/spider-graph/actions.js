@@ -13,6 +13,7 @@ export const EDIT_GRAPH  = 'EDIT_GRAPH'
 export const RESET_GRAPH = 'RESET_GRAPH'
 
 export const EDIT_GRAPH_TITLE  = 'EDIT_GRAPH_TITLE'
+export const EDIT_GRAPH_NOTES  = 'EDIT_GRAPH_NOTES'
 export const EDIT_GRAPH_THEME  = 'EDIT_GRAPH_THEME'
 export const EDIT_GRAPH_SCALE  = 'EDIT_GRAPH_SCALE'
 
