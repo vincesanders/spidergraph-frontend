@@ -58,7 +58,7 @@ const data = {
     top: 63px;
     bottom: 94.53%;
     width: 100%;
-    height: 56px
+    height: 56px;
 
     background: #4054B2;`
 
