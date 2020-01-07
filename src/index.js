@@ -23,11 +23,9 @@ import 'styles/index.css'
   MAIN
 ***************************************/
 
-console.log (spider)
-
 const spiderStore = spider.createStore (
   composeWithDevTools (redux.applyMiddleware (thunk, logger))
-);
+)
 
 ReactDOM.render (
   <ReactRedux.Provider store={spiderStore}>
