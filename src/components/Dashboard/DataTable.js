@@ -20,8 +20,14 @@ const DataTable = () => {
         setData(data => [...data, newCategory]);
     }
 
-    function addNewDataSet() {
-        
+    function addNewDataSet(e) {
+        let newData = data.map((arr, i) => {
+            if (i === 0) {
+                return [...arr.slice(0, arr.length - 1), 'DataSet', arr[arr.length - 1]];
+            }
+            return [...arr, 5]
+        })
+        setData(newData);
     }
     
     return (
