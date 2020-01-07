@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 
 import TopBar from './TopBar';
+import TitleInput from './TitleInput';
 import GraphDash from './GraphDash';
 import DataDesignTabs from './DataDesignTabs';
 import NotesInput from './NotesInput';
@@ -10,13 +11,6 @@ import ExportButtonsPanel from './ExportButtonsPanel';
 const DashboardCont = styled.div`
     background: #ECEEF7;
     height: 100vh;
-`
-
-const H2 = styled.h2`
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 167%;
-    color: #0D1124; 
 `
 
 const DashboardBody = styled.div`
@@ -66,7 +60,7 @@ const Dashboard = () => {
         <DashboardCont>
             <TopBar />
             <DashboardBody>
-                <H2>Title of Your Spider Chart</H2>
+                <TitleInput />
                 <CardCont>
                     <Row>
                         <GraphCard>

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
+import {useSelector, useDispatch} from 'react-redux';
+import actions from '../../states/spider-graph/actions';
 
 const NotesTextarea = styled.textarea`
     max-width: 100%;
@@ -8,9 +10,20 @@ const NotesTextarea = styled.textarea`
 `
 
 const NotesInput = (props) => {
+    const dispatch = useDispatch();
+    const notes = useSelector(state => state.spiders[state.openedSpider].notes);
+
+    const handleChange = e => {
+        dispatch({type: actions.EDIT_GRAPH_NOTES, payload: e.target.value})
+    }
+    
     return(
         <div>
-            <NotesTextarea placeholder='Description & Notes:'/>
+            <NotesTextarea 
+            placeholder='Description & Notes:'
+            value={notes} 
+            onChange={handleChange}
+            />
         </div>
     )
 }
