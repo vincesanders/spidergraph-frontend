@@ -38,12 +38,7 @@ const App = () => {
       <div className='App'>
         <Switch>
           {/* Home | redirect to Sign In */}
-          {/* TEMP !!!! - making home non-private to test -Phil */}
-          {/* <PrivateRoute
-          exact path={[ client.ends.root (), client.ends.home () ]}
-          component={Home}
-          /> */}
-          <Route
+          <PrivateRoute
           exact path={[ client.ends.root (), client.ends.home () ]}
           component={Home}
           />
