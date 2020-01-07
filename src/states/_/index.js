@@ -1,34 +1,31 @@
 /*******************************************************************************
   __ModuleName__
 --------------------------------------------------------------------------------
-  __ModuleDescription___
+  __ModuleDescription__
 *******************************************************************************/
 
 /*//////////////////////////////////////
   exports : qualified short-names
 //////////////////////////////////////*/
-import initialState from './initialState'
-import exampleState from './exampleState'
-import context from './context'
 import actions from './actions'
 import reducer from './reducer'
-import store from './store'
+import createStore from './createStore'
+import initialState from './initialState'
+import exampleState from './exampleState'
 
 export default {
-  initialState,
-  exampleState,
-  context,
   actions,
   reducer,
-  store,
+  createStore,
+  initialState,
+  exampleState,
 }
 
 /*//////////////////////////////////////
   exports : unqualified full-names
 //////////////////////////////////////*/
-export { default as initialState } from './initialState'
-export { default as exampleState } from './exampleState'
-export { default as context } from './context'
 export { default as actions } from './actions'
 export { default as reducer } from './reducer'
-export { default as store } from './store'
+export { default as createStore } from './createStore'
+export { default as initialState } from './initialState'
+export { default as exampleState } from './exampleState'
