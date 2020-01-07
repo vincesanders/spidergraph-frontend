@@ -1,6 +1,6 @@
 /// external modules ///
 import React from 'react'
-import LoginForm from '../src/components/LoginForm';
+import LoginRegisterForm from '../src/components/LoginRegisterForm';
 
 /***************************************
   MAIN
@@ -9,7 +9,7 @@ import LoginForm from '../src/components/LoginForm';
 const App = () => {
   return (
     <div className='App'>
-      <LoginForm />
+      <LoginRegisterForm />
     </div>
   )
 }
