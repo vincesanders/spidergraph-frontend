@@ -109,14 +109,14 @@ export const DELETE_GRAPH_FAILURE = 'DELETE_GRAPH_FAILURE'
 /**************************************/
 
 export default {
-  /// client ///
-  /// - tabs ///
+  /// CLIENT ///
+  /// CLIENT / TABS ///
   ADD_GRAPH,
   OPEN_GRAPH,
   CLOSE_GRAPH,
   REORDER_SAVED_GRAPHS,
   REORDER_OPENED_GRAPHS,
-  /// - current graph ///
+  /// CLIENT / CURRENT GRAPH ///
   EDIT_GRAPH_TITLE,
   EDIT_GRAPH_NOTES,
   EDIT_GRAPH_THEME,
@@ -129,8 +129,8 @@ export default {
   DELETE_GRAPH_DATASET,
   REORDER_GRAPH_ARMS,
   REORDER_GRAPH_DATASETS,
-  /// server ///
-  /// - auth ///
+  /// SERVER ///
+  /// SERVER / AUTH ///
   SIGN_UP,
   SIGN_UP_TRY,
   SIGN_UP_SUCCESS,
@@ -143,17 +143,17 @@ export default {
   SIGN_OUT_TRY,
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAILURE,
-  /// - all users ///
+  /// SERVER / ALL USERS ///
   GET_USERS,
   GET_USERS_TRY,
   GET_USERS_SUCCESS,
   GET_USERS_FAILURE,
-  /// - all graphs ///
+  /// SERVER / ALL GRAPHS ///
   GET_GRAPHS,
   GET_GRAPHS_TRY,
   GET_GRAPHS_SUCCESS,
   GET_GRAPHS_FAILURE,
-  /// - user ///
+  /// SERVER / USER ///
   GET_USER,
   GET_USER_TRY,
   GET_USER_SUCCESS,
@@ -162,7 +162,7 @@ export default {
   GET_USER_GRAPHS_TRY,
   GET_USER_GRAPHS_SUCCESS,
   GET_USER_GRAPHS_FAILURE,
-  /// - graph ///
+  /// SERVER / GRAPH ///
   POST_GRAPH,
   POST_GRAPH_TRY,
   POST_GRAPH_SUCCESS,
