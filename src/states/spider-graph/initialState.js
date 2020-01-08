@@ -83,6 +83,7 @@ export const initEvents = () => ({
   getUsers : initEventStatus (),
   /// user ///
   getUser : initEventStatus (),
+  getUserGraphs : initEventStatus (),
   /// all graphs ///
   getGraphs : initEventStatus (),
   /// graph ///
