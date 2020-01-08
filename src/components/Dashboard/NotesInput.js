@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
-import actions from '../../states/spider-graph/actions';
+import actions from 'states/spider-graph/actions';
 
 const NotesTextarea = styled.textarea`
     max-width: 100%;

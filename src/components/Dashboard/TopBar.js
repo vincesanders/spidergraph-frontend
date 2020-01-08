@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import {useSelector, useDispatch} from 'react-redux';
-import actions from '../../states/spider-graph/actions';
+import actions from 'states/spider-graph/actions';
 
 const Topbar = styled.div`
     width: 100%;
