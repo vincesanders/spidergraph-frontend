@@ -80,7 +80,7 @@ export default withFormik({
                 <label className='sign-in-label'>
                     <div>Password:
                     </div>
-                    <Field type='text' name='password' className="form-input" />
+                    <Field type='password' name='password' className="form-input" />
                     {touched.password && errors.password && (<p>{errors.password}</p>)}
                 </label>
                 </LabelDiv>
