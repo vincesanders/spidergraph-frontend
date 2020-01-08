@@ -148,6 +148,7 @@ const reducer = (state = initialState, action) => {
           newState.spiders = [initSpider (),];
         }
         return (newState)
+
       // else
       default :
         hi.flag ('warn', 'action not defined')
