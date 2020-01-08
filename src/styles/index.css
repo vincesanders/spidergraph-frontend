@@ -12,3 +12,40 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+.form-input{
+  width:50%;
+  height: 36px;
+
+background: #FFFFFF;
+border: 0.5px solid #D1D1D6;
+box-sizing: border-box;
+border-radius: 5px;
+}
+
+.sign-in-form{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin:auto 50px;
+}
+
+.sign-in-label{
+  font-family: Open Sans;
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 38px;
+/* or 271% */
+
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+
+
+color: #0D1124;
+}
