@@ -11,10 +11,12 @@ const Topbar = styled.div`
     padding: 0 20px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 
     color: #FFFFFF;
+
+    border-bottom: 3px solid #26326B;
 `
 
 const TopBarButton = styled.button`
@@ -26,16 +28,33 @@ const TopBarButton = styled.button`
 
 const NewGraphButton = styled(TopBarButton)`
     font-size: 4rem;
-    
+    margin-left: 10px;
 `
 
-const GraphButton = styled.button`
+const GraphButton = (props) => {
+    console.log(props.active);
+    const GraphButtonStyled = styled(TopBarButton)`
+    height: 100%;
+    /* background: #26326B; */
+    margin-right: 1px;
+    background: ${props.active? '#26326B' : '#1A2247'};
+`
+    return (
+        <GraphButtonStyled onClick={props.action}>{props.content}</GraphButtonStyled>
+    )
+
+}
+
+
+const AppTitle = styled.h3`
+    margin-right: 10px;
 `
 
 const TopBar = () => {
     const dispatch = useDispatch();
     const spiders = useSelector(state => state.spiders);
-
+    const currentGraph = useSelector(state => state.openedSpider);
+    console.log('current graph: ',currentGraph);
     const addNewGraph = () => {
         dispatch({type: actions.ADD_GRAPH});
     }
@@ -46,9 +65,10 @@ const TopBar = () => {
 
     return(
         <Topbar>
-            <h3>Spider.Graph</h3>
+            <AppTitle >Spider.Graph</AppTitle>
             {spiders.map((spider, index) => (
-                <GraphButton onClick={() => openGraph(index)}>{spider.title}</GraphButton>
+                <GraphButton action={() => openGraph(index)} content={spider.title} active={index === currentGraph}/>
+                // <GraphButton onClick={() => openGraph(index)}>{spider.title}</GraphButton>
             ))}
             <NewGraphButton onClick={addNewGraph}>+</NewGraphButton>
         </Topbar>

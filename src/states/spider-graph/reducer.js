@@ -30,6 +30,7 @@ const reducer = (state = initialState, action) => {
         // payload : void
         newState = {
           ...state,
+          openedSpider: state.spiders.length,
           spiders : [
             ...state.spiders,
             initialSpiderGraph (),
