@@ -149,9 +149,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.SIGN_UP_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            signUp : 'success',
+          }
+        }
         return (state)
 
       case (actions.SIGN_UP_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            signUp : 'failure',
+          }
+        }
         return (state)
 
       case (actions.SIGN_IN) :
@@ -168,9 +182,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.SIGN_IN_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            signIn : 'success',
+          },
+        }
         return (state)
 
       case (actions.SIGN_IN_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            signIn : 'failure',
+          },
+        }
         return (state)
 
       case (actions.SIGN_OUT) :
@@ -187,9 +215,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.SIGN_OUT_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            SignOut : 'success',
+          },
+        }
         return (state)
 
       case (actions.SIGN_OUT_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            SignOut : 'failure',
+          },
+        }
         return (state)
 
       case (actions.GET_USERS) :
@@ -206,9 +248,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_USERS_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getUsers : 'success',
+          },
+        }
         return (state)
 
       case (actions.GET_USERS_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getUsers : 'failure',
+          },
+        }
         return (state)
 
       case (actions.GET_USER) :
@@ -225,9 +281,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_USER_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getUser : 'success',
+          },
+        }
         return (state)
 
       case (actions.GET_USER_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getUser : 'failure',
+          },
+        }
         return (state)
 
       case (actions.GET_USER_GRAPHS) :
@@ -244,9 +314,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_USER_GRAPHS_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getUserGraphs : 'success',
+          },
+        }
         return (state)
 
       case (actions.GET_USER_GRAPHS_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getUserGraphs : 'failure',
+          },
+        }
         return (state)
 
       case (actions.GET_GRAPHS) :
@@ -263,9 +347,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_GRAPHS_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getGraphs : 'success',
+          },
+        }
         return (state)
 
       case (actions.GET_GRAPHS_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getGraphs : 'failure',
+          },
+        }
         return (state)
 
       case (actions.POST_GRAPH) :
@@ -282,9 +380,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.POST_GRAPH_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            postGraph : 'success',
+          },
+        }
         return (state)
 
       case (actions.POST_GRAPH_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            postGraph : 'failure',
+          },
+        }
         return (state)
 
       case (actions.GET_GRAPH) :
@@ -301,9 +413,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_GRAPH_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getGraph : 'success',
+          },
+        }
         return (state)
 
       case (actions.GET_GRAPH_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getGraph : 'failure',
+          },
+        }
         return (state)
 
       case (actions.PUT_GRAPH) :
@@ -320,9 +446,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.PUT_GRAPH_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            putGraph : 'success',
+          },
+        }
         return (state)
 
       case (actions.PUT_GRAPH_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            putGraph : 'failure',
+          },
+        }
         return (state)
 
       case (actions.DELETE_GRAPH) :
@@ -350,9 +490,23 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.DELETE_GRAPH_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            deleteGraph : 'success',
+          },
+        }
         return (state)
 
       case (actions.DELETE_GRAPH_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            deleteGraph : 'failure',
+          },
+        }
         return (state)
 
       // else
