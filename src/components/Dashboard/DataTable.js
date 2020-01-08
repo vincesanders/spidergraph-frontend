@@ -60,17 +60,11 @@ const DataTable = () => {
     }
 
     function changeDataSetValue(e) {
-        if (e.target.value > 0) {
-            data[e.target.getAttribute('index1')][e.target.getAttribute('index2')] = e.target.value;
-            setData(data);
-        } else {
-            data[e.target.getAttribute('index1')][e.target.getAttribute('index2')] = e.target.value * -1;
-            setData(data);
-        }
+        data[e.target.getAttribute('index1')][e.target.getAttribute('index2')] = e.target.value;
+        setData(data);
     }
 
     function allowOnlyNumberKeys(e) {
-        console.log(e.keyCode);
         if ((e.keyCode > 47) && (e.keyCode < 58) || e.keyCode == 8 || (e.keyCode > 95 && e.keyCode < 106)) {
             return true;
         } else {
