@@ -33,16 +33,16 @@ const reducer = (state = initialState, action) => {
         // payload : void
         newState = {
           ...state,
-          currentSpider : state.spiders.length,
-          spiders : [
-            ...state.spiders,
+          currentSpider : state.openedSpiders.length,
+          openedSpiders : [
+            ...state.openedSpiders,
             initSpider (),
           ],
         }
         return (newState)
 
       case (actions.OPEN_GRAPH) :
-        // payload : index of openedSpiders
+        // payload : index of openedopenedSpiders
         newState = {
           ...state,
           currentSpider : payload,
@@ -50,7 +50,7 @@ const reducer = (state = initialState, action) => {
         return (newState)
 
       case (actions.CLOSE_GRAPH) :
-        // payload : index of openedSpiders
+        // payload : index of openedopenedSpiders
         return (newState)
 
       case (actions.REORDER_SAVED_GRAPHS) :
@@ -67,10 +67,10 @@ const reducer = (state = initialState, action) => {
         // payload : edited title
         newState = {
           ...state,
-          spiders : Array.from (Object.values ({
-            ...state.spiders,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
             [state.currentSpider] : {
-              ...state.spiders[state.currentSpider],
+              ...state.openedSpiders[state.currentSpider],
               title : payload,
             },
           })),
@@ -81,10 +81,10 @@ const reducer = (state = initialState, action) => {
         // payload : edited notes
         newState = {
           ...state,
-          spiders : Array.from (Object.values ({
-            ...state.spiders,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
             [state.currentSpider] : {
-              ...state.spiders[state.currentSpider],
+              ...state.openedSpiders[state.currentSpider],
               notes : payload,
             },
           })),
@@ -95,10 +95,10 @@ const reducer = (state = initialState, action) => {
         // payload : edited theme
         newState = {
           ...state,
-          spiders : Array.from (Object.values ({
-            ...state.spiders,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
             [state.currentSpider] : {
-              ...state.spiders[state.currentSpider],
+              ...state.openedSpiders[state.currentSpider],
               theme : payload,
             },
           })),
@@ -109,10 +109,10 @@ const reducer = (state = initialState, action) => {
         // payload : edited scale
         newState = {
           ...state,
-          spiders : Array.from (Object.values ({
-            ...state.spiders,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
             [state.currentSpider] : {
-              ...state.spiders[state.currentSpider],
+              ...state.openedSpiders[state.currentSpider],
               scale : payload,
             },
           })),
@@ -491,13 +491,13 @@ const reducer = (state = initialState, action) => {
         // payload : graph index to delete
         newState = {
           ...state,
-          currentSpider: (state.currentSpider === 0) ? 0 : state.currentSpider - 1,
-          spiders : state.spiders.filter((spider, index) => (
+          currentSpider : (state.currentSpider === 0) ? 0 : state.currentSpider - 1,
+          openedSpiders : state.openedSpiders.filter((spider, index) => (
             index !== payload
           )),
         }
-        if (newState.spiders.length === 0) {
-          newState.spiders = [initSpider (),]
+        if (newState.openedSpiders.length === 0) {
+          newState.openedSpiders = [initSpider (),]
         }
         return (newState)
 
