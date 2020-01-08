@@ -1,3 +1,8 @@
+import {
+  initCurrentSpider,
+  initEvents,
+} from './initialState'
+
 /***************************************
   MAIN
 ----------------------------------------
@@ -5,7 +10,7 @@
 ***************************************/
 
 const exampleState = {
-  currentSpider : 0,
+  currentSpider : initCurrentSpider (),
   spiders : [
     {
       title : 'Example Graph',
@@ -25,6 +30,7 @@ const exampleState = {
       scale : 20,
     },
   ],
+  events : initEvents (),
 }
 
 /**************************************/
