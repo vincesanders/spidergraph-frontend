@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { buildQueries } from "@testing-library/react";
+import React, { useState } from "react";
 
 const DataTable = () => {
     const [dummy, setDummy] = useState(0);
@@ -65,7 +64,7 @@ const DataTable = () => {
     }
 
     function allowOnlyNumberKeys(e) {
-        if ((e.keyCode > 47) && (e.keyCode < 58) || e.keyCode == 8 || (e.keyCode > 95 && e.keyCode < 106)) {
+        if ((e.keyCode > 47) && (e.keyCode < 58) || e.keyCode === 8 || (e.keyCode > 95 && e.keyCode < 106)) {
             return true;
         } else {
             e.preventDefault();
@@ -122,6 +121,7 @@ const DataTable = () => {
                             </tr>
                         );
                     }
+                    return false;
                 })}
                 </tbody>
             </table>
