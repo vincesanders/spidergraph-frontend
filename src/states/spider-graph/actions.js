@@ -8,6 +8,8 @@
   client
 *******************/
 
+/// TABS ///
+
 export const ADD_GRAPH   = 'ADD_GRAPH'
 export const OPEN_GRAPH  = 'OPEN_GRAPH'
 export const EDIT_GRAPH  = 'EDIT_GRAPH' // needed?
@@ -15,6 +17,9 @@ export const RESET_GRAPH = 'RESET_GRAPH'
 
 export const EDIT_GRAPH_TITLE  = 'EDIT_GRAPH_TITLE'
 export const EDIT_GRAPH_NOTES  = 'EDIT_GRAPH_NOTES'
+
+/// CURRENT GRAPH ///
+
 export const EDIT_GRAPH_THEME  = 'EDIT_GRAPH_THEME'
 export const EDIT_GRAPH_SCALE  = 'EDIT_GRAPH_SCALE'
 
@@ -34,7 +39,7 @@ export const REORDER_GRAPH_DATASETS = 'REORDER_GRAPH_DATASETS'
   server
 *******************/
 
-/// USER AUTH ///
+/// AUTH ///
 
 export const SIGN_UP         = 'SIGN_UP'
 export const SIGN_UP_TRY     = 'SIGN_UP_TRY'
@@ -103,10 +108,10 @@ export const DELETE_GRAPH_FAILURE = 'DELETE_GRAPH_FAILURE'
 
 export default {
   /// client ///
+  /// - tabs ///
   ADD_GRAPH,
   OPEN_GRAPH,
-  EDIT_GRAPH,
-  RESET_GRAPH,
+  /// - current graph ///
   EDIT_GRAPH_TITLE,
   EDIT_GRAPH_NOTES,
   EDIT_GRAPH_THEME,
@@ -121,6 +126,7 @@ export default {
   REORDER_GRAPH_ARMS,
   REORDER_GRAPH_DATASETS,
   /// server ///
+  /// - auth ///
   SIGN_UP,
   SIGN_UP_TRY,
   SIGN_UP_SUCCESS,
@@ -133,10 +139,12 @@ export default {
   SIGN_OUT_TRY,
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAILURE,
+  /// - all users ///
   GET_USERS,
   GET_USERS_TRY,
   GET_USERS_SUCCESS,
   GET_USERS_FAILURE,
+  /// - all graphs ///
   GET_USER,
   GET_USER_TRY,
   GET_USER_SUCCESS,
@@ -145,10 +153,7 @@ export default {
   GET_USER_GRAPHS_TRY,
   GET_USER_GRAPHS_SUCCESS,
   GET_USER_GRAPHS_FAILURE,
-  GET_GRAPHS,
-  GET_GRAPHS_TRY,
-  GET_GRAPHS_SUCCESS,
-  GET_GRAPHS_FAILURE,
+  /// - graph ///
   POST_GRAPH,
   POST_GRAPH_TRY,
   POST_GRAPH_SUCCESS,
