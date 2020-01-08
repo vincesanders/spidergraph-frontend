@@ -1,7 +1,22 @@
 /***************************************
   MAIN
 ----------------------------------------
-  - initialState : initial state
+  - initialState
+  #### edits ####
+  - initialCurrentSpider
+  #### spider/spiders ####
+  - initialTitle
+  - initialNotes
+  - initialTheme
+  - initialScale
+  - initialLabel
+  - initialValue
+  - initialDataset
+  - initialSpider
+  - initialSpiders
+  #### events ####
+  - initialEventStatus
+  - initialEvents
 ***************************************/
 
 /*******************
