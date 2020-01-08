@@ -43,7 +43,7 @@ const NewGraphButton = styled(TopBarButton)`
     &:hover{
         background: #7282cc;
     }
-    
+
 `
 
 // const OpenGraphButton = styled(TopBarButton)`
@@ -76,7 +76,7 @@ const GraphButton = (props) => {
         width: 1rem;
         height: 4rem;
         margin-left: 10px;
-        
+
         &:hover{
             background: #7282cc;
         }
@@ -95,10 +95,10 @@ const AppTitle = styled.h3`
 
 const TopBar = () => {
     const dispatch = useDispatch();
-    const spiders = useSelector(state => state.spiders);
+    const spiders = useSelector(state => state.openedSpiders);
     const currentGraph = useSelector(state => state.currentSpider);
 
-    const [savedGraphsMenu, setSavedGraphsMenu] = useState(true);
+    const [savedGraphsMenu, setSavedGraphsMenu] = useState(false);
     const toggleSavedGraphsMenu = () => {
         setSavedGraphsMenu(! savedGraphsMenu);
     }

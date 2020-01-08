@@ -27,7 +27,7 @@ const TitleInput = styled.input`
 
 export default () => {
     const dispatch = useDispatch();
-    const title = useSelector(state => state.spiders[state.currentSpider].title);
+    const title = useSelector(state => state.openedSpiders[state.currentSpider].title);
 
     const handleChange = e => {
         dispatch(act(actions.EDIT_GRAPH_TITLE, e.target.value))

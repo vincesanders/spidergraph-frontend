@@ -12,17 +12,17 @@ const NotesTextarea = styled.textarea`
 
 const NotesInput = (props) => {
     const dispatch = useDispatch();
-    const notes = useSelector(state => state.spiders[state.currentSpider].notes);
+    const notes = useSelector(state => state.openedSpiders[state.currentSpider].notes);
 
     const handleChange = e => {
         dispatch(act(actions.EDIT_GRAPH_NOTES, e.target.value))
     }
-    
+
     return(
         <div>
-            <NotesTextarea 
+            <NotesTextarea
             placeholder='Description & Notes:'
-            value={notes} 
+            value={notes}
             onChange={handleChange}
             />
         </div>

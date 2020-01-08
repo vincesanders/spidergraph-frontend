@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 // import {useSelector, useDispatch} from 'react-redux';
-// import actions from '../../states/spider-graph/actions';
+// import actions from 'states/spider-graph/actions';
 
 const DesignCont = styled.div`
     padding: 0 20px;
@@ -30,12 +30,12 @@ const GridScaleSpan = styled.span`
 
 const DesignTable = (props) => {
     // const dispatch = useDispatch();
-    // const notes = useSelector(state => state.spiders[state.currentSpider].notes);
+    // const notes = useSelector(state => state.openedSpiders[state.currentSpider].notes);
 
     // const handleChange = e => {
     //     dispatch({type: actions.EDIT_GRAPH_NOTES, payload: e.target.value})
     // }
-    
+
     return(
         <DesignCont>
             <H4>Themes</H4>
