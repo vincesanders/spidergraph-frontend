@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import styled from 'styled-components';
-import './DataTable.css'
+import './DataTable.css';
+import { useSelector } from 'react-redux';
+
 
 /// Styling ///
 
@@ -127,6 +129,8 @@ const AddNewCategoryButton = styled.button`
 
 const DataTable = () => {
     const categoryInputRef = useRef('');
+    // const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
+    // console.log(spider);
 
     const [dummy, setDummy] = useState(0);
     /// The design tab gets and modifies data from an array of arrays.         ///
