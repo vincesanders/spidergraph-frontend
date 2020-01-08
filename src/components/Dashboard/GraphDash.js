@@ -1,23 +1,21 @@
 import React from 'react';
 import styled from 'styled-components'
-import {Radar} from 'react-chartjs-2';
+import { Radar } from 'react-chartjs-2';
 
 
 const data = {
-    labels: ["Cat1", "Cat2", "Cat3", "Cat4", "Cat5",],
-    datasets: [
-      {
-        label: "Sample Chart",
-        backgroundColor: "rgba(255, 82, 82, 0.5)",
-        borderColor: "rgba(255, 82, 82, 0.5)",
-        borderWidth: '2',
-        data: [10, 11, 12, 13, 14,],
-        legend: {position: 'bottom',
+  labels: ["Cat1", "Cat2", "Cat3", "Cat4", "Cat5",],
+  datasets: [
+    {
+      label: "Sample Chart",
+      backgroundColor: "rgba(255, 82, 82, 0.5)",
+      borderColor: "rgba(255, 82, 82, 0.5)",
+      borderWidth: '2',
+      data: [10, 11, 12, 13, 14,],
     }
-      }
 
-    ]
-  };
+  ]
+};
 
 const GraphField = styled.div`
     /* background: #FAFAFA;
@@ -34,11 +32,15 @@ const GraphField = styled.div`
 
 
 function GraphDash() {
-    return (
-        <GraphField>
-            <Radar data={data} />
-        </GraphField>
-    );
+  return (
+    <GraphField>
+      <Radar
+        data={data}
+        options={{
+          legend: { display: true, position: 'bottom', align: 'start' }
+        }} />
+    </GraphField>
+  );
 }
 
 export default GraphDash;
