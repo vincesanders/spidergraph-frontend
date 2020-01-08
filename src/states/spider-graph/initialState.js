@@ -97,7 +97,9 @@ export const initEvents = () => ({
 
 export const initialState = {
   savedSpiders : [],
-  openedSpiders : [],
+  openedSpiders : [
+    initSpider (),
+  ],
   currentSpider : initCurrentSpider (),
   events : initEvents (),
 }
