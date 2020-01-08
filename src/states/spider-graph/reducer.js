@@ -5,9 +5,8 @@ import hi from 'tools/hi'
 // import nullably from 'tools/nullably'
 
 /// internal modules ///
-import {
-  initialState,
-  initialSpider,
+import initialState, {
+  initSpider,
 } from './initialState'
 import actions from './actions'
 
@@ -33,7 +32,7 @@ const reducer = (state = initialState, action) => {
           currentSpider : state.spiders.length,
           spiders : [
             ...state.spiders,
-            initialSpider (),
+            initSpider (),
           ],
         }
         return (newState)
@@ -135,7 +134,7 @@ const reducer = (state = initialState, action) => {
         return (newState)
 
       /// server ///
-      
+
       case (actions.DELETE_GRAPH):
         // payload : graph index to delete
         newState = {
@@ -146,7 +145,7 @@ const reducer = (state = initialState, action) => {
           )),
         }
         if (newState.spiders.length === 0){
-          newState.spiders = [initialSpider (),];
+          newState.spiders = [initSpider (),];
         }
         return (newState)
       // else
