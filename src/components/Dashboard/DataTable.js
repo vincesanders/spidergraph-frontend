@@ -41,6 +41,14 @@ const DataTable = () => {
         setData(newData);
     }
 
+    function removeDataSet(e) {
+        const newData = data.map(arr => {
+            arr.splice(e.target.getAttribute('index'), 1);
+            return arr;
+        });
+        setData(newData);
+    }
+
     return (
         // This dummy number has to be hidden if left in the final build.
         <div> {dummy}
@@ -54,7 +62,7 @@ const DataTable = () => {
                                 );
                             }
                             return (
-                                <td key={i+1}>{item}<button>x</button></td>
+                                <td key={i+1}>{item}<button index={i} onClick={removeDataSet}>x</button></td>
                             );
                         })}
                         {/* TODO Add functionality that will only allow a max number of datasets */}
