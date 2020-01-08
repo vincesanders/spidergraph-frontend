@@ -49,6 +49,28 @@ const DataTable = () => {
         setData(newData);
     }
 
+    function changeDataSetName(e) {
+        data[0][e.target.getAttribute('index')] = e.target.value;
+        setData(data);
+    }
+
+    function changeCategoryName(e) {
+        data[e.target.getAttribute('index')][0] = e.target.value;
+        setData(data);
+    }
+
+    function changeDataSetValue(e) {
+        if (e.target.value > 0) {
+            data[e.target.getAttribute('index1')][e.target.getAttribute('index2')] = e.target.value;
+            setData(data);
+        } else {
+            data[e.target.getAttribute('index1')][e.target.getAttribute('index2')] = e.target.value * -1;
+            setData(data);
+        }
+        
+        console.log(data[e.target.getAttribute('index1')][e.target.getAttribute('index2')]);
+    }
+
     return (
         // This dummy number has to be hidden if left in the final build.
         <div> {dummy}
@@ -62,7 +84,11 @@ const DataTable = () => {
                                 );
                             }
                             return (
-                                <td key={i+1}>{item}<button index={i} onClick={removeDataSet}>x</button></td>
+                                // TODO make sure placeholder and value appear the same.
+                                <td key={i+1}>
+                                    <input index={i} type='text' name={item} onChange={changeDataSetName} placeholder={data[0][i]} />
+                                    <button index={i} onClick={removeDataSet}>x</button>
+                                </td>
                             );
                         })}
                         {/* TODO Add functionality that will only allow a max number of datasets */}
@@ -74,7 +100,21 @@ const DataTable = () => {
                     if (i > 0) {
                         return (
                             <tr key={i+1}>
-                                {arr.map((cell, j) => (<td key={(i+1) * j}>{cell}</td>))}
+                                {arr.map((cell, j) => {
+                                    if (j === 0) {
+                                        return (
+                                            <td key={(i+1) * j}>
+                                                <input index={i} type='text' name={cell} onChange={changeCategoryName} placeholder={data[i][j]} />
+                                            </td>
+                                        );
+                                    }
+                                    return (
+                                        <td key={(i+1) * j}>
+                                            {/* TODO: Add validation to ensure only positive integers */}
+                                            <input index1={i} index2={j} type='number' name={data[0][j] + data[i][0]} onChange={changeDataSetValue} placeholder={data[i][j]} />
+                                        </td>
+                                    );
+                                })}
                                 {/* TODO: When styling, display none until on hover */}
                                 <td><button index={i} onClick={removeCategory}>-</button></td>
                             </tr>
