@@ -24,7 +24,11 @@ const reducer = (state = initialState, action) => {
   try {
     /// actions ///
     switch (type) {
-      /// client ///
+
+      /// CLIENT ///
+
+      /// CLIENT / TABS ///
+
       case (actions.ADD_GRAPH) :
         // payload : void
         newState = {
@@ -38,20 +42,26 @@ const reducer = (state = initialState, action) => {
         return (newState)
 
       case (actions.OPEN_GRAPH) :
-        // payload : new currentSpider
+        // payload : index of openedSpiders
         newState = {
           ...state,
           currentSpider : payload,
         }
         return (newState)
 
-      case (actions.EDIT_GRAPH) :
-        // payload : edited spider
+      case (actions.CLOSE_GRAPH) :
+        // payload : index of openedSpiders
         return (newState)
 
-      case (actions.RESET_GRAPH) :
-        // payload : void
+      case (actions.REORDER_SAVED_GRAPHS) :
+        // payload : index list
         return (newState)
+
+      case (actions.REORDER_OPENED_GRAPHS) :
+        // payload : index list
+        return (newState)
+
+      /// CLIENT / CURRENT GRAPH ///
 
       case (actions.EDIT_GRAPH_TITLE) :
         // payload : edited title
@@ -127,16 +137,15 @@ const reducer = (state = initialState, action) => {
       case (actions.DELETE_GRAPH_DATASET) :
         return (newState)
 
-      case (actions.REORDER_DASH_TABS) :
-        return (newState)
-
       case (actions.REORDER_GRAPH_ARMS) :
         return (newState)
 
       case (actions.REORDER_GRAPH_DATASETS) :
         return (newState)
 
-      /// server ///
+      /// SERVER ///
+
+      /// SERVER / AUTH ///
 
       case (actions.SIGN_UP) :
         return (state)
@@ -237,6 +246,8 @@ const reducer = (state = initialState, action) => {
         }
         return (state)
 
+      /// SERVER / ALL USERS -- stretch ///
+
       case (actions.GET_USERS) :
         return (state)
 
@@ -269,6 +280,43 @@ const reducer = (state = initialState, action) => {
           },
         }
         return (state)
+
+      /// SERVER / ALL GRAPHS -- stretch ///
+
+      case (actions.GET_GRAPHS) :
+        return (state)
+
+      case (actions.GET_GRAPHS_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getGraphs : 'try',
+          },
+        }
+        return (state)
+
+      case (actions.GET_GRAPHS_SUCCESS) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getGraphs : 'success',
+          },
+        }
+        return (state)
+
+      case (actions.GET_GRAPHS_FAILURE) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getGraphs : 'failure',
+          },
+        }
+        return (state)
+
+      /// SERVER / USER ///
 
       case (actions.GET_USER) :
         return (state)
@@ -303,6 +351,8 @@ const reducer = (state = initialState, action) => {
         }
         return (state)
 
+      /// SERVER / USER GRAPHS ///
+
       case (actions.GET_USER_GRAPHS) :
         return (state)
 
@@ -336,38 +386,7 @@ const reducer = (state = initialState, action) => {
         }
         return (state)
 
-      case (actions.GET_GRAPHS) :
-        return (state)
-
-      case (actions.GET_GRAPHS_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getGraphs : 'try',
-          },
-        }
-        return (state)
-
-      case (actions.GET_GRAPHS_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getGraphs : 'success',
-          },
-        }
-        return (state)
-
-      case (actions.GET_GRAPHS_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getGraphs : 'failure',
-          },
-        }
-        return (state)
+      /// SERVER / GRAPH ///
 
       case (actions.POST_GRAPH) :
         return (state)
