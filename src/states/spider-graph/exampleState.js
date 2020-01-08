@@ -10,9 +10,10 @@ import {
 ***************************************/
 
 const exampleState = {
-  currentSpider : initCurrentSpider (),
-  spiders : [
+  savedSpiders : [],
+  openedSpiders : [
     {
+      id : 'example',
       title : 'Example Graph',
       labels : [ 'Cat1', 'Cat2', 'Cat3', 'Cat4', 'Cat5' ],
       datasets : [
@@ -30,6 +31,7 @@ const exampleState = {
       scale : 20,
     },
   ],
+  currentSpider : initCurrentSpider (),
   events : initEvents (),
 }
 

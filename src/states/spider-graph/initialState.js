@@ -67,10 +67,6 @@ export const initSpider = () => ({
   scale : initScale (),
 })
 
-export const initSpiders = () => ([
-  initSpider (),
-])
-
 /*******************
   events
 *******************/
@@ -100,8 +96,9 @@ export const initEvents = () => ({
 /**************************************/
 
 export const initialState = {
+  savedSpiders : [],
+  openedSpiders : [],
   currentSpider : initCurrentSpider (),
-  spiders : initSpiders (),
   events : initEvents (),
 }
 
