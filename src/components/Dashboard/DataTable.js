@@ -52,14 +52,17 @@ const HeaderCellTD = styled.td`
 const DeleteDataSetButton = styled.button`
     display: none;
     position: absolute;
-    background-color: red;
+    background-color: #FF5252;
     border: none;
-    color: #ECEEF7;
+    color: white;
+    font-weight: 600;
     border-radius: 50%;
     text-align: center;
     text-decoration: none;
+    outline: none;
     margin-top: -5px;
-    margin-left: -15px;
+    margin-left: -40px;
+    box-shadow: -2px 1px 2px 0px rgba(0,0,0,0.6);
     &:hover {
         display: inline-block;
     }
@@ -67,13 +70,16 @@ const DeleteDataSetButton = styled.button`
 
 const DeleteCategoryButton = styled.button`
     display: none;
-    background-color: red;
+    background-color: #FF5252;
     border: none;
-    color: #ECEEF7;
+    color: white;
+    font-weight: 600;
     border-radius: 50%;
     text-align: center;
     text-decoration: none;
+    outline: none;
     margin-left: -10px;
+    box-shadow: -2px 1px 2px 0px rgba(0,0,0,0.3);
     &:hover {
         display: inline-block;
     }
