@@ -39,6 +39,30 @@ export const initialSpider = () => ({
   scale : initialScale (),
 })
 
+/*******************
+  events
+*******************/
+
+export const initialEventStatus = () => null
+
+export const initialEvents = () => ({
+  /// auth ///
+  signUp  : initialEventStatus (),
+  signIn  : initialEventStatus (),
+  signOut : initialEventStatus (),
+  /// all users ///
+  getUsers : initialEventStatus (),
+  /// user ///
+  getUser : initialEventStatus (),
+  /// all graphs ///
+  getGraphs : initialEventStatus (),
+  /// graph ///
+  postGraph   : initialEventStatus (),
+  getGraph    : initialEventStatus (),
+  putGraph    : initialEventStatus (),
+  deleteGraph : initialEventStatus (),
+})
+
 /**************************************/
 
 export const initialState = {
