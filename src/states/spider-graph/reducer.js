@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
   /// do it! ///
   try {
     /// actions ///
-    switch (action.type) {
+    switch (type) {
       /// client ///
       case (actions.ADD_GRAPH) :
         // payload : void
