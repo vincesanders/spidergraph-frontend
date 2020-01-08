@@ -135,7 +135,127 @@ const reducer = (state = initialState, action) => {
 
       /// server ///
 
-      case (actions.DELETE_GRAPH):
+      case (actions.SIGN_UP) :
+        return (state)
+
+      case (actions.SIGN_UP_TRY) :
+        return (state)
+
+      case (actions.SIGN_UP_SUCCESS) :
+        return (state)
+
+      case (actions.SIGN_UP_FAILURE) :
+        return (state)
+
+      case (actions.SIGN_IN) :
+        return (state)
+
+      case (actions.SIGN_IN_TRY) :
+        return (state)
+
+      case (actions.SIGN_IN_SUCCESS) :
+        return (state)
+
+      case (actions.SIGN_IN_FAILURE) :
+        return (state)
+
+      case (actions.SIGN_OUT) :
+        return (state)
+
+      case (actions.SIGN_OUT_TRY) :
+        return (state)
+
+      case (actions.SIGN_OUT_SUCCESS) :
+        return (state)
+
+      case (actions.SIGN_OUT_FAILURE) :
+        return (state)
+
+      case (actions.GET_USERS) :
+        return (state)
+
+      case (actions.GET_USERS_TRY) :
+        return (state)
+
+      case (actions.GET_USERS_SUCCESS) :
+        return (state)
+
+      case (actions.GET_USERS_FAILURE) :
+        return (state)
+
+      case (actions.GET_USER) :
+        return (state)
+
+      case (actions.GET_USER_TRY) :
+        return (state)
+
+      case (actions.GET_USER_SUCCESS) :
+        return (state)
+
+      case (actions.GET_USER_FAILURE) :
+        return (state)
+
+      case (actions.GET_USER_GRAPHS) :
+        return (state)
+
+      case (actions.GET_USER_GRAPHS_TRY) :
+        return (state)
+
+      case (actions.GET_USER_GRAPHS_SUCCESS) :
+        return (state)
+
+      case (actions.GET_USER_GRAPHS_FAILURE) :
+        return (state)
+
+      case (actions.GET_GRAPHS) :
+        return (state)
+
+      case (actions.GET_GRAPHS_TRY) :
+        return (state)
+
+      case (actions.GET_GRAPHS_SUCCESS) :
+        return (state)
+
+      case (actions.GET_GRAPHS_FAILURE) :
+        return (state)
+
+      case (actions.POST_GRAPH) :
+        return (state)
+
+      case (actions.POST_GRAPH_TRY) :
+        return (state)
+
+      case (actions.POST_GRAPH_SUCCESS) :
+        return (state)
+
+      case (actions.POST_GRAPH_FAILURE) :
+        return (state)
+
+      case (actions.GET_GRAPH) :
+        return (state)
+
+      case (actions.GET_GRAPH_TRY) :
+        return (state)
+
+      case (actions.GET_GRAPH_SUCCESS) :
+        return (state)
+
+      case (actions.GET_GRAPH_FAILURE) :
+        return (state)
+
+      case (actions.PUT_GRAPH) :
+        return (state)
+
+      case (actions.PUT_GRAPH_TRY) :
+        return (state)
+
+      case (actions.PUT_GRAPH_SUCCESS) :
+        return (state)
+
+      case (actions.PUT_GRAPH_FAILURE) :
+        return (state)
+
+      case (actions.DELETE_GRAPH) :
         // payload : graph index to delete
         newState = {
           ...state,
@@ -144,10 +264,19 @@ const reducer = (state = initialState, action) => {
             index !== payload
           )),
         }
-        if (newState.spiders.length === 0){
-          newState.spiders = [initSpider (),];
+        if (newState.spiders.length === 0) {
+          newState.spiders = [initSpider (),]
         }
         return (newState)
+
+      case (actions.DELETE_GRAPH_TRY) :
+        return (state)
+
+      case (actions.DELETE_GRAPH_SUCCESS) :
+        return (state)
+
+      case (actions.DELETE_GRAPH_FAILURE) :
+        return (state)
 
       // else
       default :
