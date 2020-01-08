@@ -8,15 +8,23 @@
   client
 *******************/
 
+/// TABS ///
+
 export const ADD_GRAPH   = 'ADD_GRAPH'
 export const OPEN_GRAPH  = 'OPEN_GRAPH'
-export const EDIT_GRAPH  = 'EDIT_GRAPH' // needed?
-export const RESET_GRAPH = 'RESET_GRAPH'
+export const CLOSE_GRAPH = 'CLOSE_GRAPH'
+// export const EDIT_GRAPH  = 'EDIT_GRAPH' // needed?
+// export const RESET_GRAPH = 'RESET_GRAPH' // needed?
 
-export const EDIT_GRAPH_TITLE  = 'EDIT_GRAPH_TITLE'
-export const EDIT_GRAPH_NOTES  = 'EDIT_GRAPH_NOTES'
-export const EDIT_GRAPH_THEME  = 'EDIT_GRAPH_THEME'
-export const EDIT_GRAPH_SCALE  = 'EDIT_GRAPH_SCALE'
+export const REORDER_SAVED_GRAPHS  = 'REORDER_SAVED_GRAPHS'
+export const REORDER_OPENED_GRAPHS = 'REORDER_OPENED_GRAPHS'
+
+/// CURRENT GRAPH ///
+
+export const EDIT_GRAPH_TITLE = 'EDIT_GRAPH_TITLE'
+export const EDIT_GRAPH_NOTES = 'EDIT_GRAPH_NOTES'
+export const EDIT_GRAPH_THEME = 'EDIT_GRAPH_THEME'
+export const EDIT_GRAPH_SCALE = 'EDIT_GRAPH_SCALE'
 
 export const ADD_GRAPH_ARM    = 'ADD_GRAPH_ARM'
 export const EDIT_GRAPH_ARM   = 'EDIT_GRAPH_ARM'
@@ -26,14 +34,14 @@ export const ADD_GRAPH_DATASET    = 'ADD_GRAPH_DATASET'
 export const EDIT_GRAPH_DATASET   = 'EDIT_GRAPH_DATASET'
 export const DELETE_GRAPH_DATASET = 'ADD_GRAPH_DATASET'
 
-export const REORDER_GRAPH_ARMS   = 'REORDER_GRAPH_ARMS'
-export const REORDER_GRAPH_DATASETS   = 'REORDER_GRAPH_DATASETS'
+export const REORDER_GRAPH_ARMS     = 'REORDER_GRAPH_ARMS'
+export const REORDER_GRAPH_DATASETS = 'REORDER_GRAPH_DATASETS'
 
 /*******************
   server
 *******************/
 
-/// USER AUTH ///
+/// AUTH ///
 
 export const SIGN_UP         = 'SIGN_UP'
 export const SIGN_UP_TRY     = 'SIGN_UP_TRY'
@@ -57,6 +65,13 @@ export const GET_USERS_TRY     = 'GET_USERS_TRY'
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
 export const GET_USERS_FAILURE = 'GET_USERS_FAILURE'
 
+/// ALL GRAPHS -- stretch ///
+
+export const GET_GRAPHS         = 'GET_GRAPHS'
+export const GET_GRAPHS_TRY     = 'GET_GRAPHS_TRY'
+export const GET_GRAPHS_SUCCESS = 'GET_GRAPHS_SUCCESS'
+export const GET_GRAPHS_FAILURE = 'GET_GRAPHS_FAILURE'
+
 /// USER ///
 
 export const GET_USER         = 'GET_USER'
@@ -64,17 +79,12 @@ export const GET_USER_TRY     = 'GET_USER_TRY'
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
 export const GET_USER_FAILURE = 'GET_USER_FAILURE'
 
+/// USER GRAPHS ///
+
 export const GET_USER_GRAPHS         = 'GET_USER_GRAPHS'
 export const GET_USER_GRAPHS_TRY     = 'GET_USER_GRAPHS_TRY'
 export const GET_USER_GRAPHS_SUCCESS = 'GET_USER_GRAPHS_SUCCESS'
 export const GET_USER_GRAPHS_FAILURE = 'GET_USER_GRAPHS_FAILURE'
-
-/// ALL GRAPHS -- stretch ///
-
-export const GET_GRAPHS         = 'GET_GRAPHS'
-export const GET_GRAPHS_TRY     = 'GET_GRAPHS_TRY'
-export const GET_GRAPHS_SUCCESS = 'GET_GRAPHS_SUCCESS'
-export const GET_GRAPHS_FAILURE = 'GET_GRAPHS_FAILURE'
 
 /// GRAPH ///
 
@@ -101,11 +111,14 @@ export const DELETE_GRAPH_FAILURE = 'DELETE_GRAPH_FAILURE'
 /**************************************/
 
 export default {
-  /// client ///
+  /// CLIENT ///
+  /// CLIENT / TABS ///
   ADD_GRAPH,
   OPEN_GRAPH,
-  EDIT_GRAPH,
-  RESET_GRAPH,
+  CLOSE_GRAPH,
+  REORDER_SAVED_GRAPHS,
+  REORDER_OPENED_GRAPHS,
+  /// CLIENT / CURRENT GRAPH ///
   EDIT_GRAPH_TITLE,
   EDIT_GRAPH_NOTES,
   EDIT_GRAPH_THEME,
@@ -118,7 +131,8 @@ export default {
   DELETE_GRAPH_DATASET,
   REORDER_GRAPH_ARMS,
   REORDER_GRAPH_DATASETS,
-  /// server ///
+  /// SERVER ///
+  /// SERVER / AUTH ///
   SIGN_UP,
   SIGN_UP_TRY,
   SIGN_UP_SUCCESS,
@@ -131,22 +145,27 @@ export default {
   SIGN_OUT_TRY,
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAILURE,
+  /// SERVER / ALL USERS ///
   GET_USERS,
   GET_USERS_TRY,
   GET_USERS_SUCCESS,
   GET_USERS_FAILURE,
-  GET_USER,
-  GET_USER_TRY,
-  GET_USER_SUCCESS,
-  GET_USER_FAILURE,
-  GET_USER_GRAPHS,
-  GET_USER_GRAPHS_TRY,
-  GET_USER_GRAPHS_SUCCESS,
-  GET_USER_GRAPHS_FAILURE,
+  /// SERVER / ALL GRAPHS ///
   GET_GRAPHS,
   GET_GRAPHS_TRY,
   GET_GRAPHS_SUCCESS,
   GET_GRAPHS_FAILURE,
+  /// SERVER / USER ///
+  GET_USER,
+  GET_USER_TRY,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
+  /// SERVER / USER GRAPHS ///
+  GET_USER_GRAPHS,
+  GET_USER_GRAPHS_TRY,
+  GET_USER_GRAPHS_SUCCESS,
+  GET_USER_GRAPHS_FAILURE,
+  /// SERVER / GRAPH ///
   POST_GRAPH,
   POST_GRAPH_TRY,
   POST_GRAPH_SUCCESS,

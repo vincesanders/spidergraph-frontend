@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import {useSelector, useDispatch} from 'react-redux';
-import actions from '../../states/spider-graph/actions';
+import actions from 'states/spider-graph/actions';
 
 const Topbar = styled.div`
     width: 100%;
@@ -30,7 +30,7 @@ const TopBarButton = styled.div`
     outline: none;
     color: #FFFFFF;
 
-    
+
 `
 
 const NewGraphButton = styled(TopBarButton)`
@@ -42,7 +42,7 @@ const NewGraphButton = styled(TopBarButton)`
     &:hover{
         background: #7282cc;
     }
-    
+
 `
 
 const GraphButton = (props) => {
@@ -68,7 +68,7 @@ const GraphButton = (props) => {
         width: 1rem;
         height: 4rem;
         margin-left: 10px;
-        
+
         &:hover{
             background: #7282cc;
         }
@@ -89,7 +89,7 @@ const AppTitle = styled.h3`
 
 const TopBar = () => {
     const dispatch = useDispatch();
-    const spiders = useSelector(state => state.spiders);
+    const spiders = useSelector(state => state.openedSpiders);
     const currentGraph = useSelector(state => state.currentSpider);
     console.log('current graph: ',currentGraph);
     const addNewGraph = () => {

@@ -1,28 +1,56 @@
 /***************************************
   MAIN
 ----------------------------------------
-  - initialState : initial state
+  - initialState
+  #### edits ####
+  - initCurrentSpider
+  #### spider/spiders ####
+  - initTitle
+  - initNotes
+  - initTheme
+  - initScale
+  - initLabel
+  - initValue
+  - initDataset
+  - initSpider
+  - initSpiders
+  #### events ####
+  - initEventStatus
+  - initEvents
 ***************************************/
 
-export const initialTitle = () => 'new graph'
+/*******************
+  edits
+*******************/
 
-export const initialNotes = () => ''
+export const initCurrentSpider = () => 0
 
-export const initialTheme = () => 0
+/*******************
+  spider/spiders
+*******************/
 
-export const initialScale = () => 10
+export const initId = () => 'id'
 
-export const initialLabel = (index = 1) => `new label (${index})`
+export const initTitle = () => 'new graph'
 
-export const initialValue = () => 1
+export const initNotes = () => ''
 
-export const initialDataset = (length, value = 1) => ({
+export const initTheme = () => 0
+
+export const initScale = () => 10
+
+export const initLabel = (index = 1) => `new label (${index})`
+
+export const initValue = () => 1
+
+export const initDataset = (length, value = 1) => ({
   label : 'new dataset',
   data : Array (length).fill (value),
 })
 
-export const initialSpider = () => ({
-  title : initialTitle (),
+export const initSpider = () => ({
+  id : initId (),
+  title : initTitle (),
   labels : [ 'label-1', 'label-2', 'label-3', 'label-4', 'label-5' ],
   datasets : [
     {
@@ -34,18 +62,46 @@ export const initialSpider = () => ({
       data : [ 5, 4, 3, 2, 1 ],
     },
   ],
-  notes : initialNotes (),
-  theme : initialTheme (),
-  scale : initialScale (),
+  notes : initNotes (),
+  theme : initTheme (),
+  scale : initScale (),
+})
+
+/*******************
+  events
+*******************/
+
+export const initEventStatus = () => null
+
+export const initEvents = () => ({
+  /// auth ///
+  signUp  : initEventStatus (),
+  signIn  : initEventStatus (),
+  signOut : initEventStatus (),
+  /// all users -- stretch ///
+  getUsers : initEventStatus (),
+  /// all graphs -- stretch ///
+  getGraphs : initEventStatus (),
+  /// user ///
+  getUser : initEventStatus (),
+  /// user graphs ///
+  getUserGraphs : initEventStatus (),
+  /// graph ///
+  postGraph   : initEventStatus (),
+  getGraph    : initEventStatus (),
+  putGraph    : initEventStatus (),
+  deleteGraph : initEventStatus (),
 })
 
 /**************************************/
 
 export const initialState = {
-  currentSpider : 0,
-  spiders : [
-    initialSpider (),
+  savedSpiders : [],
+  openedSpiders : [
+    initSpider (),
   ],
+  currentSpider : initCurrentSpider (),
+  events : initEvents (),
 }
 
 /**************************************/
