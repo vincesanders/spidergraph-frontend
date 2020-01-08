@@ -11,6 +11,14 @@ import initialState, {
 import actions from './actions'
 
 /***************************************
+  tools
+***************************************/
+
+const reorderList = (list, order) => (
+  order.map ((i) => (list[i]))
+)
+
+/***************************************
   MAIN
 ----------------------------------------
   - reducer : state reducer
