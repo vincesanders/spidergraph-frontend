@@ -82,13 +82,14 @@ export const initEvents = () => ({
   signUp  : initEventStatus (),
   signIn  : initEventStatus (),
   signOut : initEventStatus (),
-  /// all users ///
+  /// all users -- stretch ///
   getUsers : initEventStatus (),
+  /// all graphs -- stretch ///
+  getGraphs : initEventStatus (),
   /// user ///
   getUser : initEventStatus (),
+  /// user graphs ///
   getUserGraphs : initEventStatus (),
-  /// all graphs ///
-  getGraphs : initEventStatus (),
   /// graph ///
   postGraph   : initEventStatus (),
   getGraph    : initEventStatus (),
