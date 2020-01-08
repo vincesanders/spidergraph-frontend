@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled from 'styled-components';
 import './DataTable.css';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 /// Styling ///
@@ -129,22 +129,28 @@ const AddNewCategoryButton = styled.button`
 
 const DataTable = () => {
     const categoryInputRef = useRef('');
-    // const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
-    // console.log(spider);
+    const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
+
+    let convertedData = [['Categories']];
+
+    spider.labels.forEach((label, i) => {
+        convertedData.push([label]);
+    });
+
+    spider.datasets.forEach((dSObj, i) => {
+        convertedData[0][i + 1] = dSObj.label;
+        dSObj.data.forEach((val, j) => {
+            convertedData[j + 1][i + 1] = val;
+        });
+    });
 
     const [dummy, setDummy] = useState(0);
     /// The design tab gets and modifies data from an array of arrays.         ///
     /// Every array within the containing array represents a ROW on the table. ///
     /// That means the data that goes along with each data-set will be in a    ///
     /// different array with the same index as the data-set header.            ///
-    const [data, setData] = useState([
-        ['Categories', 'DataSet1'],
-        ['Category1', 5],
-        ['Category2', 5],
-        ['Category3', 5],
-        ['Category4', 5],
-        ['Category5', 5]
-    ]);
+    const [data, setData] = useState(convertedData);
+
 
     function addNewCategory() {
         let newCategory = ['Category'];
