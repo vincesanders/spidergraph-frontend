@@ -127,6 +127,9 @@ const reducer = (state = initialState, action) => {
       case (actions.DELETE_GRAPH_DATASET) :
         return (newState)
 
+      case (actions.REORDER_DASH_TABS) :
+        return (newState)
+
       case (actions.REORDER_GRAPH_ARMS) :
         return (newState)
 
