@@ -16,6 +16,7 @@ const Topbar = styled.div`
 
     color: #FFFFFF;
 
+    border-top: 8px solid #4054B2;
     border-bottom: 8px solid #2e3c82;
 `
 
@@ -45,8 +46,6 @@ const NewGraphButton = styled(TopBarButton)`
 `
 
 const GraphButton = (props) => {
-    console.log(props.active);
-
     const GraphButtonStyled = styled(TopBarButton)`
         height: 100%;
         margin-right: 1px;
@@ -85,7 +84,7 @@ const GraphButton = (props) => {
 
 
 const AppTitle = styled.h3`
-    margin-right: 10px;
+    margin: 0 25px 0 5px;
 `
 
 const TopBar = () => {
