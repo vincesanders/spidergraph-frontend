@@ -12,8 +12,9 @@
 
 export const ADD_GRAPH   = 'ADD_GRAPH'
 export const OPEN_GRAPH  = 'OPEN_GRAPH'
-export const EDIT_GRAPH  = 'EDIT_GRAPH' // needed?
-export const RESET_GRAPH = 'RESET_GRAPH'
+export const CLOSE_GRAPH = 'CLOSE_GRAPH'
+// export const EDIT_GRAPH  = 'EDIT_GRAPH' // needed?
+// export const RESET_GRAPH = 'RESET_GRAPH' // needed?
 
 export const EDIT_GRAPH_TITLE  = 'EDIT_GRAPH_TITLE'
 export const EDIT_GRAPH_NOTES  = 'EDIT_GRAPH_NOTES'
@@ -111,6 +112,7 @@ export default {
   /// - tabs ///
   ADD_GRAPH,
   OPEN_GRAPH,
+  CLOSE_GRAPH,
   /// - current graph ///
   EDIT_GRAPH_TITLE,
   EDIT_GRAPH_NOTES,
