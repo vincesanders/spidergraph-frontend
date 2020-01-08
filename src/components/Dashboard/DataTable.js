@@ -67,8 +67,16 @@ const DataTable = () => {
             data[e.target.getAttribute('index1')][e.target.getAttribute('index2')] = e.target.value * -1;
             setData(data);
         }
-        
-        console.log(data[e.target.getAttribute('index1')][e.target.getAttribute('index2')]);
+    }
+
+    function allowOnlyNumberKeys(e) {
+        console.log(e.keyCode);
+        if ((e.keyCode > 47) && (e.keyCode < 58) || e.keyCode == 8 || (e.keyCode > 95 && e.keyCode < 106)) {
+            return true;
+        } else {
+            e.preventDefault();
+            return false;
+        }
     }
 
     return (
@@ -111,7 +119,7 @@ const DataTable = () => {
                                     return (
                                         <td key={(i+1) * j}>
                                             {/* TODO: Add validation to ensure only positive integers */}
-                                            <input index1={i} index2={j} type='number' name={data[0][j] + data[i][0]} onChange={changeDataSetValue} placeholder={data[i][j]} />
+                                            <input index1={i} index2={j} type='number' name={data[0][j] + data[i][0]} onChange={changeDataSetValue} placeholder={data[i][j]} pattern=" 0+\.[0-9]*[1-9][0-9]*$" onKeyDown={allowOnlyNumberKeys} />
                                         </td>
                                     );
                                 })}
