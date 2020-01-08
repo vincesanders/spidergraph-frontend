@@ -7,9 +7,9 @@ import Dashboard from './Dashboard';
 /***************************************
   MAIN
 ***************************************/
-const Home = (props) => {
+const Dash = (props) => {
   return (
-    <div className='Home'>
+    <div className='Dash'>
       <Dashboard />
     </div>
   )
@@ -17,4 +17,4 @@ const Home = (props) => {
 
 /**************************************/
 
-export default Home
+export default Dash

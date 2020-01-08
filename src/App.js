@@ -12,6 +12,7 @@ import {
 import {
   PrivateRoute,
   Home,
+  Dash,
   // Users,
   User,
   // Graphs,
@@ -38,9 +39,14 @@ const App = () => {
       <div className='App'>
         <Switch>
           {/* Home | redirect to Sign In */}
-          <PrivateRoute
+          <Route
           exact path={[ client.ends.root (), client.ends.home () ]}
           component={Home}
+          />
+          {/* Dash | redirect to Sign In */}
+          <PrivateRoute
+          exact path={client.ends.dash (':id')}
+          component={Dash}
           />
           {/* View All Users */}
           <Route

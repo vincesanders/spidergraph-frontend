@@ -2,6 +2,40 @@ import React from 'react'
 import { authios } from 'tools/auth'
 import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup'
+import styled from 'styled-components'
+
+
+
+const FormContainer = styled.div`
+width: 70%;
+height: 10%
+margin: 10px 20px;
+display: flex;
+justify-content: center;
+
+
+`
+
+const LabelDiv = styled.div`
+width:100%;
+margin: 10px`
+
+const GettingStarted = styled.button`
+width: 60%;
+background: #4054B2;
+border-radius: 5px;
+
+font-family: Open Sans;
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 38px;
+/* or 271% */
+
+text-align: center;
+
+color: #FFFFFF;`
+
 
 export default withFormik({
     mapPropsToValues() {
@@ -34,18 +68,27 @@ export default withFormik({
     })
 })(({errors, touched}) => {
     return (
-        <div>
-            <Form>
-                <label>Username:
-                    <Field type='text' name='username' />
+            <FormContainer>
+            <Form className='sign-in-form'>
+                <LabelDiv>
+                <label className='sign-in-label'>
+                    <div>Username:
+                    </div>
+                    <Field type='text' name='username' className="form-input" />
                     {touched.username && errors.username && (<p>{errors.username}</p>)}
                 </label>
-                <label>Password: 
-                    <Field type='password' name='password' />
+                </LabelDiv>
+                <LabelDiv>
+                <label className='sign-in-label'>
+                    <div>Password:
+                    </div>
+                    <Field type='text' name='password' className="form-input" />
                     {touched.password && errors.password && (<p>{errors.password}</p>)}
                 </label>
-                <button type='submit'>Submit</button>
+                </LabelDiv>
+                <GettingStarted type='submit'>Getting Started</GettingStarted>
             </Form>
-        </div>
+            </FormContainer>
+       
     );
 });
