@@ -39,6 +39,10 @@ export const initialSpider = () => ({
   scale : initialScale (),
 })
 
+export const initialSpiders = () => ([
+  initialSpider (),
+])
+
 /*******************
   events
 *******************/
@@ -66,10 +70,9 @@ export const initialEvents = () => ({
 /**************************************/
 
 export const initialState = {
-  currentSpider : 0,
-  spiders : [
-    initialSpider (),
-  ],
+  currentSpider : initialCurrentSpider (),
+  spiders : initialSpiders (),
+  events : initialEvents (),
 }
 
 /**************************************/
