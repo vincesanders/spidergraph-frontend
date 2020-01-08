@@ -16,8 +16,8 @@ export const CLOSE_GRAPH = 'CLOSE_GRAPH'
 // export const EDIT_GRAPH  = 'EDIT_GRAPH' // needed?
 // export const RESET_GRAPH = 'RESET_GRAPH' // needed?
 
-export const EDIT_GRAPH_TITLE  = 'EDIT_GRAPH_TITLE'
-export const EDIT_GRAPH_NOTES  = 'EDIT_GRAPH_NOTES'
+export const REORDER_SAVED_GRAPHS  = 'REORDER_SAVED_GRAPHS'
+export const REORDER_OPENED_GRAPHS = 'REORDER_OPENED_GRAPHS'
 
 /// CURRENT GRAPH ///
 
