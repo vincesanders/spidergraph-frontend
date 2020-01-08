@@ -21,8 +21,10 @@ export const REORDER_OPENED_GRAPHS = 'REORDER_OPENED_GRAPHS'
 
 /// CURRENT GRAPH ///
 
-export const EDIT_GRAPH_THEME  = 'EDIT_GRAPH_THEME'
-export const EDIT_GRAPH_SCALE  = 'EDIT_GRAPH_SCALE'
+export const EDIT_GRAPH_TITLE = 'EDIT_GRAPH_TITLE'
+export const EDIT_GRAPH_NOTES = 'EDIT_GRAPH_NOTES'
+export const EDIT_GRAPH_THEME = 'EDIT_GRAPH_THEME'
+export const EDIT_GRAPH_SCALE = 'EDIT_GRAPH_SCALE'
 
 export const ADD_GRAPH_ARM    = 'ADD_GRAPH_ARM'
 export const EDIT_GRAPH_ARM   = 'EDIT_GRAPH_ARM'
@@ -63,6 +65,13 @@ export const GET_USERS_TRY     = 'GET_USERS_TRY'
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
 export const GET_USERS_FAILURE = 'GET_USERS_FAILURE'
 
+/// ALL GRAPHS -- stretch ///
+
+export const GET_GRAPHS         = 'GET_GRAPHS'
+export const GET_GRAPHS_TRY     = 'GET_GRAPHS_TRY'
+export const GET_GRAPHS_SUCCESS = 'GET_GRAPHS_SUCCESS'
+export const GET_GRAPHS_FAILURE = 'GET_GRAPHS_FAILURE'
+
 /// USER ///
 
 export const GET_USER         = 'GET_USER'
@@ -74,13 +83,6 @@ export const GET_USER_GRAPHS         = 'GET_USER_GRAPHS'
 export const GET_USER_GRAPHS_TRY     = 'GET_USER_GRAPHS_TRY'
 export const GET_USER_GRAPHS_SUCCESS = 'GET_USER_GRAPHS_SUCCESS'
 export const GET_USER_GRAPHS_FAILURE = 'GET_USER_GRAPHS_FAILURE'
-
-/// ALL GRAPHS -- stretch ///
-
-export const GET_GRAPHS         = 'GET_GRAPHS'
-export const GET_GRAPHS_TRY     = 'GET_GRAPHS_TRY'
-export const GET_GRAPHS_SUCCESS = 'GET_GRAPHS_SUCCESS'
-export const GET_GRAPHS_FAILURE = 'GET_GRAPHS_FAILURE'
 
 /// GRAPH ///
 
@@ -112,6 +114,8 @@ export default {
   ADD_GRAPH,
   OPEN_GRAPH,
   CLOSE_GRAPH,
+  REORDER_SAVED_GRAPHS,
+  REORDER_OPENED_GRAPHS,
   /// - current graph ///
   EDIT_GRAPH_TITLE,
   EDIT_GRAPH_NOTES,
@@ -145,6 +149,11 @@ export default {
   GET_USERS_SUCCESS,
   GET_USERS_FAILURE,
   /// - all graphs ///
+  GET_GRAPHS,
+  GET_GRAPHS_TRY,
+  GET_GRAPHS_SUCCESS,
+  GET_GRAPHS_FAILURE,
+  /// - user ///
   GET_USER,
   GET_USER_TRY,
   GET_USER_SUCCESS,
