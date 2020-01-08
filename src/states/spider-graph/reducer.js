@@ -135,6 +135,20 @@ const reducer = (state = initialState, action) => {
         return (newState)
 
       /// server ///
+      
+      case (actions.DELETE_GRAPH):
+        // payload : graph index to delete
+        newState = {
+          ...state,
+          currentSpider: (state.currentSpider === 0) ? 0 : state.currentSpider - 1,
+          spiders : state.spiders.filter((spider, index) => (
+            index !== payload
+          )),
+        }
+        if (newState.spiders.length === 0){
+          newState.spiders = [initialSpider (),];
+        }
+        return (newState)
       // else
       default :
         hi.flag ('warn', 'action not defined')
