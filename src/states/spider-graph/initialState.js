@@ -4,6 +4,16 @@
   - initialState : initial state
 ***************************************/
 
+/*******************
+  edits
+*******************/
+
+export const initialCurrentSpider = () => 0
+
+/*******************
+  spider/spiders
+*******************/
+
 export const initialTitle = () => 'new graph'
 
 export const initialNotes = () => ''
