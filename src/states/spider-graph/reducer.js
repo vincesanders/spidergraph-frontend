@@ -139,6 +139,13 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.SIGN_UP_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            signUp : 'try',
+          }
+        }
         return (state)
 
       case (actions.SIGN_UP_SUCCESS) :
@@ -151,6 +158,13 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.SIGN_IN_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            signIn : 'try',
+          },
+        }
         return (state)
 
       case (actions.SIGN_IN_SUCCESS) :
@@ -163,6 +177,13 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.SIGN_OUT_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            SignOut : 'try',
+          },
+        }
         return (state)
 
       case (actions.SIGN_OUT_SUCCESS) :
@@ -175,6 +196,13 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_USERS_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getUsers : 'try',
+          },
+        }
         return (state)
 
       case (actions.GET_USERS_SUCCESS) :
@@ -187,6 +215,13 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_USER_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getUser : 'try',
+          },
+        }
         return (state)
 
       case (actions.GET_USER_SUCCESS) :
@@ -199,6 +234,13 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_USER_GRAPHS_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getUserGraphs : 'try',
+          },
+        }
         return (state)
 
       case (actions.GET_USER_GRAPHS_SUCCESS) :
@@ -211,6 +253,13 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_GRAPHS_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getGraphs : 'try',
+          },
+        }
         return (state)
 
       case (actions.GET_GRAPHS_SUCCESS) :
@@ -223,6 +272,13 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.POST_GRAPH_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            postGraph : 'try',
+          },
+        }
         return (state)
 
       case (actions.POST_GRAPH_SUCCESS) :
@@ -235,6 +291,13 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_GRAPH_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            getGraph : 'try',
+          },
+        }
         return (state)
 
       case (actions.GET_GRAPH_SUCCESS) :
@@ -247,6 +310,13 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.PUT_GRAPH_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            putGraph : 'try',
+          },
+        }
         return (state)
 
       case (actions.PUT_GRAPH_SUCCESS) :
@@ -270,6 +340,13 @@ const reducer = (state = initialState, action) => {
         return (newState)
 
       case (actions.DELETE_GRAPH_TRY) :
+        newState = {
+          ...state,
+          events : {
+            ...state.events,
+            deleteGraph : 'try',
+          },
+        }
         return (state)
 
       case (actions.DELETE_GRAPH_SUCCESS) :
