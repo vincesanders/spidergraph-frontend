@@ -29,6 +29,8 @@ export const initCurrentSpider = () => 0
   spider/spiders
 *******************/
 
+export const initId = () => 'id'
+
 export const initTitle = () => 'new graph'
 
 export const initNotes = () => ''
@@ -47,6 +49,7 @@ export const initDataset = (length, value = 1) => ({
 })
 
 export const initSpider = () => ({
+  id : initId (),
   title : initTitle (),
   labels : [ 'label-1', 'label-2', 'label-3', 'label-4', 'label-5' ],
   datasets : [
