@@ -7,6 +7,7 @@
 //////////////////////////////////////*/
 export { default as PrivateRoute } from './PrivateRoute'
 export { default as Home } from './Home'
+export { default as Dash } from './Dash'
 // export { default as Users } from './Users'
 export { default as User } from './User'
 // export { default as Graphs } from './Graphs'
