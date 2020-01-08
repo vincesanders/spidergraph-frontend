@@ -8,10 +8,12 @@ import styled from 'styled-components'
 
 const FormContainer = styled.div`
 width: 70%;
-height: 20%
+height: 10%
 margin: 10px 20px;
 display: flex;
 justify-content: center;
+
+
 `
 
 const LabelDiv = styled.div`
