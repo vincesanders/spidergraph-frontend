@@ -21,7 +21,7 @@ export const initialDataset = (length, value = 1) => ({
   data : Array (length).fill (value),
 })
 
-export const initialSpiderGraph = () => ({
+export const initialSpider = () => ({
   title : initialTitle (),
   labels : [ 'label-1', 'label-2', 'label-3', 'label-4', 'label-5' ],
   datasets : [
@@ -42,9 +42,9 @@ export const initialSpiderGraph = () => ({
 /**************************************/
 
 export const initialState = {
-  openedSpider : 0,
+  currentSpider : 0,
   spiders : [
-    initialSpiderGraph (),
+    initialSpider (),
   ],
 }
 

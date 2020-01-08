@@ -53,7 +53,7 @@ const AppTitle = styled.h3`
 const TopBar = () => {
     const dispatch = useDispatch();
     const spiders = useSelector(state => state.spiders);
-    const currentGraph = useSelector(state => state.openedSpider);
+    const currentGraph = useSelector(state => state.currentSpider);
     console.log('current graph: ',currentGraph);
     const addNewGraph = () => {
         dispatch({type: actions.ADD_GRAPH});

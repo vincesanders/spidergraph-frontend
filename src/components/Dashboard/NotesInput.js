@@ -11,7 +11,7 @@ const NotesTextarea = styled.textarea`
 
 const NotesInput = (props) => {
     const dispatch = useDispatch();
-    const notes = useSelector(state => state.spiders[state.openedSpider].notes);
+    const notes = useSelector(state => state.spiders[state.currentSpider].notes);
 
     const handleChange = e => {
         dispatch({type: actions.EDIT_GRAPH_NOTES, payload: e.target.value})
