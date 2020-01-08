@@ -48,7 +48,8 @@ export default withFormik({
         }
     },
     handleSubmit(values, { resetForm }) {
-        const valuesToSubmit = { username: values.username, password: values.password, email: values.email }; //I don't want to send the retyped password to the bakend.
+
+        const valuesToSubmit = {username: values.username, password: values.password, email: values.email}; //I don't want to send the retyped password to the bakend.
         console.log(valuesToSubmit);
         
 
@@ -88,16 +89,16 @@ export default withFormik({
                     </label>
                 </LabelDiv>
                 <LabelDiv>
-                    <label className='sign-in-label'>Email:
-                    <Field type='text' name='email' className='form-input' />
-                        {touched.email && errors.email && (<p>{errors.email}</p>)}
-                    </label>
+                <label className='sign-in-label'>Email:
+                    <Field type='password' name='email' className='form-input' />
+                    {touched.email && errors.email && (<p>{errors.email}</p>)}
+                </label>    
                 </LabelDiv>
                 <LabelDiv>
-                    <label className='sign-in-label'>Password:
-                    <Field type='text' name='password' className='form-input' />
-                        {touched.password && errors.password && (<p>{errors.password}</p>)}
-                        Confirm Password:
+                <label className='sign-in-label'>Password:
+                    <Field type='password' name='password' className='form-input' />
+                    {touched.password && errors.password && (<p>{errors.password}</p>)}
+                    Confirm Password:
                     <Field type='text' name='retypedPassword' className='form-input' />
                         {touched.retypedPassword && errors.retypedPassword && (<p>{errors.retypedPassword}</p>)}
                     </label>
