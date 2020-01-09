@@ -178,7 +178,6 @@ const DataTable = () => {
     function changeDataSetValue(e) {
         const categoryIndex = e.target.getAttribute('index1') - 1;
         const datasetIndex = e.target.getAttribute('index2') - 1;
-        
         const newValue = parseInt(e.target.value);
 
         dispatch(act(actions.EDIT_GRAPH_DATAPOINT, { datasetIndex: datasetIndex, categoryIndex: categoryIndex, newValue: newValue }))

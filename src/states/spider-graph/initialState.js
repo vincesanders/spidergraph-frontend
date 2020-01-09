@@ -41,7 +41,7 @@ export const initScale = () => 10
 
 export const initLabel = (index = 1) => `new label (${index})`
 
-export const initValue = () => 1
+export const initValue = () => 3
 
 export const initDataset = (length, value = 1) => ({
   label : 'new dataset',
