@@ -8,7 +8,7 @@ const TabGroup = styled.div`
 `
 
 const DataDesignTabs = () => {
-    const [tab, setTab] = useState(1);
+    const [tab, setTab] = useState(0);
 
     return(
         <div>

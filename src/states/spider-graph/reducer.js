@@ -7,8 +7,12 @@ import hi from 'tools/hi'
 /// internal modules ///
 import initialState, {
   initSpider,
+  initLabel,
+  initValue,
+  initDataset,
 } from './initialState'
 import actions from './actions'
+import { array } from 'yup'
 
 /***************************************
   tools
@@ -27,7 +31,9 @@ const reorderList = (list, order) => (
 const reducer = (state = initialState, action) => {
   const { type, payload } = action
   let newState = {}
-
+  let newLabels = [];
+  let newDatasets = [];
+  let newData = [];
   /// do it! ///
   try {
     /// actions ///
@@ -128,21 +134,134 @@ const reducer = (state = initialState, action) => {
         return (newState)
 
       case (actions.ADD_GRAPH_ARM) :
+        // payload : none
+        newState = {
+          ...state,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
+            [state.currentSpider] : {
+              ...state.openedSpiders[state.currentSpider],
+              labels: [...state.openedSpiders[state.currentSpider].labels, initLabel()],
+              datasets: state.openedSpiders[state.currentSpider].datasets.map((dataset) => ({
+                ...dataset,
+                data: [...dataset.data, initValue()],
+              }))
+            },
+          })),
+        }
         return (newState)
 
       case (actions.EDIT_GRAPH_ARM) :
+        // payload: index of graph-arm to edit && new graph arm name
+        newLabels = state.openedSpiders[state.currentSpider].labels;
+        newLabels[payload.index] = payload.newName;
+
+        newState = {
+          ...state,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
+            [state.currentSpider] : {
+              ...state.openedSpiders[state.currentSpider],
+              labels: newLabels
+            },
+          })),
+        }
+        
         return (newState)
 
       case (actions.DELETE_GRAPH_ARM) :
+        // payload : index of label/graph-arm to delete
+        newLabels = state.openedSpiders[state.currentSpider].labels;
+        newLabels.splice(payload, 1);
+        newState = {
+          ...state,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
+            [state.currentSpider] : {
+              ...state.openedSpiders[state.currentSpider],
+              labels: newLabels,
+              datasets: state.openedSpiders[state.currentSpider].datasets.map((dataset) => {
+                const newDataset = dataset.data;
+                newDataset.splice(payload, 1);
+                console.log('spliced dataset')
+                return {
+                ...dataset,
+                data: newDataset,
+              }})
+            },
+          })),
+        }
+
         return (newState)
 
       case (actions.ADD_GRAPH_DATASET) :
+        // payload : none
+        newState = {
+          ...state,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
+            [state.currentSpider] : {
+              ...state.openedSpiders[state.currentSpider],
+              datasets: [...state.openedSpiders[state.currentSpider].datasets, initDataset(state.openedSpiders[state.currentSpider].labels.length, 3)],
+            },
+          })),
+        }
         return (newState)
 
       case (actions.EDIT_GRAPH_DATASET) :
+        // payload: index of graph-arm to edit && new graph arm name
+        newDatasets = state.openedSpiders[state.currentSpider].datasets;
+        newDatasets[payload.index] = {...newDatasets[payload.index], label: payload.newName};
+
+        newState = {
+          ...state,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
+            [state.currentSpider] : {
+              ...state.openedSpiders[state.currentSpider],
+              datasets: newDatasets
+            },
+          })),
+        }
+        
         return (newState)
 
       case (actions.DELETE_GRAPH_DATASET) :
+        // payload : index of label/graph-arm to delete
+        newDatasets = state.openedSpiders[state.currentSpider].datasets;
+        newDatasets.splice(payload, 1);
+        newState = {
+          ...state,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
+            [state.currentSpider] : {
+              ...state.openedSpiders[state.currentSpider],
+              datasets: newDatasets,
+            },
+          })),
+        }
+
+        return (newState)
+      
+      case (actions.EDIT_GRAPH_DATAPOINT):
+        // payload: index of graph-arm to edit, index of catagory to edit && new datapoint value
+        newData = state.openedSpiders[state.currentSpider].datasets[payload.datasetIndex].data;
+        newData[payload.categoryIndex] = payload.newValue;
+
+        newDatasets = state.openedSpiders[state.currentSpider].datasets;
+        newDatasets[payload.datasetIndex] = {...newDatasets[payload.datasetIndex], data: newData};
+
+        newState = {
+          ...state,
+          openedSpiders : Array.from (Object.values ({
+            ...state.openedSpiders,
+            [state.currentSpider] : {
+              ...state.openedSpiders[state.currentSpider],
+              datasets: newDatasets,
+            },
+          })),
+        }
+        
         return (newState)
 
       case (actions.REORDER_GRAPH_ARMS) :
