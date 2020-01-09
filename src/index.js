@@ -26,10 +26,10 @@ import 'styles/index.css'
   MAIN
 ***************************************/
 
-/// fake user -- FOR TESTING ONLY
-user.token.set ('example')
-user.isAllowed.set ('y')
-///
+// /// fake user -- FOR TESTING ONLY
+// user.token.set ('example')
+// user.isAllowed.set ('y')
+// ///
 
 const spiderStore = spider.createStore (
   composeWithDevTools (redux.applyMiddleware (thunk, logger))

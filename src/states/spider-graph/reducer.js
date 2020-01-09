@@ -301,12 +301,15 @@ const reducer = (state = initialState, action) => {
 
       case (actions.SIGN_UP_SUCCESS) :
         // handle user
-        user.token.set (payload.data.token)
         user.isAllowed.set ('y')
+        user.token.set (payload.data.token)
+        user.data.set (payload.data)
 
         return (seqSetIn (state,
           ['events', 'signUp'],
           'success',
+          ['currentUser'],
+          payload.data,
         ))
 
       case (actions.SIGN_UP_FAILURE) :
@@ -329,12 +332,15 @@ const reducer = (state = initialState, action) => {
 
       case (actions.SIGN_IN_SUCCESS) :
         // handle user
-        user.token.set (payload.data.token)
         user.isAllowed.set ('y')
+        user.token.set (payload.data.token)
+        user.data.set (payload.data)
 
         return (seqSetIn (state,
           ['events', 'signIn'],
           'success',
+          ['currentUser'],
+          payload.data,
         ))
 
       case (actions.SIGN_IN_FAILURE) :
@@ -426,6 +432,8 @@ const reducer = (state = initialState, action) => {
 
       case (actions.GET_USER_SUCCESS) :
         return (seqSetIn (state,
+          ['currentUser'],
+          payload,
           ['events', 'getUser'],
           'success',
         ))
@@ -449,6 +457,8 @@ const reducer = (state = initialState, action) => {
 
       case (actions.GET_USER_GRAPHS_SUCCESS) :
         return (seqSetIn (state,
+          ['savedGraphs'],
+          payload,
           ['events', 'getUserGraphs'],
           'success',
         ))
@@ -472,6 +482,7 @@ const reducer = (state = initialState, action) => {
 
       case (actions.POST_GRAPH_SUCCESS) :
         return (seqSetIn (state,
+          // needs ID
           ['events', 'postGraph'],
           'success',
         ))
@@ -493,6 +504,7 @@ const reducer = (state = initialState, action) => {
 
       case (actions.GET_GRAPH_SUCCESS) :
         return (seqSetIn (state,
+          // needs graph, and convert
           ['events', 'getGraph'],
           'success',
         ))
@@ -525,14 +537,15 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.DELETE_GRAPH) :
-        return (seqUpdateIn (state,
-          ['currentSpider'],
-          () => ((state.currentSpider === 0) ? 0 : state.currentSpider - 1),
-          ['openedSpiders'],
-          (list) => (list.filter ((spider, i) => (i !== payload))),
-          ['openedSpiders'],
-          (list) => ((list.length === 0) ? [initSpider ()] : list)
-        ))
+        return (state)
+        // return (seqUpdateIn (state,
+        //   ['currentSpider'],
+        //   (index) => ((index === 0) ? 0 : index - 1),
+        //   ['openedSpiders'],
+        //   (list) => (list.filter ((spider, i) => (i !== payload))),
+        //   ['openedSpiders'],
+        //   (list) => ((list.length === 0) ? [initSpider ()] : list)
+        // ))
 
       case (actions.DELETE_GRAPH_TRY) :
         return (seqSetIn (state,
@@ -541,10 +554,20 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.DELETE_GRAPH_SUCCESS) :
-        return (seqSetIn (state,
+        return (seqUpdateIn (state,
+          ['currentSpider'],
+          (index) => ((index === 0) ? 0 : index - 1),
+          ['openedSpiders'],
+          (list) => (list.filter ((spider, i) => (i !== payload))),
+          ['openedSpiders'],
+          (list) => ((list.length === 0) ? [initSpider ()] : list),
           ['events', 'deleteGraph'],
-          'success',
+          () => 'success',
         ))
+        // return (seqSetIn (state,
+        //   ['events', 'deleteGraph'],
+        //   'success',
+        // ))
 
       case (actions.DELETE_GRAPH_FAILURE) :
         return (seqSetIn (state,

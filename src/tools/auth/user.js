@@ -3,6 +3,19 @@ import storage from './storage'
 /// helpers ///
 const ns = (key) => `${storage.namespace}.user.${key}`
 
+/// user isAllowed ///
+const setIsAllowed = (isAllowed) => {
+  storage.media.setItem (ns ('isAllowed'), isAllowed ? 'y' : 'n')
+}
+const getIsAllowed = () => {
+  return (
+    storage.media.getItem (ns ('isAllowed')) === 'y' ? true : false
+  )
+}
+const clearIsAllowed = () => {
+  storage.media.removeItem (ns ('isAllowed'))
+}
+
 /// user token ///
 const setToken = (token) => {
   storage.media.setItem (ns ('token'), token)
@@ -16,33 +29,39 @@ const clearToken = () => {
   storage.media.removeItem (ns ('token'))
 }
 
-/// user allowed ///
-const setIsAllowed = (isAllowed) => {
-  storage.media.setItem (ns ('isAllowed'), isAllowed ? 'y' : 'n')
+/// user data ///
+const setData = (data) => {
+  storage.media.setItem (ns ('data'), JSON.stringify(data))
 }
-const getIsAllowed = () => {
+const getData = () => {
   return (
-    storage.media.getItem (ns ('isAllowed')) === 'y' ? true : false
+    JSON.parse (storage.media.getItem (ns ('data')))
   )
 }
-const clearIsAllowed = () => {
-  storage.media.removeItem (ns ('isAllowed'))
+const clearData = () => {
+  storage.media.removeItem (ns ('data'))
 }
 
 ///
 export default {
-  token : {
-    set : setToken,
-    get : getToken,
-    clear : clearToken,
-  },
   isAllowed : {
     set : setIsAllowed,
     get : getIsAllowed,
     clear : clearIsAllowed,
   },
+  token : {
+    set : setToken,
+    get : getToken,
+    clear : clearToken,
+  },
+  data : {
+    set : setData,
+    get : getData,
+    clear : clearData,
+  },
   clear : () => {
-    clearToken ()
     clearIsAllowed ()
+    clearToken ()
+    clearData ()
   },
 }

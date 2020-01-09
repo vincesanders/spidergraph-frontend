@@ -137,7 +137,7 @@ const SignIn = (props) => {
           console.log ('doing nothing')
           break
   }
-  }, [events.signUp])
+  }, [events.signIn])
 
   return (
     <SignInCont>

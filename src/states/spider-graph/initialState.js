@@ -2,6 +2,8 @@
   MAIN
 ----------------------------------------
   - initialState
+  #### user ####
+  - initCurrentUser
   #### edits ####
   - initCurrentSpider
   #### spider/spiders ####
@@ -20,6 +22,12 @@
 ***************************************/
 
 /*******************
+  user
+*******************/
+
+export const initCurrentUser = () => ({})
+
+/*******************
   edits
 *******************/
 
@@ -29,7 +37,7 @@ export const initCurrentSpider = () => 0
   spider/spiders
 *******************/
 
-export const initId = () => 'id'
+export const initId = () => ':id'
 
 export const initTitle = () => 'new graph'
 
@@ -96,6 +104,7 @@ export const initEvents = () => ({
 /**************************************/
 
 export const initialState = {
+  currentUser : initCurrentUser (),
   savedSpiders : [],
   openedSpiders : [
     initSpider (),
