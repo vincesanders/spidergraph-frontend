@@ -1,5 +1,4 @@
 import React from 'react'
-import { authios } from 'tools/auth'
 import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
@@ -38,7 +37,6 @@ color: #FFFFFF;`
 
 
 export default withFormik({
-    
     mapPropsToValues() {
         return {
             username: '',
@@ -47,21 +45,8 @@ export default withFormik({
             retypedPassword: ''
         }
     },
-    handleSubmit(values, { resetForm }) {
-
-        const valuesToSubmit = {username: values.username, password: values.password, email: values.email}; //I don't want to send the retyped password to the bakend.
-        console.log(valuesToSubmit);
-        
-
-        // axios
-        //     .post('/api/auth/register/', valuesToSubmit)
-        //     .then(res => {
-        //         setStatus(res.data);
-        //         resetForm();
-        //     })
-        //     .catch(err => console.log(err.response));
-
-        resetForm(); //remove when adding axios
+    handleSubmit(values, formikBag) {
+        formikBag.props.trySubmit (values, formikBag)
     },
     validationSchema: Yup.object().shape({
         username: Yup.string()
@@ -79,9 +64,9 @@ export default withFormik({
 })(({ errors, touched }) => {
     return (
         <FormContainer>
-            
+
             <Form className='sign-in-form'>
-                
+
                 <LabelDiv>
                     <label className='sign-in-label'>Username:
                     <Field type='text' name='username' className='form-input' />
@@ -90,24 +75,24 @@ export default withFormik({
                 </LabelDiv>
                 <LabelDiv>
                 <label className='sign-in-label'>Email:
-                    <Field type='password' name='email' className='form-input' />
+                    <Field type='text' name='email' className='form-input' />
                     {touched.email && errors.email && (<p>{errors.email}</p>)}
-                </label>    
+                </label>
                 </LabelDiv>
                 <LabelDiv>
                 <label className='sign-in-label'>Password:
                     <Field type='password' name='password' className='form-input' />
                     {touched.password && errors.password && (<p>{errors.password}</p>)}
                     Confirm Password:
-                    <Field type='text' name='retypedPassword' className='form-input' />
+                    <Field type='password' name='retypedPassword' className='form-input' />
                         {touched.retypedPassword && errors.retypedPassword && (<p>{errors.retypedPassword}</p>)}
                     </label>
                 </LabelDiv>
                 <Submit type='submit'>Submit</Submit>
-                
-                
+
+
             </Form>
-            
+
         </FormContainer>
     );
 });

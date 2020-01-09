@@ -1,10 +1,13 @@
 /// external modules ///
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import _ from 'lodash'
 import styled from 'styled-components'
 import {authios} from 'tools/auth'
 
 import SignUpForm from 'components/AuthForms/SignUpForm'
-import { client, server } from 'routes'
+import { signUp } from 'states/spider-graph/thunks'
+import { client } from 'routes'
 
 const SignUpCont = styled.div`
   background: #FFFFFF;
@@ -96,32 +99,51 @@ color:#4054B2 ;
   MAIN
 ***************************************/
 const SignUp = (props) => {
-  const routeToSignIn = () => {
-    props.history.push(client.ends.signin ());
+  const events = useSelector ((state) => state.events)
+  const dispatch = useDispatch ()
+
+  const routeToHome = () => {
+    props.history.push(client.ends.home ())
   }
 
-  const test = () => {
-    authios().post(server.ends.signup.POST(),{username:'hello',password:'hello', email:'p@rick.com'}).then(
-      res => {
-        console.log(res, 'heyo')
-      }
-    )
+  const routeToSignIn = () => {
+    props.history.push(client.ends.signin ())
   }
+
+  const trySubmit = (values, formikBag) => {
+    dispatch (signUp (_.omit (values, ['retypedPassword'])))
+  }
+
+  useEffect (() => {
+    switch (events.signUp) {
+      case ('success') :
+          routeToHome ()
+          break
+      case ('failure') :
+          console.log ('error on sign up')
+          break
+      default :
+          console.log ('doing nothing')
+          break
+  }
+  }, [events.signUp])
 
   return (
     <SignUpCont>
       <H3>Create an Account</H3>
       <Formcont>
-      <SignUpForm />
-      <Logo onClick={test}>Spider.Graph</Logo>
+      <SignUpForm
+      trySubmit={trySubmit}
+      />
+      <Logo onClick={routeToSignIn}>Spider.Graph</Logo>
       <DivToSignIn>
-       Already have an account?    
+        Already have an account?
         <Signin onClick={routeToSignIn}>Sign In</Signin>
       </DivToSignIn>
       </Formcont>
-      
+
     </SignUpCont>
-    
+
   )
 }
 

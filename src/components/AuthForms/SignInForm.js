@@ -1,5 +1,4 @@
 import React from 'react'
-import { authios } from 'tools/auth'
 import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
@@ -44,18 +43,8 @@ export default withFormik({
             password: ''
         }
     },
-    handleSubmit(values, { resetForm }) {
-        console.log(values);
-
-        // axios
-        //     .post('/api/auth/login/', values)
-        //     .then(res => {
-        //         setStatus(res.data);
-        //         resetForm();
-        //     })
-        //     .catch(err => console.log(err.response));
-
-        resetForm(); //remove when adding axios
+    handleSubmit(values, formikBag) {
+        formikBag.props.trySubmit (values, formikBag)
     },
     validationSchema: Yup.object().shape({
         username: Yup.string()
@@ -66,7 +55,8 @@ export default withFormik({
             .required('This field is required')
             .min(8, 'Enter a password that is at least 8 characters long!')
     })
-})(({errors, touched}) => {
+})(({ errors, touched }) => {
+
     return (
             <FormContainer>
             <Form className='sign-in-form'>
@@ -82,13 +72,12 @@ export default withFormik({
                 <label className='sign-in-label'>
                     <div>Password:
                     </div>
-                    <Field type='text' name='password' className="form-input" />
+                    <Field type='password' name='password' className="form-input" />
                     {touched.password && errors.password && (<p>{errors.password}</p>)}
                 </label>
                 </LabelDiv>
                 <GettingStarted type='submit'>Getting Started</GettingStarted>
             </Form>
             </FormContainer>
-       
     );
 });

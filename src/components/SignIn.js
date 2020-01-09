@@ -1,11 +1,12 @@
 /// external modules ///
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { authios } from 'tools/auth'
 
 import SignInForm from 'components/AuthForms/SignInForm'
-import { client, server } from 'routes'
-
+import { signIn } from 'states/spider-graph/thunks'
+import { client } from 'routes'
 
 
 const SignInCont = styled.div`
@@ -53,7 +54,7 @@ display: flex;
 const Logo = styled.button`
 
 @media (max-width: 768px) {
-  
+
 }
 
 position: absolute;
@@ -67,7 +68,7 @@ font-family: Open Sans;
 font-style: normal;
 font-weight: 600;
 font-size: 16px;
-line-height: 38px;  
+line-height: 38px;
 `
 
 const DivToSignUp = styled.div`
@@ -110,34 +111,54 @@ color:#4054B2 ;
   MAIN
 ***************************************/
 const SignIn = (props) => {
-  const routeToSignUp = () => {
-    props.history.push(client.ends.signup ());
+  const events = useSelector ((state) => state.events)
+  const dispatch = useDispatch ()
+
+  const routeToHome = () => {
+    props.history.push(client.ends.home ())
   }
 
-const test = () => {
-  authios().post(server.ends.signin.POST(),{username:'hello',password:'hello'}).then(
-    res => {
-      console.log(res, 'heyo')
-    }
-  )
-}
+  const routeToSignUp = () => {
+    props.history.push(client.ends.signup ())
+  }
+
+  const trySubmit = (values, formikBag) => {
+    dispatch (signIn (values))
+  }
+
+  useEffect (() => {
+    switch (events.signIn) {
+      case ('success') :
+          routeToHome ()
+          break
+      case ('failure') :
+          console.log ('error on sign in')
+          break
+      default :
+          console.log ('doing nothing')
+          break
+  }
+  }, [events.signUp])
+
   return (
 
 
     <SignInCont>
       <H3>
-       Log In
+        Log In
       </H3>
       <Formcont>
-      <SignInForm />
-      <Logo onClick={test}>Spider.Graph</Logo>
+      <SignInForm
+      trySubmit={trySubmit}
+      />
+      <Logo onClick={routeToSignUp}>Spider.Graph</Logo>
       <DivToSignUp>
-       Need an account?    
+        Need an account?
         <SignUp onClick={routeToSignUp}>Sign Up</SignUp>
       </DivToSignUp>
       </Formcont>
     </SignInCont>
-    
+
   )
 }
 
