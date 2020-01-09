@@ -1,8 +1,6 @@
 /// tools ///
+import * as Im from 'immutable'
 import hi from 'tools/hi'
-// import iffy from 'tools/iffy'
-// import immutably from 'tools/immutably'
-// import nullably from 'tools/nullably'
 
 /// internal modules ///
 import initialState, {
@@ -14,8 +12,56 @@ import actions from './actions'
   tools
 ***************************************/
 
-const reorderList = (list, order) => (
-  order.map ((i) => (list[i]))
+/*--------------------------------------
+  seqHasIn
+  - hacky sequential Im.hasIn
+--------------------------------------*/
+const seqHasIn = (obj, seq /* [{ keyPath, noSetValue }, ...] */) => {
+  let values = seq.map (([ keyPath, noSetValue ]) => (
+    Im.hasIn (obj, keyPath, noSetValue)
+  ))
+  return values
+}
+
+/*--------------------------------------
+  seqGetIn
+  - hacky sequential Im.getIn
+--------------------------------------*/
+const seqGetIn = (obj, seq /* [{ keyPath, noSetValue }, ...] */) => {
+  let values = seq.map (([ keyPath, noSetValue ]) => (
+    Im.getIn (obj, keyPath, noSetValue)
+  ))
+  return values
+}
+
+/*--------------------------------------
+  seqSetIn
+  - hacky sequential Im.setIn
+--------------------------------------*/
+const seqSetIn = (obj, seq /* [{ keyPath, value }, ...] */) => {
+  let newObj = obj
+  seq.forEach ((([ keyPath, value ]) => (
+    newObj = Im.setIn (newObj, keyPath, value)
+  )))
+  return newObj
+}
+
+/*--------------------------------------
+  seqUpdateIn
+  - hacky sequential Im.updateIn
+--------------------------------------*/
+const seqUpdateIn = (obj, seq /* [{ keyPath, updater }, ...] */) => {
+  return (seq.map (([ keyPath, updater ]) => (
+    Im.updateIn (obj, keyPath, updater)
+  )))
+}
+
+/*--------------------------------------
+  reshapeList
+  - reshape (or reorder) a list with array of indices
+--------------------------------------*/
+const reshapeList = (list, shape) => (
+  shape.map ((i) => (list[i]))
 )
 
 /***************************************
