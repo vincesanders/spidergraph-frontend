@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import _ from 'lodash'
-import { authios } from 'tools/auth'
-import { signUp } from 'states/spider-graph/thunks'
+import { useSelector } from 'react-redux'
 import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
@@ -49,24 +46,8 @@ export default withFormik({
             retypedPassword: ''
         }
     },
-    handleSubmit(values, { setStatus, resetForm }) {
-        setStatus (_.omit (values, ['retypedPassword']))
-        // const valuesToSubmit = {
-        //     username: values.username,
-        //     password: values.password,
-        //     email: values.email
-        // }; //I don't want to send the retyped password to the bakend.
-
-        // console.log(valuesToSubmit);
-        // this.dipatch (signUp (valuesToSubmit))
-        // axios
-        //     .post('/api/auth/register/', valuesToSubmit)
-        //     .then(res => {
-        //         setStatus(res.data);
-        //         resetForm();
-        //     })
-        //     .catch(err => console.log(err.response));
-        // resetForm(); //remove when adding axios
+    handleSubmit(values, formikBag) {
+        formikBag.props.trySubmit (values, formikBag)
     },
     validationSchema: Yup.object().shape({
         username: Yup.string()
@@ -81,14 +62,7 @@ export default withFormik({
             .required('This field is required')
             .oneOf([Yup.ref('password'), null], 'Passwords must match!!!')
     })
-})(({ errors, touched, status, resetForm }) => {
-
-    // handleSubmit hack
-    const dispatch = useDispatch ()
-    React.useEffect (() => {
-        status && dispatch (signUp (status))
-    }, [dispatch, status])
-
+})(({ errors, touched }) => {
     return (
         <FormContainer>
 
