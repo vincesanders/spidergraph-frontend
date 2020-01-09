@@ -182,7 +182,7 @@ const reducer = (state = initialState, action) => {
             },
           })),
         }
-        
+
         return (newState)
 
       case (actions.DELETE_GRAPH_ARM) :
@@ -239,7 +239,7 @@ const reducer = (state = initialState, action) => {
             },
           })),
         }
-        
+
         return (newState)
 
       case (actions.DELETE_GRAPH_DATASET) :
@@ -258,7 +258,7 @@ const reducer = (state = initialState, action) => {
         }
 
         return (newState)
-      
+
       case (actions.EDIT_GRAPH_DATAPOINT):
         // payload: index of graph-arm to edit, index of catagory to edit && new datapoint value
         newData = state.openedSpiders[state.currentSpider].datasets[payload.datasetIndex].data;
@@ -277,7 +277,7 @@ const reducer = (state = initialState, action) => {
             },
           })),
         }
-        
+
         return (newState)
 
       case (actions.REORDER_GRAPH_ARMS) :
