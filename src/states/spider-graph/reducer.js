@@ -482,6 +482,7 @@ const reducer = (state = initialState, action) => {
 
       case (actions.POST_GRAPH_SUCCESS) :
         return (seqSetIn (state,
+          // needs ID
           ['events', 'postGraph'],
           'success',
         ))
@@ -503,6 +504,7 @@ const reducer = (state = initialState, action) => {
 
       case (actions.GET_GRAPH_SUCCESS) :
         return (seqSetIn (state,
+          // needs graph, and convert
           ['events', 'getGraph'],
           'success',
         ))
