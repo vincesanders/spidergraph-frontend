@@ -1,9 +1,11 @@
 /// external modules ///
 import React from 'react'
 import styled from 'styled-components'
+import { authios } from 'tools/auth'
 
 import SignInForm from 'components/AuthForms/SignInForm'
-import { client } from 'routes'
+import { client, server } from 'routes'
+
 
 
 const SignInCont = styled.div`
@@ -112,14 +114,23 @@ const SignIn = (props) => {
     props.history.push(client.ends.signup ());
   }
 
+const test = () => {
+  authios().post(server.ends.signin.POST(),{username:'hello',password:'hello'}).then(
+    res => {
+      console.log(res, 'heyo')
+    }
+  )
+}
   return (
+
+
     <SignInCont>
       <H3>
        Log In
       </H3>
       <Formcont>
       <SignInForm />
-      <Logo onClick={routeToSignUp}>Spider.Graph</Logo>
+      <Logo onClick={test}>Spider.Graph</Logo>
       <DivToSignUp>
        Need an account?    
         <SignUp onClick={routeToSignUp}>Sign Up</SignUp>

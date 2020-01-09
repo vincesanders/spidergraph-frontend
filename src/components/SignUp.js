@@ -1,9 +1,10 @@
 /// external modules ///
 import React from 'react'
 import styled from 'styled-components'
+import {authios} from 'tools/auth'
 
 import SignUpForm from 'components/AuthForms/SignUpForm'
-import { client } from 'routes'
+import { client, server } from 'routes'
 
 const SignUpCont = styled.div`
   background: #FFFFFF;
@@ -99,12 +100,20 @@ const SignUp = (props) => {
     props.history.push(client.ends.signin ());
   }
 
+  const test = () => {
+    authios().post(server.ends.signup.POST(),{username:'hello',password:'hello', email:'p@rick.com'}).then(
+      res => {
+        console.log(res, 'heyo')
+      }
+    )
+  }
+
   return (
     <SignUpCont>
       <H3>Create an Account</H3>
       <Formcont>
       <SignUpForm />
-      <Logo onClick={routeToSignIn}>Spider.Graph</Logo>
+      <Logo onClick={test}>Spider.Graph</Logo>
       <DivToSignIn>
        Already have an account?    
         <Signin onClick={routeToSignIn}>Sign In</Signin>
