@@ -19,6 +19,14 @@ function GraphDash() {
     setData(spider);
   }, [spider, spider.labels.length])
 
+  const chartOptions = {
+    scale: {
+      gridLines: {
+        circular: true
+      }
+    }
+  }
+
   return (
     <GraphField>
       <Radar
@@ -30,6 +38,7 @@ function GraphDash() {
             align: 'start',
           },
           scale: {
+            gridLines: { circular: true},
             ticks:{
               suggestedMin: 0,
               // suggestedMax: 10

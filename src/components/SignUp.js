@@ -1,8 +1,11 @@
 /// external modules ///
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import _ from 'lodash'
 import styled from 'styled-components'
 
 import SignUpForm from 'components/AuthForms/SignUpForm'
+import { signUp } from 'states/spider-graph/thunks'
 import { client } from 'routes'
 
 const SignUpCont = styled.div`
@@ -95,24 +98,51 @@ color:#4054B2 ;
   MAIN
 ***************************************/
 const SignUp = (props) => {
-  const routeToSignIn = () => {
-    props.history.push(client.ends.signin ());
+  const events = useSelector ((state) => state.events)
+  const dispatch = useDispatch ()
+
+  const routeToHome = () => {
+    props.history.push(client.ends.home ())
   }
+
+  const routeToSignIn = () => {
+    props.history.push(client.ends.signin ())
+  }
+
+  const trySubmit = (values, formikBag) => {
+    dispatch (signUp (_.omit (values, ['retypedPassword'])))
+  }
+
+  useEffect (() => {
+    switch (events.signUp) {
+      case ('success') :
+          routeToHome ()
+          break
+      case ('failure') :
+          console.log ('error on sign up')
+          break
+      default :
+          console.log ('doing nothing')
+          break
+  }
+  }, [events.signUp])
 
   return (
     <SignUpCont>
       <H3>Create an Account</H3>
       <Formcont>
-      <SignUpForm />
+      <SignUpForm
+      trySubmit={trySubmit}
+      />
       <Logo onClick={routeToSignIn}>Spider.Graph</Logo>
       <DivToSignIn>
-       Already have an account?    
+        Already have an account?
         <Signin onClick={routeToSignIn}>Sign In</Signin>
       </DivToSignIn>
       </Formcont>
-      
+
     </SignUpCont>
-    
+
   )
 }
 

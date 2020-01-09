@@ -1,5 +1,5 @@
 export default {
-  base : 'https://cors-anywhere.herokuapp.com/https://example.com/api',
+  base : 'https://cors-anywhere.herokuapp.com/https://lambda-spider.herokuapp.com/api',
   ends : {
     signup : {
       POST : () => `/auth/register`,

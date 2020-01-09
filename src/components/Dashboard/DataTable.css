@@ -47,7 +47,45 @@ input[type=number]::-webkit-outer-spin-button {
     color: #0D1124;
 }
 
-/* Make dummy data invisible. */
-.data-table-container {
-    color: transparent;
+.DeleteDataSetButton {
+    border: none;
+    position: absolute;
+    background-color: #FF5252;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    margin-top: -5px;
+    margin-left: -40px;
+    padding: -2px;
+    opacity: 0;
+    transition: 0.2s linear;
+}
+
+.DeleteDataSetButton:hover {
+    font-size: 17px;
+    opacity: 1;
+}
+
+.DeleteCategoryButton {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #FF5252;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    margin-left: -6px;
+    /* Added for animation */
+    transition: 0.2s linear;
+    opacity: 0;
+}
+
+.DeleteCategoryButton:hover {
+    font-size: 22px;
 }

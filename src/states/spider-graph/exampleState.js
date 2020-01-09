@@ -1,4 +1,5 @@
 import {
+  initCurrentUser,
   initCurrentSpider,
   initEvents,
 } from './initialState'
@@ -10,6 +11,7 @@ import {
 ***************************************/
 
 const exampleState = {
+  currentUser : initCurrentUser (),
   savedSpiders : [],
   openedSpiders : [
     {

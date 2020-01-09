@@ -4,10 +4,12 @@ import { server } from 'routes'
 import user from './user'
 
 const authios = () => {
+  console.log ('>>> authios : it\'s happening! <<<')
+
   return axios.create ({
     baseURL : server.base,
     headers : {
-      Authorization : user.token.get (),
+      token : user.token.get (),
     },
   })
 }

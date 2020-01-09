@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
 import {useSelector, useDispatch} from 'react-redux';
-import {actions} from 'states/spider-graph';
+import {actions, thunks} from 'states/spider-graph';
 import act from 'states/act';
 
 import DropDown from './DropDown';
@@ -99,19 +99,22 @@ const TopBar = () => {
 
     const addNewGraph = () => {
         dispatch(act(actions.ADD_GRAPH));
+        // dispatch(thunks.postGraph)
     }
 
     const openGraph = (e, index) => {
         e.stopPropagation();
         dispatch(act(actions.OPEN_GRAPH, index))
+        // dispatch(thunks.getGraph, spiders[index].id)
     }
 
     const deleteGraph = (e, index) => {
         e.stopPropagation();
         dispatch(act(actions.DELETE_GRAPH, index));
+        // dispatch(thunks.deleteGraph, spiders[index].id)
     }
 
-    
+
     // temp
 
     // const [savedGraphs, setSavedGraphs] = useState([
@@ -126,7 +129,7 @@ const TopBar = () => {
     //     setSavedGraphs(savedGraphs.map((graph, index) => (
     //         (graph.id === graphId)
     //         ? {...graph, active: !graph.active}
-    //         : graph    
+    //         : graph
     //     )))
     // }
 
