@@ -1,5 +1,6 @@
 /// tools ///
 import _ from 'lodash'
+import { hasIn, getIn, setIn, updateIn } from 'immutable'
 import hi from 'tools/hi'
 
 /// internal modules ///
@@ -13,47 +14,56 @@ import actions from './actions'
 ***************************************/
 
 /*--------------------------------------
-  seqHasIn
-  - hacky sequential Im.hasIn
+  reshapeList
+  - reshape (or reorder) a list with array of indices
 --------------------------------------*/
-const seqHasIn = (obj, ...seq /* [[ keyPath ], ...] */) => {
-  let values = seq.map (([ keyPath ]) => (
-    Im.hasIn (obj, keyPath)
-  ))
-  return values
+const reshapeList = (list, shape) => (
+  shape.map ((i) => (list[i]))
+)
+
+/*--------------------------------------
+  seqHasIn
+  - hacky sequential immutable.hasIn
+--------------------------------------*/
+const seqHasIn = (obj, ...seq /* (keyPath,)+ */) => {
+  return _.map (
+    seq, (keyPath) => (hasIn (obj, keyPath))
+  )
 }
 
 /*--------------------------------------
   seqGetIn
-  - hacky sequential Im.getIn
+  - hacky sequential immutable.getIn
 --------------------------------------*/
-const seqGetIn = (obj, ...seq /* [[ keyPath, noSetValue ], ...] */) => {
-  let values = seq.map (([ keyPath, noSetValue ]) => (
-    Im.getIn (obj, keyPath, noSetValue)
-  ))
-  return values
+const seqGetIn = (obj, ...seq /* (keyPath, noSetValue,)+ */) => {
+  return _.map (
+    _.chunk (seq, 2),
+    ([ keyPath, noSetValue ]) => (getIn (obj, keyPath, noSetValue))
+  )
 }
 
 /*--------------------------------------
   seqSetIn
-  - hacky sequential Im.setIn
+  - hacky sequential immutable.setIn
 --------------------------------------*/
-const seqSetIn = (obj, ...seq /* [[ keyPath, value ], ...] */) => {
-  let newObj = obj
-  seq.forEach ((([ keyPath, value ]) => (
-    newObj = Im.setIn (newObj, keyPath, value)
-  )))
-  return newObj
+const seqSetIn = (obj, ...seq /* (keyPath, value,)+ */) => {
+  return _.reduce (
+    _.chunk (seq, 2),
+    (o, [ keyPath, value ]) => (setIn (o, keyPath, value)),
+    obj
+  )
 }
 
 /*--------------------------------------
   seqUpdateIn
-  - hacky sequential Im.updateIn
+  - hacky sequential immutable.updateIn
 --------------------------------------*/
-const seqUpdateIn = (obj, ...seq /* [[ keyPath, updater ], ...] */) => {
-  return (seq.map (([ keyPath, updater ]) => (
-    Im.updateIn (obj, keyPath, updater)
-  )))
+const seqUpdateIn = (obj, ...seq /* (keyPath, updater,)+ */) => {
+  return _.reduce (
+    _.chunk (seq, 2),
+    (o, [ keyPath, updater ]) => (updateIn (o, keyPath, updater)),
+    obj
+  )
 }
 
 /*--------------------------------------
