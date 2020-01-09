@@ -19,13 +19,13 @@ const DesignTable = (props) => {
     function handleCool(){
         let clone = themedSpider
         if(clone.datasets[0]){
-        clone.datasets[0].backgroundColor = 'rgba(112, 111, 211, 1)';
+        clone.datasets[0].backgroundColor = 'rgba(112, 111, 211, .5)';
             if(clone.datasets[1]){
-            clone.datasets[1].backgroundColor = 'rgba(51, 217, 178, 1)';
+            clone.datasets[1].backgroundColor = 'rgba(51, 217, 178, .5)';
                 if(clone.datasets[2]){
-                clone.datasets[2].backgroundColor = 'rgba(52, 172, 224, 1)';
+                clone.datasets[2].backgroundColor = 'rgba(52, 172, 224, .5)';
                     if(clone.datasets[3]){
-                    clone.datasets[3].backgroundColor = 'rgba(33, 140, 116, 1)';
+                    clone.datasets[3].backgroundColor = 'rgba(33, 140, 116, .5)';
                     }
                 }
             }  
@@ -35,6 +35,59 @@ const DesignTable = (props) => {
         setThemedSpider(clone)
         console.log(themedSpider)
     }
+    function handleWarm(){
+        let clone = themedSpider
+        if(clone.datasets[0]){
+        clone.datasets[0].backgroundColor = 'rgba(255, 121, 63, .5)';
+            if(clone.datasets[1]){
+            clone.datasets[1].backgroundColor = 'rgba(255, 218, 121, .5)';
+                if(clone.datasets[2]){
+                clone.datasets[2].backgroundColor = 'rgba(255, 177, 66, .5)';
+                    if(clone.datasets[3]){
+                    clone.datasets[3].backgroundColor = 'rgba(255, 82, 82, .5)';
+                    if(clone.datasets[4]){
+                        clone.datasets[4].backgroundColor = 'rgba(179, 57, 57, .5)';
+                        if(clone.datasets[5]){
+                            clone.datasets[5].backgroundColor = 'rgba(255, 82, 82, .5)';
+                            }
+                        }
+                    }
+                }
+            }  
+        }
+        clone.theme = 2;
+
+        setThemedSpider(clone)
+        console.log(themedSpider)
+    }
+
+    function handleGrey(){
+        let clone = themedSpider
+        if(clone.datasets[0]){
+        clone.datasets[0].backgroundColor = 'rgba(197, 197, 205, 0.5)';
+            if(clone.datasets[1]){
+            clone.datasets[1].backgroundColor = 'rgba(13, 17, 36, 0.5)';
+                if(clone.datasets[2]){
+                clone.datasets[2].backgroundColor = 'rgba(234, 234, 234, 0.5)';
+                    if(clone.datasets[3]){
+                    clone.datasets[3].backgroundColor = 'rgba(234, 234, 234, 0.7)';
+                    if(clone.datasets[4]){
+                        clone.datasets[4].backgroundColor = 'rgba(234, 234, 234, 0.3)';
+                        if(clone.datasets[5]){
+                            clone.datasets[5].backgroundColor = 'rgba(197, 197, 205, 0.5)';
+                            }
+                        }
+                    }
+                }
+            }  
+        }
+        clone.theme = 2;
+
+        setThemedSpider(clone)
+        console.log(themedSpider)
+    }
+
+
     console.log(themedSpider, 'current')
     return (
         <DesignCont>
@@ -46,14 +99,14 @@ const DesignTable = (props) => {
                     </ColorBoxContainer>
                     <ThemeText >Cool Theme</ThemeText>
                 </ThemeButton>
-                <ThemeButton>
-                    <ColorBoxContainer>
+                <ThemeButton onClick={handleWarm}>
+                    <ColorBoxContainer >
                         <ColorBox style={{background: '#FF793F'}} /> <ColorBox style={{background: '#FFDA79'}} /> <ColorBox style={{background: '#FFB142'}} /> <ColorBox style={{background: '#FF5252'}} /> 
                         <ColorBox style={{background: '#B33939'}} /> <ColorBoxBlack style={{margin:'15px 15px 15px 33%'}} />
                     </ColorBoxContainer>
                     <ThemeText>Warm Theme</ThemeText>
                 </ThemeButton>
-                <ThemeButton style={{margin: '30px 0px'}}>
+                <ThemeButton style={{margin: '30px 0px'}} onClick={handleGrey}>
                     <ColorBoxContainer>
                     <ColorBox style={{background: '#C5C5CD'}} /> <ColorBox style={{background: 'rgba(13, 17, 36, 0.5)'}} /> <ColorBox style={{background: '#EAEAEA'}} /> <ColorBox style={{background: '#EAEAEA'}} /> 
                     <ColorBox style={{background: '#EAEAEA'}} /> <ColorBoxBlack style={{margin:'15px 15px 15px 33%'}} />
