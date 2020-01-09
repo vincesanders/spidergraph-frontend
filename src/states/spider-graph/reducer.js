@@ -432,6 +432,8 @@ const reducer = (state = initialState, action) => {
 
       case (actions.GET_USER_SUCCESS) :
         return (seqSetIn (state,
+          ['currentUser'],
+          payload,
           ['events', 'getUser'],
           'success',
         ))
@@ -455,6 +457,8 @@ const reducer = (state = initialState, action) => {
 
       case (actions.GET_USER_GRAPHS_SUCCESS) :
         return (seqSetIn (state,
+          ['savedGraphs'],
+          payload,
           ['events', 'getUserGraphs'],
           'success',
         ))
