@@ -145,14 +145,12 @@ const SignIn = (props) => {
         Log In
       </H3>
       <Formcont>
-      <SignInForm />
-      <a href="https://spidergraph.alexmiller26.now.sh/">
-      <Logo>Spider.Graph</Logo>
-      </a>
       <SignInForm
       trySubmit={trySubmit}
       />
-      <Logo onClick={routeToSignUp}>Spider.Graph</Logo>
+      <a href="https://spidergraph.alexmiller26.now.sh/">
+      <Logo>Spider.Graph</Logo>
+      </a>
       <DivToSignUp>
         Need an account?
         <SignUp onClick={routeToSignUp}>Sign Up</SignUp>
