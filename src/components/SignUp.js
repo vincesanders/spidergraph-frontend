@@ -136,7 +136,7 @@ const SignUp = (props) => {
       />
       <Logo onClick={routeToSignIn}>Spider.Graph</Logo>
       <DivToSignIn>
-       Already have an account?
+        Already have an account?
         <Signin onClick={routeToSignIn}>Sign In</Signin>
       </DivToSignIn>
       </Formcont>

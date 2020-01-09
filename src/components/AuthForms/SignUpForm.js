@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
