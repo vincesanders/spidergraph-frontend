@@ -301,8 +301,9 @@ const reducer = (state = initialState, action) => {
 
       case (actions.SIGN_UP_SUCCESS) :
         // handle user
-        user.token.set (payload.data.token)
         user.isAllowed.set ('y')
+        user.token.set (payload.data.token)
+        user.data.set (payload.data)
 
         return (seqSetIn (state,
           ['events', 'signUp'],
@@ -331,8 +332,9 @@ const reducer = (state = initialState, action) => {
 
       case (actions.SIGN_IN_SUCCESS) :
         // handle user
-        user.token.set (payload.data.token)
         user.isAllowed.set ('y')
+        user.token.set (payload.data.token)
+        user.data.set (payload.data)
 
         return (seqSetIn (state,
           ['events', 'signIn'],
