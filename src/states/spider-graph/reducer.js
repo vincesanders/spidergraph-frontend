@@ -16,9 +16,9 @@ import actions from './actions'
   seqHasIn
   - hacky sequential Im.hasIn
 --------------------------------------*/
-const seqHasIn = (obj, seq /* [{ keyPath, noSetValue }, ...] */) => {
-  let values = seq.map (([ keyPath, noSetValue ]) => (
-    Im.hasIn (obj, keyPath, noSetValue)
+const seqHasIn = (obj, ...seq /* [[ keyPath ], ...] */) => {
+  let values = seq.map (([ keyPath ]) => (
+    Im.hasIn (obj, keyPath)
   ))
   return values
 }
@@ -27,7 +27,7 @@ const seqHasIn = (obj, seq /* [{ keyPath, noSetValue }, ...] */) => {
   seqGetIn
   - hacky sequential Im.getIn
 --------------------------------------*/
-const seqGetIn = (obj, seq /* [{ keyPath, noSetValue }, ...] */) => {
+const seqGetIn = (obj, ...seq /* [[ keyPath, noSetValue ], ...] */) => {
   let values = seq.map (([ keyPath, noSetValue ]) => (
     Im.getIn (obj, keyPath, noSetValue)
   ))
@@ -38,7 +38,7 @@ const seqGetIn = (obj, seq /* [{ keyPath, noSetValue }, ...] */) => {
   seqSetIn
   - hacky sequential Im.setIn
 --------------------------------------*/
-const seqSetIn = (obj, seq /* [{ keyPath, value }, ...] */) => {
+const seqSetIn = (obj, ...seq /* [[ keyPath, value ], ...] */) => {
   let newObj = obj
   seq.forEach ((([ keyPath, value ]) => (
     newObj = Im.setIn (newObj, keyPath, value)
@@ -50,7 +50,7 @@ const seqSetIn = (obj, seq /* [{ keyPath, value }, ...] */) => {
   seqUpdateIn
   - hacky sequential Im.updateIn
 --------------------------------------*/
-const seqUpdateIn = (obj, seq /* [{ keyPath, updater }, ...] */) => {
+const seqUpdateIn = (obj, ...seq /* [[ keyPath, updater ], ...] */) => {
   return (seq.map (([ keyPath, updater ]) => (
     Im.updateIn (obj, keyPath, updater)
   )))
