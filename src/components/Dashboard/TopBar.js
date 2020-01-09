@@ -134,7 +134,6 @@ const TopBar = () => {
 
     return(
         <Topbar>
-            <img src='../favicon.png' alt='thing' style={{width: '3rem', marginRight: '5px'}}/>
             <AppTitle >Spider.Graph</AppTitle>
             {/* <OpenGraphButton onClick={addNewGraph}>Open</OpenGraphButton> */}
             {/* <SavedGraphsDropDown onClick={toggleSavedGraphsMenu}>
