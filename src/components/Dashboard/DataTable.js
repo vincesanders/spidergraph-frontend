@@ -154,6 +154,7 @@ const DataTable = () => {
         dispatch(act(actions.DELETE_GRAPH_ARM, labelToDelete));
     }
 
+    //Add functionality to prevent the removal of the last dataset.
     function addNewDataSet() {
         dispatch(act(actions.ADD_GRAPH_DATASET));
     }
@@ -209,8 +210,15 @@ const DataTable = () => {
                                         <HeaderCell key={i + 1}>{item}</HeaderCell>
                                     );
                                 }
+                                //if there is only one data set, it can't be deleted. So no delete button.
+                                if (item.length === 2) {
+                                    return (
+                                        <HeaderCellTD key={i + 1}>
+                                            <HeaderInput index={i} type='text' name={item} onChange={(e) => changeDataSetName(e, i)} value={data[0][i]} />
+                                        </HeaderCellTD>
+                                    );
+                                }
                                 return (
-                                    // TODO make sure placeholder and value appear the same.
                                     <HeaderCellTD key={i + 1}>
                                         <HeaderInput index={i} type='text' name={item} onChange={(e) => changeDataSetName(e, i)} value={data[0][i]} />
                                         <button className='DeleteDataSetButton' index={i} onClick={removeDataSet}>
@@ -229,7 +237,7 @@ const DataTable = () => {
                         {data.map((arr, i) => {
                             if (i > 0) {
                                 return (
-                                    <TableRow id='table-row' key={i + 1}>
+                                    <TableRow key={i + 1}>
                                         {arr.map((cell, j) => {
                                             if (j === 0) {
                                                 return (
@@ -247,7 +255,7 @@ const DataTable = () => {
                                         })}
                                         {/* TODO: When styling, display none until on hover */}
                                         <td><button className='DeleteCategoryButton' index={i} onClick={removeCategory}>
-                                            <FontAwesomeIcon id='font-awesome-icon' icon={faTimesCircle} />
+                                            <FontAwesomeIcon icon={faTimesCircle} />
                                         </button></td>
                                     </TableRow>
                                 );
