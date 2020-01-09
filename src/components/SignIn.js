@@ -151,7 +151,9 @@ const SignIn = (props) => {
       <SignInForm
       trySubmit={trySubmit}
       />
-      <Logo onClick={routeToSignUp}>Spider.Graph</Logo>
+      <a href="https://spidergraph.alexmiller26.now.sh/">
+      <Logo>Spider.Graph</Logo>
+      </a>
       <DivToSignUp>
         Need an account?
         <SignUp onClick={routeToSignUp}>Sign Up</SignUp>

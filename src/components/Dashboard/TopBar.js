@@ -134,7 +134,9 @@ const TopBar = () => {
 
     return(
         <Topbar>
+            <a href="https://spidergraph.alexmiller26.now.sh/">
             <AppTitle >Spider.Graph</AppTitle>
+            </a>
             {/* <OpenGraphButton onClick={addNewGraph}>Open</OpenGraphButton> */}
             {/* <SavedGraphsDropDown onClick={toggleSavedGraphsMenu}>
                 <span>Saved Graphs</span>
