@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-// import {useSelector, useDispatch} from 'react-redux';
-// import actions from 'states/spider-graph/actions';
+import {useSelector, useDispatch} from 'react-redux';
+import actions from 'states/spider-graph/actions';
 
 const DesignCont = styled.div`
     padding: 0 20px;
@@ -29,18 +29,43 @@ const GridScaleSpan = styled.span`
 `
 
 const DesignTable = (props) => {
-    // const dispatch = useDispatch();
-    // const notes = useSelector(state => state.openedSpiders[state.currentSpider].notes);
+    const dispatch = useDispatch();
+    const currentSpider = useSelector(state => state.currentSpider);
 
     // const handleChange = e => {
     //     dispatch({type: actions.EDIT_GRAPH_NOTES, payload: e.target.value})
     // }
 
+
+    const spider = useSelector(state => state.openedSpiders[currentSpider]);
+
+    const [themedSpider, setThemedSpider] = useState(spider)
+
+    function handleCool(){
+        let clone = themedSpider
+        if(clone.datasets[0]){
+        clone.datasets[0].backgroundColor = 'rgba(112, 111, 211, 1)';
+            if(clone.datasets[1]){
+            clone.datasets[1].backgroundColor = 'rgba(51, 217, 178, 1)';
+                if(clone.datasets[2]){
+                clone.datasets[2].backgroundColor = 'rgba(52, 172, 224, 1)';
+                    if(clone.datasets[3]){
+                    clone.datasets[3].backgroundColor = 'rgba(33, 140, 116, 1)';
+                    }
+                }
+            }  
+        }
+        clone.theme = 1;
+
+        setThemedSpider(clone)
+        console.log(themedSpider)
+    }
+    console.log(themedSpider, 'current')
     return(
         <DesignCont>
             <H4>Themes</H4>
             <ThemeButtonsDiv>
-                <ThemeButton>Cool Theme</ThemeButton>
+                <ThemeButton onClick={handleCool}>Cool Theme</ThemeButton>
                 <ThemeButton> Warm Theme</ThemeButton>
                 <ThemeButton>Gray Theme</ThemeButton>
             </ThemeButtonsDiv>
