@@ -1,5 +1,5 @@
 /// tools ///
-import * as Im from 'immutable'
+import _ from 'lodash'
 import hi from 'tools/hi'
 
 /// internal modules ///
