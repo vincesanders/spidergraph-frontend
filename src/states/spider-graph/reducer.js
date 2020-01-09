@@ -1,8 +1,7 @@
 /// tools ///
+import _ from 'lodash'
+import { hasIn, getIn, setIn, updateIn } from 'immutable'
 import hi from 'tools/hi'
-// import iffy from 'tools/iffy'
-// import immutably from 'tools/immutably'
-// import nullably from 'tools/nullably'
 
 /// internal modules ///
 import initialState, {
@@ -18,9 +17,58 @@ import { array } from 'yup'
   tools
 ***************************************/
 
-const reorderList = (list, order) => (
-  order.map ((i) => (list[i]))
+/*--------------------------------------
+  reshapeList
+  - reshape (or reorder) a list with array of indices
+--------------------------------------*/
+const reshapeList = (list, shape) => (
+  shape.map ((i) => (list[i]))
 )
+
+/*--------------------------------------
+  seqHasIn
+  - hacky sequential immutable.hasIn
+--------------------------------------*/
+const seqHasIn = (obj, ...seq /* (keyPath,)+ */) => {
+  return _.map (
+    seq, (keyPath) => (hasIn (obj, keyPath))
+  )
+}
+
+/*--------------------------------------
+  seqGetIn
+  - hacky sequential immutable.getIn
+--------------------------------------*/
+const seqGetIn = (obj, ...seq /* (keyPath, noSetValue,)+ */) => {
+  return _.map (
+    _.chunk (seq, 2),
+    ([ keyPath, noSetValue ]) => (getIn (obj, keyPath, noSetValue))
+  )
+}
+
+/*--------------------------------------
+  seqSetIn
+  - hacky sequential immutable.setIn
+--------------------------------------*/
+const seqSetIn = (obj, ...seq /* (keyPath, value,)+ */) => {
+  return _.reduce (
+    _.chunk (seq, 2),
+    (o, [ keyPath, value ]) => (setIn (o, keyPath, value)),
+    obj
+  )
+}
+
+/*--------------------------------------
+  seqUpdateIn
+  - hacky sequential immutable.updateIn
+--------------------------------------*/
+const seqUpdateIn = (obj, ...seq /* (keyPath, updater,)+ */) => {
+  return _.reduce (
+    _.chunk (seq, 2),
+    (o, [ keyPath, updater ]) => (updateIn (o, keyPath, updater)),
+    obj
+  )
+}
 
 /***************************************
   MAIN
@@ -45,23 +93,19 @@ const reducer = (state = initialState, action) => {
 
       case (actions.ADD_GRAPH) :
         // payload : void
-        newState = {
-          ...state,
-          currentSpider : state.openedSpiders.length,
-          openedSpiders : [
-            ...state.openedSpiders,
-            initSpider (),
-          ],
-        }
-        return (newState)
+        return (seqUpdateIn (state,
+          ['currentSpider'],
+          () => state.openedSpiders.length,
+          ['openedSpiders'],
+          (list) => [...list, initSpider ()],
+        ))
 
       case (actions.OPEN_GRAPH) :
         // payload : index of openedopenedSpiders
-        newState = {
-          ...state,
-          currentSpider : payload,
-        }
-        return (newState)
+        return (seqSetIn (state,
+          ['currentSpider'],
+          payload,
+        ))
 
       case (actions.CLOSE_GRAPH) :
         // payload : index of openedopenedSpiders
@@ -79,59 +123,31 @@ const reducer = (state = initialState, action) => {
 
       case (actions.EDIT_GRAPH_TITLE) :
         // payload : edited title
-        newState = {
-          ...state,
-          openedSpiders : Array.from (Object.values ({
-            ...state.openedSpiders,
-            [state.currentSpider] : {
-              ...state.openedSpiders[state.currentSpider],
-              title : payload,
-            },
-          })),
-        }
-        return (newState)
+        return (seqSetIn (state,
+          ['openedSpiders', state.currentSpider, 'title'],
+          payload,
+        ))
 
       case (actions.EDIT_GRAPH_NOTES) :
         // payload : edited notes
-        newState = {
-          ...state,
-          openedSpiders : Array.from (Object.values ({
-            ...state.openedSpiders,
-            [state.currentSpider] : {
-              ...state.openedSpiders[state.currentSpider],
-              notes : payload,
-            },
-          })),
-        }
-        return (newState)
+        return (seqSetIn (state,
+          ['openedSpiders', state.currentSpider, 'notes'],
+          payload,
+        ))
 
       case (actions.EDIT_GRAPH_THEME) :
         // payload : edited theme
-        newState = {
-          ...state,
-          openedSpiders : Array.from (Object.values ({
-            ...state.openedSpiders,
-            [state.currentSpider] : {
-              ...state.openedSpiders[state.currentSpider],
-              theme : payload,
-            },
-          })),
-        }
-        return (newState)
+        return (seqSetIn (state,
+          ['openedSpiders', state.currentSpider, 'theme'],
+          payload,
+        ))
 
       case (actions.EDIT_GRAPH_SCALE) :
         // payload : edited scale
-        newState = {
-          ...state,
-          openedSpiders : Array.from (Object.values ({
-            ...state.openedSpiders,
-            [state.currentSpider] : {
-              ...state.openedSpiders[state.currentSpider],
-              scale : payload,
-            },
-          })),
-        }
-        return (newState)
+        return (seqSetIn (state,
+          ['openedSpiders', state.currentSpider, 'scale'],
+          payload,
+        ))
 
       case (actions.ADD_GRAPH_ARM) :
         // payload : none
@@ -166,7 +182,7 @@ const reducer = (state = initialState, action) => {
             },
           })),
         }
-        
+
         return (newState)
 
       case (actions.DELETE_GRAPH_ARM) :
@@ -223,7 +239,7 @@ const reducer = (state = initialState, action) => {
             },
           })),
         }
-        
+
         return (newState)
 
       case (actions.DELETE_GRAPH_DATASET) :
@@ -242,7 +258,7 @@ const reducer = (state = initialState, action) => {
         }
 
         return (newState)
-      
+
       case (actions.EDIT_GRAPH_DATAPOINT):
         // payload: index of graph-arm to edit, index of catagory to edit && new datapoint value
         newData = state.openedSpiders[state.currentSpider].datasets[payload.datasetIndex].data;
@@ -261,7 +277,7 @@ const reducer = (state = initialState, action) => {
             },
           })),
         }
-        
+
         return (newState)
 
       case (actions.REORDER_GRAPH_ARMS) :
@@ -278,100 +294,64 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.SIGN_UP_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            signUp : 'try',
-          }
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'signUp'],
+          'try',
+        ))
 
       case (actions.SIGN_UP_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            signUp : 'success',
-          }
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'signUp'],
+          'success',
+        ))
 
       case (actions.SIGN_UP_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            signUp : 'failure',
-          }
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'signUp'],
+          'failure',
+        ))
 
       case (actions.SIGN_IN) :
         return (state)
 
       case (actions.SIGN_IN_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            signIn : 'try',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'signIn'],
+          'try',
+        ))
 
       case (actions.SIGN_IN_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            signIn : 'success',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'signIn'],
+          'success',
+        ))
 
       case (actions.SIGN_IN_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            signIn : 'failure',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'signIn'],
+          'failure',
+        ))
 
       case (actions.SIGN_OUT) :
         return (state)
 
       case (actions.SIGN_OUT_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            SignOut : 'try',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'SignOut'],
+          'try',
+        ))
 
       case (actions.SIGN_OUT_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            SignOut : 'success',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'SignOut'],
+          'success',
+        ))
 
       case (actions.SIGN_OUT_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            SignOut : 'failure',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'SignOut'],
+          'failure',
+        ))
 
       /// SERVER / ALL USERS -- stretch ///
 
@@ -379,34 +359,22 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_USERS_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getUsers : 'try',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getUsers'],
+          'try',
+        ))
 
       case (actions.GET_USERS_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getUsers : 'success',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getUsers'],
+          'success',
+        ))
 
       case (actions.GET_USERS_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getUsers : 'failure',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getUsers'],
+          'failure',
+        ))
 
       /// SERVER / ALL GRAPHS -- stretch ///
 
@@ -414,34 +382,22 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_GRAPHS_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getGraphs : 'try',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getGraphs'],
+          'try',
+        ))
 
       case (actions.GET_GRAPHS_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getGraphs : 'success',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getGraphs'],
+          'success',
+        ))
 
       case (actions.GET_GRAPHS_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getGraphs : 'failure',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getGraphs'],
+          'failure',
+        ))
 
       /// SERVER / USER ///
 
@@ -449,34 +405,22 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_USER_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getUser : 'try',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getUser'],
+          'try',
+        ))
 
       case (actions.GET_USER_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getUser : 'success',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getUser'],
+          'success',
+        ))
 
       case (actions.GET_USER_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getUser : 'failure',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getUser'],
+          'failure',
+        ))
 
       /// SERVER / USER GRAPHS ///
 
@@ -484,34 +428,22 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.GET_USER_GRAPHS_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getUserGraphs : 'try',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getUserGraphs'],
+          'try',
+        ))
 
       case (actions.GET_USER_GRAPHS_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getUserGraphs : 'success',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getUserGraphs'],
+          'success',
+        ))
 
       case (actions.GET_USER_GRAPHS_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getUserGraphs : 'failure',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getUserGraphs'],
+          'failure',
+        ))
 
       /// SERVER / GRAPH ///
 
@@ -519,144 +451,92 @@ const reducer = (state = initialState, action) => {
         return (state)
 
       case (actions.POST_GRAPH_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            postGraph : 'try',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'postGraph'],
+          'try',
+        ))
 
       case (actions.POST_GRAPH_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            postGraph : 'success',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'postGraph'],
+          'success',
+        ))
 
       case (actions.POST_GRAPH_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            postGraph : 'failure',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'postGraph'],
+          'failure',
+        ))
 
       case (actions.GET_GRAPH) :
         return (state)
 
       case (actions.GET_GRAPH_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getGraph : 'try',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getGraph'],
+          'try',
+        ))
 
       case (actions.GET_GRAPH_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getGraph : 'success',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getGraph'],
+          'success',
+        ))
 
       case (actions.GET_GRAPH_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            getGraph : 'failure',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'getGraph'],
+          'failure',
+        ))
 
       case (actions.PUT_GRAPH) :
         return (state)
 
       case (actions.PUT_GRAPH_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            putGraph : 'try',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'putGraph'],
+          'try',
+        ))
 
       case (actions.PUT_GRAPH_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            putGraph : 'success',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'putGraph'],
+          'success',
+        ))
 
       case (actions.PUT_GRAPH_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            putGraph : 'failure',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'putGraph'],
+          'failure',
+        ))
 
       case (actions.DELETE_GRAPH) :
-        // payload : graph index to delete
-        newState = {
-          ...state,
-          currentSpider : (state.currentSpider === 0) ? 0 : state.currentSpider - 1,
-          openedSpiders : state.openedSpiders.filter((spider, index) => (
-            index !== payload
-          )),
-        }
-        if (newState.openedSpiders.length === 0) {
-          newState.openedSpiders = [initSpider (),]
-        }
-        return (newState)
+        return (seqUpdateIn (state,
+          ['currentSpider'],
+          () => ((state.currentSpider === 0) ? 0 : state.currentSpider - 1),
+          ['openedSpiders'],
+          (list) => (list.filter ((spider, i) => (i !== payload))),
+          ['openedSpiders'],
+          (list) => ((list.length === 0) ? [initSpider ()] : list)
+        ))
 
       case (actions.DELETE_GRAPH_TRY) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            deleteGraph : 'try',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'deleteGraph'],
+          'try',
+        ))
 
       case (actions.DELETE_GRAPH_SUCCESS) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            deleteGraph : 'success',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'deleteGraph'],
+          'success',
+        ))
 
       case (actions.DELETE_GRAPH_FAILURE) :
-        newState = {
-          ...state,
-          events : {
-            ...state.events,
-            deleteGraph : 'failure',
-          },
-        }
-        return (state)
+        return (seqSetIn (state,
+          ['events', 'deleteGraph'],
+          'failure',
+        ))
 
       // else
       default :
