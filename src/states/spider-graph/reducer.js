@@ -307,6 +307,8 @@ const reducer = (state = initialState, action) => {
         return (seqSetIn (state,
           ['events', 'signUp'],
           'success',
+          ['currentUser'],
+          payload.data,
         ))
 
       case (actions.SIGN_UP_FAILURE) :
@@ -335,6 +337,8 @@ const reducer = (state = initialState, action) => {
         return (seqSetIn (state,
           ['events', 'signIn'],
           'success',
+          ['currentUser'],
+          payload.data,
         ))
 
       case (actions.SIGN_IN_FAILURE) :

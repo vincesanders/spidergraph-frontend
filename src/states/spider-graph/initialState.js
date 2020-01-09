@@ -2,6 +2,8 @@
   MAIN
 ----------------------------------------
   - initialState
+  #### user ####
+  - initCurrentUser
   #### edits ####
   - initCurrentSpider
   #### spider/spiders ####
@@ -18,6 +20,12 @@
   - initEventStatus
   - initEvents
 ***************************************/
+
+/*******************
+  user
+*******************/
+
+export const initCurrentUser = () => ({})
 
 /*******************
   edits
@@ -96,6 +104,7 @@ export const initEvents = () => ({
 /**************************************/
 
 export const initialState = {
+  currentUser : initCurrentUser (),
   savedSpiders : [],
   openedSpiders : [
     initSpider (),
