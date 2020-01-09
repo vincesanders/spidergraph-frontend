@@ -37,7 +37,7 @@ export const initCurrentSpider = () => 0
   spider/spiders
 *******************/
 
-export const initId = () => 'id'
+export const initId = () => ':id'
 
 export const initTitle = () => 'new graph'
 
