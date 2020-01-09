@@ -4,6 +4,8 @@ import './DataTable.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { actions } from 'states/spider-graph';
 import act from 'states/act';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 /// Styling ///
 
@@ -42,7 +44,7 @@ const HeaderInput = styled.input`
         color: #ECEEF7;
     }
     &:hover + .DeleteDataSetButton {
-        display: inline-block;
+        opacity: 1;
     }
 `
 
@@ -51,42 +53,6 @@ const HeaderCellTD = styled.td`
     width: 150ps;
     height: 40px;
 `
-const DeleteDataSetButton = styled.button`
-    border: none;
-    display: none;
-    position: absolute;
-    background-color: #FF5252;
-    color: white;
-    font-weight: 600;
-    border-radius: 50%;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    margin-top: -5px;
-    margin-left: -40px;
-    box-shadow: -2px 1px 2px 0px rgba(0,0,0,0.6);
-    &:hover {
-        display: inline-block;
-    }
-    `
-
-
-const DeleteCategoryButton = styled.button`
-    outline: none;
-    border: none;
-    display: none;
-    color: white;
-    font-weight: 600;
-    border-radius: 50%;
-    text-align: center;
-    text-decoration: none;
-    margin-left: -10px;
-    box-shadow: -2px 1px 2px 0px rgba(0,0,0,0.3);
-    &:hover {
-        display: inline-block;
-        background-color: #FF5252;
-    }
-    `
 
 const TableRow = styled.tr`
     font-size: 14px;
@@ -95,12 +61,13 @@ const TableRow = styled.tr`
     line-height: 38px;
     border-bottom: 1px solid #D4D4D4;
     &:hover \ .DeleteCategoryButton {
-        display: inline-block;
+        opacity: 1;
     } 
 `
 
 const HeaderAddButtonContainer = styled.td`
     background: #1A2247;
+    width: 36px;
 `
 
 const AddNewDataSetButton = styled.button`
@@ -170,13 +137,13 @@ const DataTable = () => {
         });
 
         setData(convertedData);
-        console.log('GOT NEW SPIDER');
-        console.log(spider.datasets[0].data[0])
-        console.log(convertedData)
+        // console.log('GOT NEW SPIDER');
+        // console.log(spider.datasets[0].data[0])
+        // console.log(convertedData)
     }, [spider])
 
-    console.log('rerender with data: ');
-    console.log(data);
+    // console.log('rerender with data: ');
+    // console.log(data);
 
     function addNewCategory() {
         dispatch(act(actions.ADD_GRAPH_ARM));
@@ -187,6 +154,7 @@ const DataTable = () => {
         dispatch(act(actions.DELETE_GRAPH_ARM, labelToDelete));
     }
 
+    //Add functionality to prevent the removal of the last dataset.
     function addNewDataSet() {
         dispatch(act(actions.ADD_GRAPH_DATASET));
     }
@@ -210,7 +178,6 @@ const DataTable = () => {
     function changeDataSetValue(e) {
         const categoryIndex = e.target.getAttribute('index1') - 1;
         const datasetIndex = e.target.getAttribute('index2') - 1;
-
         const newValue = parseInt(e.target.value);
 
         dispatch(act(actions.EDIT_GRAPH_DATAPOINT, { datasetIndex: datasetIndex, categoryIndex: categoryIndex, newValue: newValue }))
@@ -228,8 +195,6 @@ const DataTable = () => {
     }
 
     return (
-        
-        // This dummy number has to be hidden if left in the final build.
         <>
             {/* The following line of code is for debugging purposes: */}
             {/* <p>current spider: {currentSpider}, first entry: {firstEntry}</p> */}
@@ -244,11 +209,20 @@ const DataTable = () => {
                                         <HeaderCell key={i + 1}>{item}</HeaderCell>
                                     );
                                 }
+                                //if there is only one data set, it can't be deleted. So no delete button.
+                                if (item.length === 2) {
+                                    return (
+                                        <HeaderCellTD key={i + 1}>
+                                            <HeaderInput index={i} type='text' name={item} onChange={(e) => changeDataSetName(e, i)} value={data[0][i]} />
+                                        </HeaderCellTD>
+                                    );
+                                }
                                 return (
-                                    // TODO make sure placeholder and value appear the same.
                                     <HeaderCellTD key={i + 1}>
                                         <HeaderInput index={i} type='text' name={item} onChange={(e) => changeDataSetName(e, i)} value={data[0][i]} />
-                                        <button className='DeleteDataSetButton' index={i} onClick={removeDataSet}>X</button>
+                                        <button className='DeleteDataSetButton' index={i} onClick={removeDataSet}>
+                                            <FontAwesomeIcon icon={faTimes} />
+                                        </button>
                                     </HeaderCellTD>
                                 );
                             })}
@@ -279,7 +253,9 @@ const DataTable = () => {
                                             );
                                         })}
                                         {/* TODO: When styling, display none until on hover */}
-                                        <td><button className='DeleteCategoryButton' index={i} onClick={removeCategory}>X</button></td>
+                                        <td><button className='DeleteCategoryButton' index={i} onClick={removeCategory}>
+                                            <FontAwesomeIcon icon={faTimesCircle} />
+                                        </button></td>
                                     </TableRow>
                                 );
                             }
