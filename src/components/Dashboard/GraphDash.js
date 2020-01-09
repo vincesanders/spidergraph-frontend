@@ -11,11 +11,20 @@ function GraphDash() {
   const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
   console.log(spider);
 
+  const chartOptions = {
+    scale: {
+      gridLines: {
+        circular: true
+      }
+    }
+  }
+
   return (
     <GraphField>
       <Radar
         data={spider}
         options={{
+          scale: { gridLines: { circular: true}},
           legend: { display: true, position: 'bottom', align: 'start' }
         }} />
     </GraphField>
