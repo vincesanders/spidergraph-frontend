@@ -1,8 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from 'styled-components';
 import './DataTable.css';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { actions } from 'states/spider-graph';
+import act from 'states/act';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 /// Styling ///
 
@@ -41,7 +44,7 @@ const HeaderInput = styled.input`
         color: #ECEEF7;
     }
     &:hover + .DeleteDataSetButton {
-        display: inline-block;
+        opacity: 1;
     }
 `
 
@@ -51,55 +54,20 @@ const HeaderCellTD = styled.td`
     height: 40px;
 `
 
-const DeleteDataSetButton = styled.button`
-    display: none;
-    position: absolute;
-    background-color: #FF5252;
-    border: none;
-    color: white;
-    font-weight: 600;
-    border-radius: 50%;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    margin-top: -5px;
-    margin-left: -40px;
-    box-shadow: -2px 1px 2px 0px rgba(0,0,0,0.6);
-    &:hover {
-        display: inline-block;
-    }
-`
-
-const DeleteCategoryButton = styled.button`
-    display: none;
-    background-color: #FF5252;
-    border: none;
-    color: white;
-    font-weight: 600;
-    border-radius: 50%;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    margin-left: -10px;
-    box-shadow: -2px 1px 2px 0px rgba(0,0,0,0.3);
-    &:hover {
-        display: inline-block;
-    }
-`
-
 const TableRow = styled.tr`
-    background: white;
     font-size: 14px;
+    background: white;
     font-weight: normal;
     line-height: 38px;
     border-bottom: 1px solid #D4D4D4;
     &:hover \ .DeleteCategoryButton {
-        display: inline-block;
-    }  
+        opacity: 1;
+    } 
 `
 
 const HeaderAddButtonContainer = styled.td`
     background: #1A2247;
+    width: 36px;
 `
 
 const AddNewDataSetButton = styled.button`
@@ -129,7 +97,10 @@ const AddNewCategoryButton = styled.button`
 
 const DataTable = () => {
     const categoryInputRef = useRef('');
-    const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
+    const currentSpider = useSelector(state => state.currentSpider);
+    const spider = useSelector(state => state.openedSpiders[currentSpider]);
+    const firstEntry = useSelector(state => state.openedSpiders[currentSpider].datasets[0].data[0])
+    const dispatch = useDispatch();
 
     let convertedData = [['Categories']];
 
@@ -144,65 +115,72 @@ const DataTable = () => {
         });
     });
 
-    const [dummy, setDummy] = useState(0);
+    // const [dummy, setDummy] = useState(0);
     /// The design tab gets and modifies data from an array of arrays.         ///
     /// Every array within the containing array represents a ROW on the table. ///
     /// That means the data that goes along with each data-set will be in a    ///
     /// different array with the same index as the data-set header.            ///
     const [data, setData] = useState(convertedData);
 
+    useEffect(() => {    
+        let convertedData = [['Categories']];
+
+        spider.labels.forEach((label, i) => {
+            convertedData.push([label]);
+        });
+
+        spider.datasets.forEach((dSObj, i) => {
+            convertedData[0][i + 1] = dSObj.label;
+            dSObj.data.forEach((val, j) => {
+                convertedData[j + 1][i + 1] = val;
+            });
+        });
+
+        setData(convertedData);
+        // console.log('GOT NEW SPIDER');
+        // console.log(spider.datasets[0].data[0])
+        // console.log(convertedData)
+    }, [spider])
+
+    // console.log('rerender with data: ');
+    // console.log(data);
 
     function addNewCategory() {
-        let newCategory = ['Category'];
-        data[1].forEach((col, i) => {
-            if (i > 0) {
-                newCategory.push(5);
-            }
-        })
-        setData(data => [...data, newCategory]);
+        dispatch(act(actions.ADD_GRAPH_ARM));
     }
 
-    //this function is not calling a rerender when chaging state
     function removeCategory(e) {
-        const newData = data;
-        newData.splice(e.target.getAttribute('index'), 1);
-        setData(newData);
-        //this is a temp solution. Changing this state is calling a rerender
-        setDummy(dummy + 1);
-    } 
+        const labelToDelete = parseInt(e.target.getAttribute('index')) - 1;
+        dispatch(act(actions.DELETE_GRAPH_ARM, labelToDelete));
+    }
 
+    //Add functionality to prevent the removal of the last dataset.
     function addNewDataSet() {
-        const newData = data.map((arr, i) => {
-            if (i === 0) {
-                return [...arr, 'DataSet'];
-            }
-            return [...arr, 5]
-        })
-        setData(newData);
+        dispatch(act(actions.ADD_GRAPH_DATASET));
     }
 
     function removeDataSet(e) {
-        const newData = data.map(arr => {
-            arr.splice(e.target.getAttribute('index'), 1);
-            return arr;
-        });
-        setData(newData);
-    }
-
-    function changeDataSetName(e) {
-        data[0][e.target.getAttribute('index')] = e.target.value;
-        setData(data);
+        const datasetToDelete = parseInt(e.target.getAttribute('index')) - 1;
+        dispatch(act(actions.DELETE_GRAPH_DATASET, datasetToDelete))
     }
 
     function changeCategoryName(e) {
-        data[e.target.getAttribute('index')][0] = e.target.value;
-        setData(data);
+        const catagoryIndex = e.target.getAttribute('index') - 1;
+        dispatch(act(actions.EDIT_GRAPH_ARM, { index: catagoryIndex, newName: e.target.value }))
+    }
+
+    function changeDataSetName(e, i) {
+        const datasetIndex = i - 1;
+        dispatch(act(actions.EDIT_GRAPH_DATASET, { index: datasetIndex, newName: e.target.value }))
     }
 
     //Code can be added here to counter vulnerability to negative or floating numbers.
     function changeDataSetValue(e) {
-        data[e.target.getAttribute('index1')][e.target.getAttribute('index2')] = e.target.value;
-        setData(data);
+        const categoryIndex = e.target.getAttribute('index1') - 1;
+        const datasetIndex = e.target.getAttribute('index2') - 1;
+        const newValue = parseInt(e.target.value);
+
+        dispatch(act(actions.EDIT_GRAPH_DATAPOINT, { datasetIndex: datasetIndex, categoryIndex: categoryIndex, newValue: newValue }))
     }
 
     //This function prevents the user from inputing negative or decimal numbers.
@@ -217,67 +195,83 @@ const DataTable = () => {
     }
 
     return (
-        // This dummy number has to be hidden if left in the final build.
-        <div className='data-table-container'> {dummy}
-            <table className='data-table'>
-                <thead>
-                    <tr>
-                        {data[0].map((item, i) => {
-                            if (i === 0) {
+        <>
+            {/* The following line of code is for debugging purposes: */}
+            {/* <p>current spider: {currentSpider}, first entry: {firstEntry}</p> */}
+            <div className='data-table-container'>
+                <table className='data-table'>
+                    <thead>
+                        <tr>
+                            {/* {spider.datasets.length} */}
+                            {data[0].map((item, i) => {
+                                if (i === 0) {
+                                    return (
+                                        <HeaderCell key={i + 1}>{item}</HeaderCell>
+                                    );
+                                }
+                                //if there is only one data set, it can't be deleted. So no delete button.
+                                if (item.length === 2) {
+                                    return (
+                                        <HeaderCellTD key={i + 1}>
+                                            <HeaderInput index={i} type='text' name={item} onChange={(e) => changeDataSetName(e, i)} value={data[0][i]} />
+                                        </HeaderCellTD>
+                                    );
+                                }
                                 return (
-                                    <HeaderCell key={i+1}>{item}</HeaderCell>
+                                    <HeaderCellTD key={i + 1}>
+                                        <HeaderInput index={i} type='text' name={item} onChange={(e) => changeDataSetName(e, i)} value={data[0][i]} />
+                                        <button className='DeleteDataSetButton' index={i} onClick={removeDataSet}>
+                                            <FontAwesomeIcon icon={faTimes} />
+                                        </button>
+                                    </HeaderCellTD>
+                                );
+                            })}
+                            {/* TODO Add functionality that will only allow a max number of datasets */}
+                            <HeaderAddButtonContainer>
+                                <AddNewDataSetButton onClick={addNewDataSet}>+</AddNewDataSetButton>
+                            </HeaderAddButtonContainer>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.map((arr, i) => {
+                            if (i > 0) {
+                                return (
+                                    <TableRow key={i + 1}>
+                                        {arr.map((cell, j) => {
+                                            if (j === 0) {
+                                                return (
+                                                    <td key={(i + 1) * j}>
+                                                        <input className='category-input' ref={categoryInputRef} index={i} type='text' name={cell} onChange={changeCategoryName} value={data[i][j]} />
+                                                    </td>
+                                                );
+                                            }
+                                            return (
+                                                <td key={(i + 1) * j}>
+                                                    {/* TODO: Add validation to ensure only positive integers */}
+                                                    <input className='data-field' index1={i} index2={j} type='number' name={data[0][j] + data[i][0]} onChange={(e) => changeDataSetValue(e)} value={data[i][j]} pattern=" 0+\.[0-9]*[1-9][0-9]*$" onKeyDown={allowOnlyNumberKeys} />
+                                                </td>
+                                            );
+                                        })}
+                                        {/* TODO: When styling, display none until on hover */}
+                                        <td><button className='DeleteCategoryButton' index={i} onClick={removeCategory}>
+                                            <FontAwesomeIcon icon={faTimesCircle} />
+                                        </button></td>
+                                    </TableRow>
                                 );
                             }
-                            return (
-                                // TODO make sure placeholder and value appear the same.
-                                <HeaderCellTD key={i+1}>
-                                    <HeaderInput index={i} type='text' name={item} onChange={changeDataSetName} placeholder={data[0][i]} />
-                                    <DeleteDataSetButton className='DeleteDataSetButton' index={i} onClick={removeDataSet}>X</DeleteDataSetButton>
-                                </HeaderCellTD>
-                            );
+                            return false;
                         })}
-                        {/* TODO Add functionality that will only allow a max number of datasets */}
-                        <HeaderAddButtonContainer>
-                            <AddNewDataSetButton onClick={addNewDataSet}>+</AddNewDataSetButton>
-                        </HeaderAddButtonContainer>
-                    </tr>
-                </thead>
-                <tbody>
-                {data.map((arr, i) => {
-                    if (i > 0) {
-                        return (
-                            <TableRow key={i+1}>
-                                {arr.map((cell, j) => {
-                                    if (j === 0) {
-                                        return (
-                                            <td key={(i+1) * j}>
-                                                <input className='category-input' ref={categoryInputRef} index={i} type='text' name={cell} onChange={changeCategoryName} placeholder={data[i][j]} />
-                                            </td>
-                                        );
-                                    }
-                                    return (
-                                        <td key={(i+1) * j}>
-                                            {/* TODO: Add validation to ensure only positive integers */}
-                                            <input className='data-field' index1={i} index2={j} type='number' name={data[0][j] + data[i][0]} onChange={changeDataSetValue} placeholder={data[i][j]} pattern=" 0+\.[0-9]*[1-9][0-9]*$" onKeyDown={allowOnlyNumberKeys} />
-                                        </td>
-                                    );
-                                })}
-                                {/* TODO: When styling, display none until on hover */}
-                                <td><DeleteCategoryButton className='DeleteCategoryButton' index={i} onClick={removeCategory}>X</DeleteCategoryButton></td>
-                            </TableRow>
-                        );
-                    }
-                    return false;
-                })}
-                </tbody>
-            </table>
-            {/* TODO Add functionality that will only allow a max number of categories */}
-            <div className='add-new-category-button-container'>
-                <AddNewCategoryButton onClick={addNewCategory}>+</AddNewCategoryButton>
-                <span>Entry</span>
+                    </tbody>
+                </table>
+                {/* TODO Add functionality that will only allow a max number of categories */}
+                <div className='add-new-category-button-container'>
+                    <AddNewCategoryButton onClick={addNewCategory}>+</AddNewCategoryButton>
+                    <span>Entry</span>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
 export default DataTable;
+
