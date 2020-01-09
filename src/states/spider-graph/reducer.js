@@ -531,14 +531,15 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.DELETE_GRAPH) :
-        return (seqUpdateIn (state,
-          ['currentSpider'],
-          () => ((state.currentSpider === 0) ? 0 : state.currentSpider - 1),
-          ['openedSpiders'],
-          (list) => (list.filter ((spider, i) => (i !== payload))),
-          ['openedSpiders'],
-          (list) => ((list.length === 0) ? [initSpider ()] : list)
-        ))
+        return (state)
+        // return (seqUpdateIn (state,
+        //   ['currentSpider'],
+        //   (index) => ((index === 0) ? 0 : index - 1),
+        //   ['openedSpiders'],
+        //   (list) => (list.filter ((spider, i) => (i !== payload))),
+        //   ['openedSpiders'],
+        //   (list) => ((list.length === 0) ? [initSpider ()] : list)
+        // ))
 
       case (actions.DELETE_GRAPH_TRY) :
         return (seqSetIn (state,
@@ -547,10 +548,20 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.DELETE_GRAPH_SUCCESS) :
-        return (seqSetIn (state,
+        return (seqUpdateIn (state,
+          ['currentSpider'],
+          (index) => ((index === 0) ? 0 : index - 1),
+          ['openedSpiders'],
+          (list) => (list.filter ((spider, i) => (i !== payload))),
+          ['openedSpiders'],
+          (list) => ((list.length === 0) ? [initSpider ()] : list),
           ['events', 'deleteGraph'],
-          'success',
+          () => 'success',
         ))
+        // return (seqSetIn (state,
+        //   ['events', 'deleteGraph'],
+        //   'success',
+        // ))
 
       case (actions.DELETE_GRAPH_FAILURE) :
         return (seqSetIn (state,
