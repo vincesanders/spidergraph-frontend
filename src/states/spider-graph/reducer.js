@@ -11,7 +11,7 @@ import initialState, {
   initDataset,
 } from './initialState'
 import actions from './actions'
-import { array } from 'yup'
+import { user } from 'tools/auth'
 
 /***************************************
   tools
@@ -300,6 +300,10 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.SIGN_UP_SUCCESS) :
+        // store user
+        user.token.set (payload.data.token)
+        user.isAllowed.set ('y')
+
         return (seqSetIn (state,
           ['events', 'signUp'],
           'success',
