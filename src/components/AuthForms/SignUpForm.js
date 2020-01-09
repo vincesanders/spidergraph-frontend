@@ -6,10 +6,12 @@ import styled from 'styled-components'
 
 const FormContainer = styled.div`
 width: 70%;
-height: 20%
+height: 10%
 margin: 10px 20px;
 display: flex;
+flex-direction: column;
 justify-content: center;
+align-items: center;
 `
 
 const LabelDiv = styled.div`
@@ -32,7 +34,11 @@ text-align: center;
 
 color: #FFFFFF;`
 
+
+
+
 export default withFormik({
+    
     mapPropsToValues() {
         return {
             username: '',
@@ -45,6 +51,7 @@ export default withFormik({
 
         const valuesToSubmit = {username: values.username, password: values.password, email: values.email}; //I don't want to send the retyped password to the bakend.
         console.log(valuesToSubmit);
+        
 
         // axios
         //     .post('/api/auth/register/', valuesToSubmit)
@@ -69,15 +76,17 @@ export default withFormik({
             .required('This field is required')
             .oneOf([Yup.ref('password'), null], 'Passwords must match!!!')
     })
-})(({errors, touched}) => {
+})(({ errors, touched }) => {
     return (
         <FormContainer>
+            
             <Form className='sign-in-form'>
+                
                 <LabelDiv>
-                <label className='sign-in-label'>Username:
+                    <label className='sign-in-label'>Username:
                     <Field type='text' name='username' className='form-input' />
-                    {touched.username && errors.username && (<p>{errors.username}</p>)}
-                </label>
+                        {touched.username && errors.username && (<p>{errors.username}</p>)}
+                    </label>
                 </LabelDiv>
                 <LabelDiv>
                 <label className='sign-in-label'>Email:
@@ -91,11 +100,14 @@ export default withFormik({
                     {touched.password && errors.password && (<p>{errors.password}</p>)}
                     Confirm Password:
                     <Field type='text' name='retypedPassword' className='form-input' />
-                    {touched.retypedPassword && errors.retypedPassword && (<p>{errors.retypedPassword}</p>)}
-                </label>
+                        {touched.retypedPassword && errors.retypedPassword && (<p>{errors.retypedPassword}</p>)}
+                    </label>
                 </LabelDiv>
                 <Submit type='submit'>Submit</Submit>
+                
+                
             </Form>
+            
         </FormContainer>
     );
 });

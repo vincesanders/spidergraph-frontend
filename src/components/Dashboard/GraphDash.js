@@ -1,44 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
-import {Radar} from 'react-chartjs-2';
-
-
-const data = {
-    labels: ["Cat1", "Cat2", "Cat3", "Cat4", "Cat5",],
-    datasets: [
-      {
-        label: "Sample Chart",
-        backgroundColor: "rgba(255, 82, 82, 0.5)",
-        borderColor: "rgba(255, 82, 82, 0.5)",
-        borderWidth: '2',
-        data: [10, 11, 12, 13, 14,],
-        legend: {position: 'bottom',
-    }
-      }
-
-    ]
-  };
+import { Radar } from 'react-chartjs-2';
+import {useSelector} from 'react-redux';
 
 const GraphField = styled.div`
-    /* background: #FAFAFA;
-    border-radius: 5px;
-    position: absolute;
-    left: 25px;
-    right: 495px;
-    top: 147px;
-    bottom: 180px;
-    border-radius: 25px;
-    width: 920px;
-    height: 695px; */
+    
 `
 
-
 function GraphDash() {
-    return (
-        <GraphField>
-            <Radar data={data} />
-        </GraphField>
-    );
+  const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
+  const [data, setData] = useState(spider);
+  // console.log(spider);
+  const [forceRender, setForceRender] = useState(0)
+
+  useEffect(() => {
+    console.log('graph got new spider: ', spider);
+    setForceRender(forceRender + 1);
+    setData(spider);
+  }, [spider, spider.labels.length])
+
+  return (
+    <GraphField>
+      <Radar
+        data={data}
+        options={{
+          legend: { 
+            display: true, 
+            position: 'bottom', 
+            align: 'start',
+          },
+          scale: {
+            ticks:{
+              suggestedMin: 0,
+              // suggestedMax: 10
+            },
+            dummyKeyThatForcesRerender: forceRender,
+          },
+        }} />
+    </GraphField>
+  );
 }
 
 export default GraphDash;

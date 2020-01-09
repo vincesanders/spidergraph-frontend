@@ -15,6 +15,11 @@ const SignInCont = styled.div`
 `
 
 const H3 = styled.h3`
+@media (max-width: 768px) {
+  margin: 40% 9px;
+}
+
+
 position: absolute;
 width: 684px;
 height: 51px;
@@ -45,9 +50,13 @@ display: flex;
 
 const Logo = styled.button`
 
+@media (max-width: 768px) {
+  
+}
+
 position: absolute;
 left:20%;
-top: 20%
+top: 20%;
 
 border:none;
 background-color: #FFFFFF;
@@ -56,7 +65,44 @@ font-family: Open Sans;
 font-style: normal;
 font-weight: 600;
 font-size: 16px;
-line-height: 38px;`
+line-height: 38px;  
+`
+
+const DivToSignUp = styled.div`
+position: absolute;
+bottom: 30%;
+border: none;
+background-color: #FFFFFF;
+width: 300px;
+margin: 5px;
+
+color: #0D1124;
+
+@media (max-width: 768px) {
+  bottom: 20%;
+  right: 25%;
+}
+`
+
+const SignUp = styled.button`
+width: 100px;
+background-color: #FFFFFF;
+border: none;
+margin-left: 10%;
+
+font-family: Open Sans;
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 38px;
+/* or 271% */
+
+text-align: center;
+
+color:#4054B2 ;
+
+
+`
 
 /***************************************
   MAIN
@@ -74,6 +120,10 @@ const SignIn = (props) => {
       <Formcont>
       <SignInForm />
       <Logo onClick={routeToSignUp}>Spider.Graph</Logo>
+      <DivToSignUp>
+       Need an account?    
+        <SignUp onClick={routeToSignUp}>Sign Up</SignUp>
+      </DivToSignUp>
       </Formcont>
     </SignInCont>
     

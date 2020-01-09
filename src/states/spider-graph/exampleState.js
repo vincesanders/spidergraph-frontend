@@ -1,3 +1,8 @@
+import {
+  initCurrentSpider,
+  initEvents,
+} from './initialState'
+
 /***************************************
   MAIN
 ----------------------------------------
@@ -5,26 +10,51 @@
 ***************************************/
 
 const exampleState = {
-  currentSpider : 0,
-  spiders : [
+  savedSpiders : [],
+  openedSpiders : [
     {
-      title : 'Example Graph',
-      labels : [ 'Cat1', 'Cat2', 'Cat3', 'Cat4', 'Cat5' ],
+      id : 'example-1',
+      title : 'title-1',
+      labels : [ 'label-1', 'label-2', 'label-3', 'label-4', 'label-5' ],
       datasets : [
         {
-          label : 'Example Dataset',
-          backgroundColor : 'rgba(255, 82, 82, 0.5)',
-          borderColor : 'rgba(255, 82, 82, 0.5)',
-          borderWidth : '2',
+          label : 'dataset-1',
           data : [ 10, 11, 12, 13, 14 ],
-          legend : { position : 'bottom' }
+        },
+        {
+          label : 'dataset-2',
+          data : [ 11, 12, 13, 14, 15 ],
         }
       ],
-      notes : 'These are some notes!',
+      notes : 'notes-1',
       theme : 1,
-      scale : 20,
+      scale : 1,
+    },
+    {
+      id : 'example-2',
+      title : 'title-2',
+      labels : [ 'label-1', 'label-2', 'label-3' ],
+      datasets : [
+        {
+          label : 'dataset-1',
+          data : [ 10, 11, 12 ],
+        },
+        {
+          label : 'dataset-2',
+          data : [ 11, 12, 13 ],
+        },
+        {
+          label : 'dataset-3',
+          data : [ 12, 13, 14 ],
+        }
+      ],
+      notes : 'notes-2',
+      theme : 0,
+      scale : 2,
     },
   ],
+  currentSpider : initCurrentSpider (),
+  events : initEvents (),
 }
 
 /**************************************/

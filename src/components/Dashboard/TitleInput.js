@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
-import actions from '../../states/spider-graph/actions';
+import {actions} from 'states/spider-graph';
+import act from 'states/act';
 
 const TitleInput = styled.input`
     font-size: 48px;
@@ -26,10 +27,10 @@ const TitleInput = styled.input`
 
 export default () => {
     const dispatch = useDispatch();
-    const title = useSelector(state => state.spiders[state.currentSpider].title);
+    const title = useSelector(state => state.openedSpiders[state.currentSpider].title);
 
     const handleChange = e => {
-        dispatch({type: actions.EDIT_GRAPH_TITLE, payload: e.target.value})
+        dispatch(act(actions.EDIT_GRAPH_TITLE, e.target.value))
     }
 
     return(

@@ -8,10 +8,12 @@ import styled from 'styled-components'
 
 const FormContainer = styled.div`
 width: 70%;
-height: 20%
+height: 10%
 margin: 10px 20px;
 display: flex;
 justify-content: center;
+
+
 `
 
 const LabelDiv = styled.div`
@@ -80,7 +82,7 @@ export default withFormik({
                 <label className='sign-in-label'>
                     <div>Password:
                     </div>
-                    <Field type='password' name='password' className="form-input" />
+                    <Field type='text' name='password' className="form-input" />
                     {touched.password && errors.password && (<p>{errors.password}</p>)}
                 </label>
                 </LabelDiv>
