@@ -46,17 +46,11 @@ const NewGraphButton = styled(TopBarButton)`
 
 `
 
-// const OpenGraphButton = styled(TopBarButton)`
-//     border-radius: 50px;
-//     width: 9rem;
-//     height: 4rem;
-//     font-size: 2rem;
+// const SavedGraphsDropDown = styled.div`
+//     position: relative;
+//     display: inline-block;
+//     margin-right: 10px;
 // `
-const SavedGraphsDropDown = styled.div`
-    position: relative;
-    display: inline-block;
-    margin-right: 10px;
-`
 
 const GraphButton = (props) => {
     const GraphButtonStyled = styled(TopBarButton)`
@@ -117,23 +111,24 @@ const TopBar = () => {
         dispatch(act(actions.DELETE_GRAPH, index));
     }
 
+    
     // temp
 
-    const [savedGraphs, setSavedGraphs] = useState([
-        {title: 'Graph 1', id: '11', active: false},
-        {title: 'Graph 2', id: '22', active: true},
-        {title: 'Graph 3', id: '33', active: false},
-        {title: 'Graph 4', id: '44', active: true},
-    ])
+    // const [savedGraphs, setSavedGraphs] = useState([
+    //     {title: 'Graph 1', id: '11', active: false},
+    //     {title: 'Graph 2', id: '22', active: true},
+    //     {title: 'Graph 3', id: '33', active: false},
+    //     {title: 'Graph 4', id: '44', active: true},
+    // ])
 
-    const openGraphActual = (event, graphId) => {
-        event.stopPropagation();
-        setSavedGraphs(savedGraphs.map((graph, index) => (
-            (graph.id === graphId)
-            ? {...graph, active: !graph.active}
-            : graph    
-        )))
-    }
+    // const openGraphActual = (event, graphId) => {
+    //     event.stopPropagation();
+    //     setSavedGraphs(savedGraphs.map((graph, index) => (
+    //         (graph.id === graphId)
+    //         ? {...graph, active: !graph.active}
+    //         : graph    
+    //     )))
+    // }
 
      // end temp
 
@@ -141,10 +136,10 @@ const TopBar = () => {
         <Topbar>
             <AppTitle >Spider.Graph</AppTitle>
             {/* <OpenGraphButton onClick={addNewGraph}>Open</OpenGraphButton> */}
-            <SavedGraphsDropDown onClick={toggleSavedGraphsMenu}>
+            {/* <SavedGraphsDropDown onClick={toggleSavedGraphsMenu}>
                 <span>Saved Graphs</span>
                 <DropDown active={savedGraphsMenu} savedGraphs={savedGraphs} openGraph={openGraphActual}/>
-            </SavedGraphsDropDown>
+            </SavedGraphsDropDown> */}
             {spiders.map((spider, index) => (
                 <GraphButton openGraph={(e) => openGraph(e, index)} deleteGraph={(e) => deleteGraph(e, index)} content={spider.title} active={index === currentGraph} key={index}/>
             ))}

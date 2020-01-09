@@ -58,7 +58,7 @@ const Logo = styled.button`
 
 position: absolute;
 left:20%;
-top: 20%
+top: 20%;
 
 border:none;
 background-color: #FFFFFF;
@@ -90,7 +90,7 @@ const SignUp = styled.button`
 width: 100px;
 background-color: #FFFFFF;
 border: none;
-margin-left: 10%
+margin-left: 10%;
 
 font-family: Open Sans;
 font-style: normal;
