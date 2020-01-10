@@ -113,19 +113,17 @@ const SignUp = (props) => {
   }
 
   const trySubmit = (values, formikBag) => {
+    console.log ('--- sign up : trySubmit ---')
     dispatch (signUp (_.omit (values, ['retypedPassword'])))
   }
 
   useEffect (() => {
+    console.log (`--- sign up : ${events.signUp} ---`)
     switch (events.signUp) {
       case ('success') :
         routeToHome ()
         break
-      case ('failure') :
-        console.log ('error on sign up')
-        break
       default :
-        console.log ('doing nothing')
         break
     }
   }, [events.signUp])

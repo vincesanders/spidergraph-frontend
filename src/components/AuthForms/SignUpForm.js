@@ -53,6 +53,7 @@ export default withFormik({
     }
   },
   handleSubmit(values, formikBag) {
+    console.log ('--- sign up : handleSubmit ---')
     formikBag.props.trySubmit (values, formikBag)
   },
   validationSchema: Yup.object().shape({

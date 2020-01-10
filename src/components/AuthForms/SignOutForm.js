@@ -45,6 +45,7 @@ const SubmitButton = styled.button`
 const SignOutForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault ()
+    console.log ('--- sign out : handleSubmit ---')
     props.trySubmit ()
   }
 

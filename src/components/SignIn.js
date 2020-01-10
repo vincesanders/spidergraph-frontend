@@ -122,19 +122,17 @@ const SignIn = (props) => {
   }
 
   const trySubmit = (values, formikBag) => {
+    console.log ('--- sign in : trySubmit ---')
     dispatch (signIn (values))
   }
 
   useEffect (() => {
+    console.log (`--- sign in : ${events.signIn} ---`)
     switch (events.signIn) {
       case ('success') :
         routeToHome ()
         break
-      case ('failure') :
-        console.log ('error on sign in')
-        break
       default :
-        console.log ('doing nothing')
         break
     }
   }, [events.signIn])

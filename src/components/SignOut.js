@@ -89,19 +89,17 @@ const SignOut = (props) => {
   }
 
   const trySubmit = (values, formikBag) => {
+    console.log ('--- sign out : trySubmit ---')
     dispatch (signOut (values))
   }
 
   useEffect (() => {
+    console.log (`--- sign out : ${events.signOut} ---`)
     switch (events.signOut) {
       case ('success') :
         routeToLanding ()
         break
-      case ('failure') :
-        console.log ('error on sign out')
-        break
       default :
-        console.log ('doing nothing')
         break
     }
   }, [events.signOut])
