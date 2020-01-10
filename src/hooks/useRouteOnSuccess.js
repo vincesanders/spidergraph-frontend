@@ -7,14 +7,8 @@ import { useEffect } from 'react'
 const useRouteOnSuccess = (name, routeTo, status, ...moreDeps) => {
   useEffect (() => {
     console.log (`--- ${name} : ${status} ---`)
-    switch (status) {
-      case ('success') :
-        routeTo ()
-        break
-      case ('failure') :
-        break
-      default :
-        break
+    if (status === 'success') {
+      routeTo ()
     }
   }, [status, ...moreDeps])
 }
