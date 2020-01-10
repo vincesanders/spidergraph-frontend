@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import { authios } from 'tools/auth'
 
 import SignInForm from 'components/AuthForms/SignInForm'
 import { signIn } from 'states/spider-graph/thunks'
@@ -140,6 +141,8 @@ const SignIn = (props) => {
   }, [events.signIn])
 
   return (
+
+
     <SignInCont>
       <H3>
         Log In
@@ -148,7 +151,9 @@ const SignIn = (props) => {
       <SignInForm
       trySubmit={trySubmit}
       />
-      <Logo onClick={routeToSignUp}>Spider.Graph</Logo>
+      <a href="https://spidergraph.alexmiller26.now.sh/">
+      <Logo>Spider.Graph</Logo>
+      </a>
       <DivToSignUp>
         Need an account?
         <SignUp onClick={routeToSignUp}>Sign Up</SignUp>

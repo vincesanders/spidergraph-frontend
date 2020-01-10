@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import {useSelector} from 'react-redux';
 
 import TopBar from './TopBar';
 import TitleInput from './TitleInput';
@@ -56,31 +57,40 @@ const ButtonPanel = styled.div`
 `
 
 const Dashboard = () => {
+    const openedSpiders = useSelector(state => state.openedSpiders);
+    console.log('DASH LOADED, current spider: ');
+    console.log(openedSpiders);
+
+
     return (
         <DashboardCont>
             <TopBar />
-            <DashboardBody>
-                <TitleInput />
-                <CardCont>
-                    <Row>
-                        <GraphCard>
-                            <GraphDash />
-                        </GraphCard>
-                        <DataDesignCard>
-                            <DataDesignTabs />
-                        </DataDesignCard>
-                    </Row>
-                    <Row>
-                        <NotesDiv>
-                            <NotesInput />
-                        </NotesDiv>
-                        <ButtonPanel>
-                            <ExportButtonsPanel />
-                        </ButtonPanel>
-                    </Row>
-                </CardCont>
-            </DashboardBody>
-            {/* <Graph /> */}
+            {openedSpiders.length  === 0 
+            ? <h1>Click + to add a new graph, or open an exisitng graph...</h1>
+            :<>
+                <DashboardBody>
+                    <TitleInput />
+                    <CardCont>
+                        <Row>
+                            <GraphCard>
+                                <GraphDash />
+                            </GraphCard>
+                            <DataDesignCard>
+                                <DataDesignTabs />
+                            </DataDesignCard>
+                        </Row>
+                        <Row>
+                            <NotesDiv>
+                                <NotesInput />
+                            </NotesDiv>
+                            <ButtonPanel>
+                                <ExportButtonsPanel />
+                            </ButtonPanel>
+                        </Row>
+                    </CardCont>
+                </DashboardBody>
+            </>
+            }
         </DashboardCont>
         
     );

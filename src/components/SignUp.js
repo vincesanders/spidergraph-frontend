@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import _ from 'lodash'
 import styled from 'styled-components'
+import {authios} from 'tools/auth'
 
 import SignUpForm from 'components/AuthForms/SignUpForm'
 import { signUp } from 'states/spider-graph/thunks'
@@ -134,7 +135,9 @@ const SignUp = (props) => {
       <SignUpForm
       trySubmit={trySubmit}
       />
-      <Logo onClick={routeToSignIn}>Spider.Graph</Logo>
+      <a href="https://spidergraph.alexmiller26.now.sh/">
+      <Logo>Spider.Graph</Logo>
+      </a>
       <DivToSignIn>
         Already have an account?
         <Signin onClick={routeToSignIn}>Sign In</Signin>

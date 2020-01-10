@@ -1,10 +1,10 @@
 /// external modules ///
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 /// internal modules ///
 import Dashboard from './Dashboard';
-import { getUser, getUserGraphs } from 'states/spider-graph/thunks'
+import { getUserGraphs } from 'states/spider-graph/thunks'
 import { user } from 'tools/auth'
 
 /***************************************
