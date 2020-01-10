@@ -92,7 +92,7 @@ const Dashboard = () => {
                     <CardCont>
                         <Row>
                             <GraphCard>
-                            <FontAwesomeIcon icon={faSave} style={{fontSize: '40px', marginLeft:'90%', marginTop:'30px'}} onClick={putGraphToServer}/>
+                            <FontAwesomeIcon icon={faSave} style={{fontSize: '40px', marginLeft:'90%', marginTop:'30px'}} onClick={putGraphToServer} alert='Graph Saved!'/>
 
                                 <GraphDash />
                             </GraphCard>
