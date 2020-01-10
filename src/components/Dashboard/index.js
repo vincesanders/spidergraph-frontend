@@ -66,7 +66,7 @@ const Dashboard = () => {
         <DashboardCont>
             <TopBar />
             {openedSpiders.length  === 0 
-            ? <h1>Click + to add a new graph, or open an exisitng graph...</h1>
+            ? <h1>Click + to add a new graph, or open an existing graph...</h1>
             :<>
                 <DashboardBody>
                     <TitleInput />
