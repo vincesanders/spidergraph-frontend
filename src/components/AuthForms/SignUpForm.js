@@ -70,10 +70,8 @@ export default withFormik({
     })
 })(({ errors, touched }) => {
     return (
-        <FormContainer>
-
+        <FormContainer className='SignUpForm'>
             <Form className='sign-in-form'>
-
                 <LabelDiv>
                     <label className='sign-in-label'>Username:
                     <Field type='text' name='username' className='form-input' />
@@ -81,25 +79,22 @@ export default withFormik({
                     </label>
                 </LabelDiv>
                 <LabelDiv>
-                <label className='sign-in-label'>Email:
-                    <Field type='text' name='email' className='form-input' />
-                    {touched.email && errors.email && (<p>{errors.email}</p>)}
-                </label>
+                    <label className='sign-in-label'>Email:
+                        <Field type='text' name='email' className='form-input' />
+                        {touched.email && errors.email && (<p>{errors.email}</p>)}
+                    </label>
                 </LabelDiv>
                 <LabelDiv>
-                <label className='sign-in-label'>Password:
-                    <Field type='password' name='password' className='form-input' />
-                    {touched.password && errors.password && (<p>{errors.password}</p>)}
-                    Confirm Password:
-                    <Field type='password' name='retypedPassword' className='form-input' />
-                        {touched.retypedPassword && errors.retypedPassword && (<p>{errors.retypedPassword}</p>)}
+                    <label className='sign-in-label'>Password:
+                        <Field type='password' name='password' className='form-input' />
+                        {touched.password && errors.password && (<p>{errors.password}</p>)}
+                        Confirm Password:
+                        <Field type='password' name='retypedPassword' className='form-input' />
+                            {touched.retypedPassword && errors.retypedPassword && (<p>{errors.retypedPassword}</p>)}
                     </label>
                 </LabelDiv>
                 <Submit type='submit'>Submit</Submit>
-
-
             </Form>
-
         </FormContainer>
     );
 });

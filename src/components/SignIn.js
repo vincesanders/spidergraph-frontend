@@ -140,7 +140,7 @@ const SignIn = (props) => {
   }, [events.signIn])
 
   return (
-    <PageContainer>
+    <PageContainer className='SignIn'>
       <H3>
         Log In
       </H3>

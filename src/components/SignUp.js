@@ -131,7 +131,7 @@ const SignUp = (props) => {
   }, [events.signUp])
 
   return (
-    <PageContainer>
+    <PageContainer className='SignUp'>
       <H3>Create an Account</H3>
       <FormContainer>
         <SignUpForm

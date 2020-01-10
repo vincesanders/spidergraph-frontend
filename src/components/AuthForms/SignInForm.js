@@ -62,26 +62,24 @@ export default withFormik({
 })(({ errors, touched }) => {
 
     return (
-            <FormContainer>
+        <FormContainer className='SignInForm'>
             <Form className='sign-in-form'>
                 <LabelDiv>
-                <label className='sign-in-label'>
-                    <div>Username:
-                    </div>
-                    <Field type='text' name='username' className="form-input" />
-                    {touched.username && errors.username && (<p>{errors.username}</p>)}
-                </label>
+                    <label className='sign-in-label'>
+                        <div>Username:</div>
+                        <Field type='text' name='username' className="form-input" />
+                        {touched.username && errors.username && (<p>{errors.username}</p>)}
+                    </label>
                 </LabelDiv>
                 <LabelDiv>
-                <label className='sign-in-label'>
-                    <div>Password:
-                    </div>
-                    <Field type='password' name='password' className="form-input" />
-                    {touched.password && errors.password && (<p>{errors.password}</p>)}
-                </label>
+                    <label className='sign-in-label'>
+                        <div>Password:</div>
+                        <Field type='password' name='password' className="form-input" />
+                        {touched.password && errors.password && (<p>{errors.password}</p>)}
+                    </label>
                 </LabelDiv>
                 <GettingStarted type='submit'>Getting Started</GettingStarted>
             </Form>
-            </FormContainer>
+        </FormContainer>
     );
 });
