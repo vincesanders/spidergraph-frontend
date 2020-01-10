@@ -458,7 +458,7 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.GET_USER_GRAPHS_SUCCESS) :
-        console.log('graph success payload data: ');
+        console.log('user graphs get success payload data: ');
         console.log(payload.data);
 
         return (seqSetIn (state,
@@ -486,6 +486,8 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.POST_GRAPH_SUCCESS) :
+        console.log('graph post success payload data: ');
+        console.log(payload.data);
         return (seqSetIn (state,
           // needs ID
           ['events', 'postGraph'],
