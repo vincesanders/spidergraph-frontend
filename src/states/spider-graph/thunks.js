@@ -9,13 +9,14 @@ import { server } from 'routes'
 
 const _flag = (...things) => console.log (`>>> ${things.join (' : ')} <<<`)
 
+const serverRequest = (dispatch) => (actionPrefix, requestType, requestPath, ...args) => {
   const flag = (...rest) => _flag ('serverRequest', actionPrefix, ...rest)
 
   flag ('try')
   dispatch (act (actions[actionPrefix + '_TRY']))
 
   authios ()
-    [reqType] (...args)
+    [requestType] (requestPath, ...args)
     .then ((res) => {
       flag ('success')
       console.log (res)
@@ -25,7 +26,7 @@ const _flag = (...things) => console.log (`>>> ${things.join (' : ')} <<<`)
     .catch ((err) => {
       flag ('failure')
       console.log (err)
-      
+
       dispatch (act (actions[actionPrefix + '_FAILURE'], err))
     })
 }
@@ -37,15 +38,15 @@ const _flag = (...things) => console.log (`>>> ${things.join (' : ')} <<<`)
 /// auth ///
 
 export const signUp = (data) => (dispatch) => {
-  serverRequest (dispatch) ('post', 'SIGN_UP', server.ends.signup.POST (), data)
+  serverRequest (dispatch) ('SIGN_UP', 'post', server.ends.signup.POST (), data)
 }
 
 export const signIn = (data) => (dispatch) => {
-  serverRequest (dispatch) ('post', 'SIGN_IN', server.ends.signin.POST (), data)
+  serverRequest (dispatch) ('SIGN_IN', 'post', server.ends.signin.POST (), data)
 }
 
 export const signOut = (data) => (dispatch) => {
-  serverRequest (dispatch) ('post', 'SIGN_OUT', server.ends.signout.POST (), data)
+  serverRequest (dispatch) ('SIGN_OUT', 'post', server.ends.signout.POST (), data)
 }
 
 /// all users -- stretch ///
@@ -59,32 +60,32 @@ export const getGraphs = () => (dispatch) => {}
 /// user ///
 
 export const getUser = (id) => (dispatch) => {
-  serverRequest (dispatch) ('get', 'GET_USER', server.ends.user.GET (id))
+  serverRequest (dispatch) ('GET_USER', 'get', server.ends.user.GET (id))
 }
 
 /// user graphs ///
 
 export const getUserGraphs = (id) => (dispatch) => {
-  serverRequest (dispatch) ('get', 'GET_USER_GRAPHS', server.ends.user_graphs.GET (id))
+  serverRequest (dispatch) ('GET_USER_GRAPHS', 'get', server.ends.user_graphs.GET (id))
   console.log('called get graphs thunk');
 }
 
 /// graph ///
 
 export const postGraph = (data) => (dispatch) => {
-  serverRequest (dispatch) ('post', 'POST_GRAPH', server.ends.graph.POST (), data)
+  serverRequest (dispatch) ('POST_GRAPH', 'post', server.ends.graph.POST (), data)
 }
 
 export const getGraph = (id) => (dispatch) => {
-  serverRequest (dispatch) ('get', 'GET_GRAPH', server.ends.graph.GET (id))
+  serverRequest (dispatch) ('GET_GRAPH', 'get', server.ends.graph.GET (id))
 }
 
 export const putGraph = (id, data) => (dispatch) => {
-  serverRequest (dispatch) ('put', 'PUT_GRAPH', server.ends.graph.PUT (id), data)
+  serverRequest (dispatch) ('PUT_GRAPH', 'put', server.ends.graph.PUT (id), data)
 }
 
 export const deleteGraph = (id) => (dispatch) => {
-  serverRequest (dispatch) ('delete', 'DELETE_GRAPH', server.ends.graph.DELETE (id))
+  serverRequest (dispatch) ('DELETE_GRAPH', 'delete', server.ends.graph.DELETE (id))
 }
 
 /**************************************/
