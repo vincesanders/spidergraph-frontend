@@ -57,6 +57,7 @@ export const getUser = (id) => (dispatch) => {
 
 export const getUserGraphs = (id) => (dispatch) => {
   serverRequest (dispatch) ('get', 'GET_USER_GRAPHS', server.ends.user_graphs.GET (id))
+  console.log('called get graphs thunk');
 }
 
 /// graph ///
@@ -74,6 +75,7 @@ export const putGraph = (id, data) => (dispatch) => {
 }
 
 export const deleteGraph = (id) => (dispatch) => {
+  console.log('DELETE GRAPH THUNK CALLED')
   serverRequest (dispatch) ('delete', 'DELETE_GRAPH', server.ends.graph.DELETE (id))
 }
 

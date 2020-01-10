@@ -8,8 +8,8 @@ import actions from 'states/spider-graph/actions';
 const DesignTable = (props) => {
     const dispatch = useDispatch();
 
-    const handleChange = e => {
-        dispatch({ type: actions.EDIT_GRAPH_NOTES, payload: e.target.value })
+    const handleThemeChange = (themeId) => {
+        dispatch({ type: actions.EDIT_GRAPH_THEME, payload: themeId })
     }
     const currentSpider = useSelector(state => state.currentSpider);
     const spider = useSelector(state => state.openedSpiders[currentSpider]);
@@ -31,7 +31,7 @@ const DesignTable = (props) => {
             }  
         }
         clone.theme = 1;
-
+        handleThemeChange(1);
         setThemedSpider(clone)
         console.log(themedSpider)
     }
@@ -56,6 +56,7 @@ const DesignTable = (props) => {
             }  
         }
         clone.theme = 2;
+        handleThemeChange(2);
 
         setThemedSpider(clone)
         console.log(themedSpider)
@@ -81,7 +82,8 @@ const DesignTable = (props) => {
                 }
             }  
         }
-        clone.theme = 2;
+        clone.theme = 3;
+        handleThemeChange(3);
 
         setThemedSpider(clone)
         console.log(themedSpider)
@@ -161,7 +163,7 @@ const ColorBoxContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items:center;
-    padding: 1%`
+    padding: 1%;`
 
 
 const ColorBoxBlack = styled.div`

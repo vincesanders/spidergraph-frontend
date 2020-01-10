@@ -13,11 +13,23 @@ function GraphDash() {
   // console.log(spider);
   const [forceRender, setForceRender] = useState(0)
 
+  console.log('graphs spider');
+  console.log(spider);
+
   useEffect(() => {
-    console.log('graph got new spider: ', spider);
+    console.log('!!!!!!!! graph got new spider: ');
+    console.log(spider);
     setForceRender(forceRender + 1);
     setData(spider);
   }, [spider, spider.labels.length])
+
+  const theme = useSelector(state => state.openedSpiders[state.currentSpider].theme);
+
+  useEffect(() => {
+    console.log('new theme: ');
+    console.log(theme);
+  },[theme])
+
 
   const chartOptions = {
     scale: {
