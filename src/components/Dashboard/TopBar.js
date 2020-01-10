@@ -4,6 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {actions, thunks} from 'states/spider-graph';
 import act from 'states/act';
 import { user } from 'tools/auth'
+import {frontToServer, serverToFront} from 'states/spider-graph/converter';
+import {initSpider} from 'states/spider-graph/initialState';
 
 import DropDown from './DropDown';
 
@@ -91,8 +93,9 @@ const AppTitle = styled.h3`
 const TopBar = () => {
     const currentUser = user.data.get ();
     const dispatch = useDispatch();
-    const spiders = useSelector(state => state.openedSpiders);
-    const currentGraph = useSelector(state => state.currentSpider);
+    const openedSpiders = useSelector(state => state.openedSpiders);
+    const savedSpiders = useSelector(state => state.savedSpiders);
+    const currentSavedSpider = useSelector(state => state.currentSavedSpider);
 
     const [savedGraphsMenu, setSavedGraphsMenu] = useState(false);
     const toggleSavedGraphsMenu = () => {
@@ -100,35 +103,56 @@ const TopBar = () => {
     }
 
     const addNewGraph = () => {
+        // add new front template graph to open graphs, switch to that one now
+        // call post to add this template to the server, 
+        // on POST graph success, set this graph to have the ID in reply from server
         dispatch(act(actions.ADD_GRAPH));
 
+        const serverNewGraph = frontToServer(initSpider(), currentUser.id);
+        console.log('SERVER FORMNAT GRAPH')
+        console.log(serverNewGraph);
         const tempServerNewGraph = {
-            "name":"test2",
+            "name":"test3",
             "owner":currentUser.id,
             "theme":1,
-            "axis":["axis1","axis2","axis3","axis4"],
+            "axis":["axis1","axis2","axis3"],
             "layer":["layer1","layer2","layer3","layer4"],
             "data":[
               [11,12,13,14],
               [21,22,23,24],
               [31,32,33,34],
-              [41,42,43,44]
             ]
           }
+          console.log(tempServerNewGraph);
 
-        dispatch(thunks.postGraph(tempServerNewGraph));
+
+        dispatch(thunks.postGraph(serverNewGraph));
     }
 
     const openGraph = (e, index) => {
         e.stopPropagation();
-        dispatch(act(actions.OPEN_GRAPH, index))
-        // dispatch(thunks.getGraph, spiders[index].id)
+        // if graph is in openedSpiders, open it locally, else call server get 
+        let openSpiderId = -1;
+        openedSpiders.forEach((openSpider, openId) => {
+            if (openSpider.id === index){
+                openSpiderId = openId;
+                console.log('spider is open, saved Id + openedId:', index, openSpiderId);
+            }
+        } )
+        if (openSpiderId >= 0){
+            console.log('local open graph');
+            dispatch(act(actions.OPEN_GRAPH, openSpiderId));
+        }else{
+            console.log('server get graph id: ', index);
+            dispatch(thunks.getGraph(index))
+        }
     }
 
-    const deleteGraph = (e, index) => {
+    const deleteGraph = (e, serverId) => {
         e.stopPropagation();
-        dispatch(act(actions.DELETE_GRAPH, index));
-        // dispatch(thunks.deleteGraph, spiders[index].id)
+        console.log('delete graph putton pressed, server id: ', serverId);
+        dispatch(act(actions.DELETE_GRAPH, serverId));
+        dispatch(thunks.deleteGraph(serverId))
     }
 
 
@@ -160,10 +184,15 @@ const TopBar = () => {
                 <span>Saved Graphs</span>
                 <DropDown active={savedGraphsMenu} savedGraphs={savedGraphs} openGraph={openGraphActual}/>
             </SavedGraphsDropDown> */}
-            {spiders.map((spider, index) => (
+            {/* {spiders.map((spider, index) => (
                 <GraphButton openGraph={(e) => openGraph(e, index)} deleteGraph={(e) => deleteGraph(e, index)} content={spider.title} active={index === currentGraph} key={index}/>
+            ))} */}
+            {savedSpiders.map((savedSpider, index) => (
+                <GraphButton openGraph={(e) => openGraph(e, savedSpider.id)} deleteGraph={(e) => deleteGraph(e, savedSpider.id)} 
+                content={savedSpider.title} active={index === currentSavedSpider} key={index}/>
             ))}
             <NewGraphButton onClick={addNewGraph}>+</NewGraphButton>
+            <span>uid: {currentUser.id}</span>
         </Topbar>
     )
 }
