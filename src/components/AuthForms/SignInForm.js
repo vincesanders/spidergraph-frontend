@@ -49,7 +49,7 @@ export default withFormik({
         }
     },
     handleSubmitButton(values, formikBag) {
-        formikBag.props.trySubmitButton (values, formikBag)
+        formikBag.props.trySubmit (values, formikBag)
     },
     validationSchema: Yup.object().shape({
         username: Yup.string()
