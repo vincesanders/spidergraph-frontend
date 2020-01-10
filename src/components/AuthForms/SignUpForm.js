@@ -52,7 +52,7 @@ export default withFormik({
             retypedPassword: ''
         }
     },
-    handleSubmitButton(values, formikBag) {
+    handleSubmit(values, formikBag) {
         formikBag.props.trySubmit (values, formikBag)
     },
     validationSchema: Yup.object().shape({
