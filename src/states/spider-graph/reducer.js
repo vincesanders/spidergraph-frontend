@@ -6,12 +6,15 @@ import hi from 'tools/hi'
 /// internal modules ///
 import initialState, {
   initSpider,
+  initSavedSpider,
   initLabel,
   initValue,
   initDataset,
 } from './initialState'
 import actions from './actions'
 import { user } from 'tools/auth'
+import {serverToFront} from './converter';
+import {getIndexOfSpiderWithServerId} from './utils';
 
 /***************************************
   tools
@@ -82,6 +85,10 @@ const reducer = (state = initialState, action) => {
   let newLabels = [];
   let newDatasets = [];
   let newData = [];
+
+  let openSpiderIndex = -1;
+  let savedSpiderIndex = -1
+  let serverGraphId = -1;
   /// do it! ///
   try {
     /// actions ///
@@ -96,16 +103,36 @@ const reducer = (state = initialState, action) => {
         return (seqUpdateIn (state,
           ['currentSpider'],
           () => state.openedSpiders.length,
+          ['currentSavedSpider'],
+          () => state.savedSpiders.length,
           ['openedSpiders'],
           (list) => [...list, initSpider ()],
+          ['savedSpiders'],
+          (list) => [...list, initSavedSpider ()],
         ))
 
       case (actions.OPEN_GRAPH) :
         // payload : index of openedopenedSpiders
-        return (seqSetIn (state,
-          ['currentSpider'],
-          payload,
-        ))
+        openSpiderIndex = getIndexOfSpiderWithServerId(state.openedSpiders, payload);
+        savedSpiderIndex = getIndexOfSpiderWithServerId(state.savedSpiders, payload);
+        console.log('openup open id: ', openSpiderIndex);
+        console.log('openup save id: ', savedSpiderIndex);
+
+
+        if (openSpiderIndex !== -1){
+          return (seqSetIn (state,
+            ['currentSpider'],
+            openSpiderIndex,
+            ['currentSavedSpider'],
+            savedSpiderIndex
+          ))
+        } else{
+          return (seqSetIn (state,
+            ['currentSavedSpider'],
+            savedSpiderIndex
+          ))
+        }
+        
 
       case (actions.CLOSE_GRAPH) :
         // payload : index of openedopenedSpiders
@@ -461,9 +488,16 @@ const reducer = (state = initialState, action) => {
         console.log('user graphs get success payload data: ');
         console.log(payload.data);
 
+        const frontFormatSavedSpiders = payload.data.map(savedSpider => {
+          return{
+            id: savedSpider.id,
+            title: savedSpider.name,
+          }
+        })
+
         return (seqSetIn (state,
-          ['savedGraphs'],
-          payload.data,
+          ['savedSpiders'],
+          frontFormatSavedSpiders,
           ['events', 'getUserGraphs'],
           'success',
         ))
@@ -488,8 +522,11 @@ const reducer = (state = initialState, action) => {
       case (actions.POST_GRAPH_SUCCESS) :
         console.log('graph post success payload data: ');
         console.log(payload.data);
+
         return (seqSetIn (state,
           // needs ID
+          ['openedSpiders', state.currentSpider, 'id'],
+          payload.data.id,
           ['events', 'postGraph'],
           'success',
         ))
@@ -510,11 +547,26 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.GET_GRAPH_SUCCESS) :
-        return (seqSetIn (state,
-          // needs graph, and convert
-          ['events', 'getGraph'],
-          'success',
+        // console.log('graph get success payload data: ');
+        // console.log(payload.data);
+
+        // convert graph from server to frontend format, and add to openedSpiders array at end
+        // console.log('server to front conversion:');
+        const graphFrontendFormat = serverToFront(payload.data);
+        // console.log(graphFrontendFormat);
+
+        return (seqUpdateIn (state,
+          ['currentSpider'],
+          () => state.openedSpiders.length,
+          ['openedSpiders'],
+          (list) => [...list, graphFrontendFormat],
         ))
+
+        // return (seqSetIn (state,
+        //   // needs graph, and convert
+        //   ['events', 'getGraph'],
+        //   'success',
+        // ))
 
       case (actions.GET_GRAPH_FAILURE) :
         return (seqSetIn (state,
@@ -544,15 +596,25 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.DELETE_GRAPH) :
-        return (state)
-        // return (seqUpdateIn (state,
-        //   ['currentSpider'],
-        //   (index) => ((index === 0) ? 0 : index - 1),
-        //   ['openedSpiders'],
-        //   (list) => (list.filter ((spider, i) => (i !== payload))),
-        //   ['openedSpiders'],
-        //   (list) => ((list.length === 0) ? [initSpider ()] : list)
-        // ))
+        serverGraphId = payload;
+        console.log('delete server id: ', serverGraphId);
+        
+        savedSpiderIndex = getIndexOfSpiderWithServerId(state.savedSpiders, serverGraphId);
+        console.log('delete saved id: ', savedSpiderIndex);
+
+        openSpiderIndex = getIndexOfSpiderWithServerId(state.openedSpiders, serverGraphId);
+        console.log('delete open id: ', openSpiderIndex);
+
+        return (seqUpdateIn (state,
+          // ['currentSpider'],
+          // (index) => ((index === 0) ? 0 : index - 1),
+          ['openedSpiders'],
+          (list) => (list.filter ((spider, i) => (i !== openSpiderIndex))),
+          ['savedSpiders'],
+          (list) => (list.filter ((spider, i) => (i !== savedSpiderIndex))),
+          ['openedSpiders'],
+          (list) => ((list.length === 0) ? [initSpider ()] : list)
+        ))
 
       case (actions.DELETE_GRAPH_TRY) :
         return (seqSetIn (state,
@@ -561,20 +623,25 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.DELETE_GRAPH_SUCCESS) :
-        return (seqUpdateIn (state,
-          ['currentSpider'],
-          (index) => ((index === 0) ? 0 : index - 1),
-          ['openedSpiders'],
-          (list) => (list.filter ((spider, i) => (i !== payload))),
-          ['openedSpiders'],
-          (list) => ((list.length === 0) ? [initSpider ()] : list),
-          ['events', 'deleteGraph'],
-          () => 'success',
-        ))
+          console.log('SERVER DELETE SUCCESS');
+          console.log(payload.data);
+
+        // return (seqUpdateIn (state,
+        //   ['currentSpider'],
+        //   (index) => ((index === 0) ? 0 : index - 1),
+        //   ['openedSpiders'],
+        //   (list) => (list.filter ((spider, i) => (i !== payload))),
+        //   ['openedSpiders'],
+        //   (list) => ((list.length === 0) ? [initSpider ()] : list),
+        //   ['events', 'deleteGraph'],
+        //   () => 'success',
+        // ))
+        // ^^ phil comment out
         // return (seqSetIn (state,
         //   ['events', 'deleteGraph'],
         //   'success',
         // ))
+          return (state)
 
       case (actions.DELETE_GRAPH_FAILURE) :
         return (seqSetIn (state,
