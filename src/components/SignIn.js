@@ -88,7 +88,7 @@ const RedirectContainer = styled.div`
   }
 `
 
-const SignUpButton = styled.button`
+const RedirectButton = styled.button`
   width: 100px;
   background-color: #FFFFFF;
   border: none;
@@ -133,13 +133,19 @@ const SignIn = (props) => {
     <PageContainer className='SignIn'>
       <PageTitle>Sign In</PageTitle>
       <FormContainer>
-        <Logo onClick={routeToSignUp}>Spider.Graph</Logo>
+        <Logo
+        onClick={routeToSignUp}>
+          Spider.Graph
+        </Logo>
         <SignInForm
         trySubmit={trySubmit}
         />
         <RedirectContainer>
           Need an account?
-          <SignUpButton onClick={routeToSignUp}>Sign Up</SignUpButton>
+          <RedirectButton
+          onClick={routeToSignUp}>
+            Sign Up
+          </RedirectButton>
         </RedirectContainer>
       </FormContainer>
     </PageContainer>

@@ -100,7 +100,10 @@ const SignOut = (props) => {
     <PageContainer className='SignOut'>
       <PageTitle>Sign Out</PageTitle>
       <FormContainer>
-        <Logo onClick={() => {}}>Spider.Graph</Logo>
+        <Logo
+        onClick={() => {}}>
+          Spider.Graph
+        </Logo>
         <SignOutForm
         trySubmit={trySubmit}
         />
