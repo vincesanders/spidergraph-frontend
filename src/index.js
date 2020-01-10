@@ -32,7 +32,7 @@ import 'styles/index.css'
 // ///
 
 const spiderStore = spider.createStore (
-  composeWithDevTools (redux.applyMiddleware (thunk))
+  composeWithDevTools (redux.applyMiddleware (thunk, logger))
 )
 
 ReactDOM.render (
