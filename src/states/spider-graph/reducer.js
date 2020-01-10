@@ -164,6 +164,7 @@ const reducer = (state = initialState, action) => {
 
       case (actions.EDIT_GRAPH_THEME) :
         // payload : edited theme
+        console.log('SET THEME TO ID: ', payload)
         return (seqSetIn (state,
           ['openedSpiders', state.currentSpider, 'theme'],
           payload,
