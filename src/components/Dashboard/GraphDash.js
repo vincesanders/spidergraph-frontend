@@ -41,7 +41,9 @@ function GraphDash() {
 
   return (
     <GraphField>
+      <div style={{height: '20px'}}></div>
       <Radar
+        
         data={data}
         options={{
           legend: { 

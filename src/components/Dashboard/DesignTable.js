@@ -30,8 +30,8 @@ const DesignTable = (props) => {
                 }
             }  
         }
-        clone.theme = 1;
-        handleThemeChange(1);
+        clone.theme = 2;
+        handleThemeChange(2);
         setThemedSpider(clone)
         console.log(themedSpider)
     }
@@ -55,8 +55,8 @@ const DesignTable = (props) => {
                 }
             }  
         }
-        clone.theme = 2;
-        handleThemeChange(2);
+        clone.theme = 3;
+        handleThemeChange(3);
 
         setThemedSpider(clone)
         console.log(themedSpider)
@@ -82,8 +82,8 @@ const DesignTable = (props) => {
                 }
             }  
         }
-        clone.theme = 3;
-        handleThemeChange(3);
+        clone.theme = 4;
+        handleThemeChange(4);
 
         setThemedSpider(clone)
         console.log(themedSpider)
