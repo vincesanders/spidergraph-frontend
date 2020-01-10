@@ -7,16 +7,25 @@ import { server } from 'routes'
   tools
 ***************************************/
 
-const serverRequest = (dispatch) => (reqType, actionPrefix, ...args /* path, data */) => {
+const _flag = (...things) => console.log (`>>> ${things.join (' : ')} <<<`)
+
+  const flag = (...rest) => _flag ('serverRequest', actionPrefix, ...rest)
+
+  flag ('try')
   dispatch (act (actions[actionPrefix + '_TRY']))
+
   authios ()
     [reqType] (...args)
     .then ((res) => {
+      flag ('success')
       console.log (res)
+
       dispatch (act (actions[actionPrefix + '_SUCCESS'], res))
     })
     .catch ((err) => {
+      flag ('failure')
       console.log (err)
+      
       dispatch (act (actions[actionPrefix + '_FAILURE'], err))
     })
 }
