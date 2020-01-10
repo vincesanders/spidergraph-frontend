@@ -102,11 +102,11 @@ const SignUp = (props) => {
   const dispatch = useDispatch ()
 
   const routeToHome = () => {
-    props.history.push(client.ends.home ())
+    props.history.push (client.ends.home ())
   }
 
   const routeToSignIn = () => {
-    props.history.push(client.ends.signin ())
+    props.history.push (client.ends.signin ())
   }
 
   const trySubmit = (values, formikBag) => {
