@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {useSelector, useDispatch} from 'react-redux';
 import {actions, thunks} from 'states/spider-graph';
 import act from 'states/act';
+import { user } from 'tools/auth'
 
 import DropDown from './DropDown';
 
@@ -88,6 +89,7 @@ const AppTitle = styled.h3`
 `
 
 const TopBar = () => {
+    const currentUser = user.data.get ();
     const dispatch = useDispatch();
     const spiders = useSelector(state => state.openedSpiders);
     const currentGraph = useSelector(state => state.currentSpider);
@@ -99,7 +101,22 @@ const TopBar = () => {
 
     const addNewGraph = () => {
         dispatch(act(actions.ADD_GRAPH));
-        // dispatch(thunks.postGraph)
+
+        const tempServerNewGraph = {
+            "name":"test2",
+            "owner":currentUser.id,
+            "theme":1,
+            "axis":["axis1","axis2","axis3","axis4"],
+            "layer":["layer1","layer2","layer3","layer4"],
+            "data":[
+              [11,12,13,14],
+              [21,22,23,24],
+              [31,32,33,34],
+              [41,42,43,44]
+            ]
+          }
+
+        dispatch(thunks.postGraph(tempServerNewGraph));
     }
 
     const openGraph = (e, index) => {

@@ -291,6 +291,7 @@ const reducer = (state = initialState, action) => {
       /// SERVER / AUTH ///
 
       case (actions.SIGN_UP) :
+
         return (state)
 
       case (actions.SIGN_UP_TRY) :
@@ -399,6 +400,7 @@ const reducer = (state = initialState, action) => {
       /// SERVER / ALL GRAPHS -- stretch ///
 
       case (actions.GET_GRAPHS) :
+
         return (state)
 
       case (actions.GET_GRAPHS_TRY) :
@@ -456,9 +458,12 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.GET_USER_GRAPHS_SUCCESS) :
+        console.log('user graphs get success payload data: ');
+        console.log(payload.data);
+
         return (seqSetIn (state,
           ['savedGraphs'],
-          payload,
+          payload.data,
           ['events', 'getUserGraphs'],
           'success',
         ))
@@ -481,6 +486,8 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.POST_GRAPH_SUCCESS) :
+        console.log('graph post success payload data: ');
+        console.log(payload.data);
         return (seqSetIn (state,
           // needs ID
           ['events', 'postGraph'],

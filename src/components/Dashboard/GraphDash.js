@@ -14,7 +14,7 @@ function GraphDash() {
   const [forceRender, setForceRender] = useState(0)
 
   useEffect(() => {
-    console.log('graph got new spider: ', spider);
+    // console.log('graph got new spider: ', spider);
     setForceRender(forceRender + 1);
     setData(spider);
   }, [spider, spider.labels.length])
