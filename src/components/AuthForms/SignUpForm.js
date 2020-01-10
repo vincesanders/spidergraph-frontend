@@ -3,6 +3,10 @@ import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 
+/***************************************
+  COMPONENTS
+***************************************/
+
 const FormContainer = styled.div`
 width: 70%;
 height: 10%
@@ -14,8 +18,9 @@ align-items: center;
 `
 
 const LabelDiv = styled.div`
-width:100%;
-margin: 10px`
+width: 100%;
+margin: 10px;
+`
 
 const Submit = styled.button`
 width: 60%;
@@ -31,10 +36,12 @@ line-height: 38px;
 
 text-align: center;
 
-color: #FFFFFF;`
+color: #FFFFFF;
+`
 
-
-
+/***************************************
+  MAIN
+***************************************/
 
 export default withFormik({
     mapPropsToValues() {
