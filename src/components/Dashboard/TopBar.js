@@ -6,7 +6,7 @@ import act from 'states/act';
 import { user } from 'tools/auth'
 import {frontToServer, serverToFront} from 'states/spider-graph/converter';
 import {initSpider} from 'states/spider-graph/initialState';
-
+import {getIndexOfSpiderWithServerId} from 'states/spider-graph/utils';
 import DropDown from './DropDown';
 
 const Topbar = styled.div`
@@ -109,32 +109,30 @@ const TopBar = () => {
         dispatch(act(actions.ADD_GRAPH));
 
         const serverNewGraph = frontToServer(initSpider(), currentUser.id);
-        console.log('SERVER FORMNAT GRAPH')
-        console.log(serverNewGraph);
+        // console.log('SERVER FORMNAT GRAPH')
+        // console.log(serverNewGraph);
 
         dispatch(thunks.postGraph(serverNewGraph));
     }
 
     const openGraph = (e, serverId) => {
         e.stopPropagation();
-        // if graph is in openedSpiders, open it locally, else call server get 
-        // let openSpiderId = -1;
-        // openedSpiders.forEach((openSpider, openId) => {
-        //     if (openSpider.id === serverId){
-        //         openSpiderId = openId;
-        //         console.log('spider is open, saved Id + openedId:', serverId, openSpiderId);
-        //     }
-        // } )
-        console.log('local open graph');
-        dispatch(act(actions.OPEN_GRAPH, serverId));
-    
-        console.log('server get graph id: ', serverId);
-        dispatch(thunks.getGraph(serverId))
+        
+        const openSpiderIndex = getIndexOfSpiderWithServerId(openedSpiders, serverId);
+        // if graph is in openedSpiders, open it locally, else call server get and open it locally
+        if (openSpiderIndex >= 0){
+            // console.log('local open graph');
+            dispatch(act(actions.OPEN_GRAPH, serverId));
+        }else{
+            // console.log('server get graph id: ', serverId);
+            dispatch(act(actions.OPEN_GRAPH, serverId));
+            dispatch(thunks.getGraph(serverId))
+        }
     }
 
     const deleteGraph = (e, serverId) => {
         e.stopPropagation();
-        console.log('delete graph putton pressed, server id: ', serverId);
+        // console.log('delete graph putton pressed, server id: ', serverId);
         dispatch(act(actions.DELETE_GRAPH, serverId));
         dispatch(thunks.deleteGraph(serverId))
     }

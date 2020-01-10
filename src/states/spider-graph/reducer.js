@@ -547,26 +547,26 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.GET_GRAPH_SUCCESS) :
-        console.log('graph get success payload data: ');
-        console.log(payload.data);
+        // console.log('graph get success payload data: ');
+        // console.log(payload.data);
 
         // convert graph from server to frontend format, and add to openedSpiders array at end
-        console.log('server to front conversion:');
+        // console.log('server to front conversion:');
         const graphFrontendFormat = serverToFront(payload.data);
-        console.log(graphFrontendFormat);
+        // console.log(graphFrontendFormat);
 
         return (seqUpdateIn (state,
-          // ['currentSpider'],
-          // () => state.openedSpiders.length,
+          ['currentSpider'],
+          () => state.openedSpiders.length,
           ['openedSpiders'],
           (list) => [...list, graphFrontendFormat],
         ))
 
-        return (seqSetIn (state,
-          // needs graph, and convert
-          ['events', 'getGraph'],
-          'success',
-        ))
+        // return (seqSetIn (state,
+        //   // needs graph, and convert
+        //   ['events', 'getGraph'],
+        //   'success',
+        // ))
 
       case (actions.GET_GRAPH_FAILURE) :
         return (seqSetIn (state,
