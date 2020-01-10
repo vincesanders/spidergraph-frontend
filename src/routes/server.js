@@ -7,6 +7,9 @@ export default {
     signin : {
       POST : () => `/auth/login`,
     },
+    signout : {
+      POST : () => `/auth/logout`,
+    },
     users : {
       GET : () => `/users`,
     },
