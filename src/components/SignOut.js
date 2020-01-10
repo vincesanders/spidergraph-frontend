@@ -72,24 +72,6 @@ const Logo = styled.button`
   line-height: 38px;
 `
 
-const SignOutButton = styled.button`
-  width: 100px;
-  background-color: #FFFFFF;
-  border: none;
-  margin-left: 10%;
-
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 38px;
-  /* or 271% */
-
-  text-align: center;
-
-  color: #4054B2 ;
-`
-
 /***************************************
   MAIN
 ***************************************/
@@ -107,6 +89,7 @@ const SignOut = (props) => {
   }
 
   useEffect (() => {
+    console.log (events)
     switch (events.signOut) {
       case ('success') :
           routeToHome ()
@@ -117,14 +100,14 @@ const SignOut = (props) => {
       default :
           console.log ('doing nothing')
           break
-  }
+    }
   }, [events.signOut])
 
   return (
     <PageContainer className='SignOut'>
       <PageTitle>Sign Out</PageTitle>
       <FormContainer>
-        <Logo>Spider.Graph</Logo>
+        <Logo onClick={() => {}}>Spider.Graph</Logo>
         <SignOutForm
         trySubmit={trySubmit}
         />

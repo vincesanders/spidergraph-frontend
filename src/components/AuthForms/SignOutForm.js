@@ -43,9 +43,16 @@ const SubmitButton = styled.button`
 ***************************************/
 
 const SignOutForm = (props) => {
+  const handleSubmit = (e) => {
+    e.preventDefault ()
+    props.trySubmit ()
+  }
+
   return (
     <FormContainer className='SignOutForm'>
-      <Form className='sign-x-form'>
+      <Form
+      className='sign-x-form'
+      onSubmit={handleSubmit}>
         <SubmitButton type='submit'>Sign Out</SubmitButton>
       </Form>
     </FormContainer>
