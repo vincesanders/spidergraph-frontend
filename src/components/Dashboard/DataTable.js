@@ -2,10 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from 'styled-components';
 import './DataTable.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { actions } from 'states/spider-graph';
+import { actions, thunks } from 'states/spider-graph';
 import act from 'states/act';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { user } from 'tools/auth'
+import {frontToServer, serverToFront} from 'states/spider-graph/converter';
+
 
 /// Styling ///
 
@@ -96,10 +99,11 @@ const AddNewCategoryButton = styled.button`
 /// Exported Function ///
 
 const DataTable = () => {
+    const currentUser = user.data.get ();
     const categoryInputRef = useRef('');
     const currentSpider = useSelector(state => state.currentSpider);
-    const spider = useSelector(state => state.openedSpiders[currentSpider]);
-    const firstEntry = useSelector(state => state.openedSpiders[currentSpider].datasets[0].data[0])
+    const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
+    const firstEntry = useSelector(state => state.openedSpiders[state.currentSpider].datasets[0].data[0])
     const dispatch = useDispatch();
 
     let convertedData = [['Categories']];
@@ -144,6 +148,14 @@ const DataTable = () => {
 
     // console.log('rerender with data: ');
     // console.log(data);
+
+    // useEffect(() => {
+    //     const id = spider.id;
+
+    //     const serverNewGraph = frontToServer(spider, currentUser.id);
+
+    //     dispatch(thunks.putGraph(id, serverNewGraph));
+    // },[spider])
 
     function addNewCategory() {
         dispatch(act(actions.ADD_GRAPH_ARM));

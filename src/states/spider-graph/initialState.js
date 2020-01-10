@@ -39,11 +39,11 @@ export const initCurrentSpider = () => 0
 
 export const initId = () => ':id'
 
-export const initTitle = () => 'new graph'
+export const initTitle = () => 'new graph x'
 
 export const initNotes = () => ''
 
-export const initTheme = () => 0
+export const initTheme = () => 1
 
 export const initScale = () => 10
 
@@ -59,20 +59,33 @@ export const initDataset = (length, value = 1) => ({
 export const initSpider = () => ({
   id : initId (),
   title : initTitle (),
-  labels : [ 'label-1', 'label-2', 'label-3', 'label-4', 'label-5' ],
+  labels : [ 'label-1', 'label-2', 'label-3'],
   datasets : [
     {
       label : 'dataset-1',
-      data : [ 1, 2, 3, 4, 5 ],
+      data : [ 1, 2, 3],
     },
     {
       label : 'dataset-2',
-      data : [ 5, 4, 3, 2, 1 ],
+      data : [ 4, 3, 2],
+    },
+    {
+      label : 'dataset-3',
+      data : [ 10, 9, 8],
+    },
+    {
+      label : 'dataset-4',
+      data : [ 6, 7, 8],
     },
   ],
   notes : initNotes (),
   theme : initTheme (),
   scale : initScale (),
+})
+
+export const initSavedSpider = () => ({
+  id : initId (),
+  title : initTitle (),
 })
 
 /*******************
@@ -110,7 +123,9 @@ export const initialState = {
     initSpider (),
   ],
   currentSpider : initCurrentSpider (),
+  currentSavedSpider: 0,
   events : initEvents (),
+  gotInitialGraphs: false
 }
 
 /**************************************/

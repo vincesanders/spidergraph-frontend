@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components'
+import {useSelector, useDispatch} from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSave, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 import TopBar from './TopBar';
 import TitleInput from './TitleInput';
@@ -7,6 +10,12 @@ import GraphDash from './GraphDash';
 import DataDesignTabs from './DataDesignTabs';
 import NotesInput from './NotesInput';
 import ExportButtonsPanel from './ExportButtonsPanel';
+
+import { user } from 'tools/auth'
+import { actions, thunks } from 'states/spider-graph';
+import {frontToServer, serverToFront} from 'states/spider-graph/converter';
+
+
 
 const DashboardCont = styled.div`
     background: #ECEEF7;
@@ -56,31 +65,52 @@ const ButtonPanel = styled.div`
 `
 
 const Dashboard = () => {
+    const openedSpiders = useSelector(state => state.openedSpiders);
+    const currentUser = user.data.get ();
+    const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
+    const dispatch = useDispatch();
+
+    console.log('DASH LOADED, current spider: ');
+    console.log(openedSpiders);
+
+    const putGraphToServer = () => {
+        const id = spider.id;
+
+        const serverNewGraph = frontToServer(spider, currentUser.id);
+
+        dispatch(thunks.putGraph(id, serverNewGraph));
+    }
+
+
     return (
         <DashboardCont>
             <TopBar />
-            <DashboardBody>
-                <TitleInput />
-                <CardCont>
-                    <Row>
-                        <GraphCard>
-                            <GraphDash />
-                        </GraphCard>
-                        <DataDesignCard>
-                            <DataDesignTabs />
-                        </DataDesignCard>
-                    </Row>
-                    <Row>
-                        <NotesDiv>
-                            <NotesInput />
-                        </NotesDiv>
-                        <ButtonPanel>
-                            <ExportButtonsPanel />
-                        </ButtonPanel>
-                    </Row>
-                </CardCont>
-            </DashboardBody>
-            {/* <Graph /> */}
+                <DashboardBody>
+                    {/* <div style={{display: 'flex', justifyContent:'space-between'}}> */}
+                        <TitleInput />
+                    {/* </div> */}
+                    <CardCont>
+                        <Row>
+                            <GraphCard>
+                            <FontAwesomeIcon icon={faSave} style={{fontSize: '40px', marginLeft:'90%', marginTop:'30px'}} onClick={putGraphToServer} alert='Graph Saved!'/>
+
+                                <GraphDash />
+                            </GraphCard>
+                            <DataDesignCard>
+                                <DataDesignTabs />
+                            </DataDesignCard>
+                        </Row>
+                        <Row>
+                            <NotesDiv>
+                                <NotesInput />
+                            </NotesDiv>
+                            <ButtonPanel>
+                                <ExportButtonsPanel />
+                            </ButtonPanel>
+                        </Row>
+                    </CardCont>
+                </DashboardBody>
+            }
         </DashboardCont>
         
     );

@@ -3,6 +3,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import _ from 'lodash'
 import styled from 'styled-components'
+import {authios} from 'tools/auth'
 
 import { SignUpForm } from 'components/AuthForms'
 import { signUp } from 'states/spider-graph/thunks'
@@ -139,9 +140,7 @@ const SignUp = (props) => {
           </RedirectButton>
         </RedirectContainer>
       </FormContainer>
-
     </PageContainer>
-
   )
 }
 

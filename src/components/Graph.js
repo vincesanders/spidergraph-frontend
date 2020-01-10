@@ -82,21 +82,21 @@ const data = {
     `
   
   function Graph() {
-    return (
-        <GraphPage>
+    // return (
+    //     <GraphPage>
 
-        <Topbar>
-        </Topbar>
-        <H2>Title of Your Spider Chart</H2>
-          <GraphField>
-            <Radar data={data} />
-          </GraphField>
-          <Design>
+    //     <Topbar>
+    //     </Topbar>
+    //     <H2>Title of Your Spider Chart</H2>
+    //       <GraphField>
+    //         <Radar data={data} />
+    //       </GraphField>
+    //       <Design>
 
-          </Design>
-        </GraphPage>
+    //       </Design>
+    //     </GraphPage>
         
-    );
+    // );
   }
 
   export default Graph;

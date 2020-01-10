@@ -90,7 +90,6 @@ export const getUser = (id) => (dispatch) => {
 
 export const getUserGraphs = (id) => (dispatch) => {
   serverRequest (dispatch) ('GET_USER_GRAPHS', 'get', server.ends.user_graphs.GET (id))
-  console.log('called get graphs thunk');
 }
 
 /// graph ///
