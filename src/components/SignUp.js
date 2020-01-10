@@ -127,7 +127,7 @@ const SignUp = (props) => {
       default :
           console.log ('doing nothing')
           break
-  }
+    }
   }, [events.signUp])
 
   return (

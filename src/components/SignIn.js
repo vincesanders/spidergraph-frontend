@@ -136,7 +136,7 @@ const SignIn = (props) => {
       default :
           console.log ('doing nothing')
           break
-  }
+    }
   }, [events.signIn])
 
   return (
