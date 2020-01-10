@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 
-import SignInForm from 'components/AuthForms/SignInForm'
+import { SignInForm } from 'components/AuthForms'
 import { signIn } from 'states/spider-graph/thunks'
 import { client } from 'routes'
 

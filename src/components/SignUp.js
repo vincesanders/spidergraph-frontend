@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import _ from 'lodash'
 import styled from 'styled-components'
 
-import SignUpForm from 'components/AuthForms/SignUpForm'
+import { SignUpForm } from 'components/AuthForms'
 import { signUp } from 'states/spider-graph/thunks'
 import { client } from 'routes'
 
