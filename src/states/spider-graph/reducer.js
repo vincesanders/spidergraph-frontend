@@ -359,7 +359,7 @@ const reducer = (state = initialState, action) => {
 
       case (actions.SIGN_OUT_TRY) :
         return (seqSetIn (state,
-          ['events', 'SignOut'],
+          ['events', 'signOut'],
           'try',
         ))
 
@@ -368,7 +368,7 @@ const reducer = (state = initialState, action) => {
         user.clear ()
 
         return (seqSetIn (state,
-          ['events', 'SignOut'],
+          ['events', 'signOut'],
           'success',
           ['currentUser'],
           initCurrentUser (),
@@ -376,7 +376,7 @@ const reducer = (state = initialState, action) => {
 
       case (actions.SIGN_OUT_FAILURE) :
         return (seqSetIn (state,
-          ['events', 'SignOut'],
+          ['events', 'signOut'],
           'failure',
         ))
 
