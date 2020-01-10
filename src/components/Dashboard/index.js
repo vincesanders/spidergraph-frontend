@@ -57,17 +57,17 @@ const ButtonPanel = styled.div`
 `
 
 const Dashboard = () => {
-    const currentSpider = useSelector(state => state.openedSpiders[state.currentSpider]);
+    const openedSpiders = useSelector(state => state.openedSpiders);
     console.log('DASH LOADED, current spider: ');
-    console.log(currentSpider);
+    console.log(openedSpiders);
 
 
     return (
         <DashboardCont>
-            {currentSpider === undefined 
-            ? <h1>LOADING ...</h1>
+            <TopBar />
+            {openedSpiders.length  === 0 
+            ? <h1>Click + to add a new graph, or open an exisitng graph...</h1>
             :<>
-                <TopBar />
                 <DashboardBody>
                     <TitleInput />
                     <CardCont>

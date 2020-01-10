@@ -120,7 +120,7 @@ export const initialState = {
   currentUser : initCurrentUser (),
   savedSpiders : [],
   openedSpiders : [
-    initSpider (),
+    // initSpider (),
   ],
   currentSpider : initCurrentSpider (),
   currentSavedSpider: 0,

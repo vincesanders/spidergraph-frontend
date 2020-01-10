@@ -20,7 +20,7 @@ export const frontToServer = (frontGraph, uid) => {
         name: frontGraph.title,
         owner: uid,
         theme: frontGraph.theme,
-        // notes: frontGraph.notes,
+        notes: frontGraph.notes,
         axis: frontGraph.labels,
         layer: frontGraph.datasets.map(dataset =>  dataset.label),
         
