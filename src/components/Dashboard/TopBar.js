@@ -111,41 +111,25 @@ const TopBar = () => {
         const serverNewGraph = frontToServer(initSpider(), currentUser.id);
         console.log('SERVER FORMNAT GRAPH')
         console.log(serverNewGraph);
-        const tempServerNewGraph = {
-            "name":"test3",
-            "owner":currentUser.id,
-            "theme":1,
-            "axis":["axis1","axis2","axis3"],
-            "layer":["layer1","layer2","layer3","layer4"],
-            "data":[
-              [11,12,13,14],
-              [21,22,23,24],
-              [31,32,33,34],
-            ]
-          }
-          console.log(tempServerNewGraph);
-
 
         dispatch(thunks.postGraph(serverNewGraph));
     }
 
-    const openGraph = (e, index) => {
+    const openGraph = (e, serverId) => {
         e.stopPropagation();
         // if graph is in openedSpiders, open it locally, else call server get 
-        let openSpiderId = -1;
-        openedSpiders.forEach((openSpider, openId) => {
-            if (openSpider.id === index){
-                openSpiderId = openId;
-                console.log('spider is open, saved Id + openedId:', index, openSpiderId);
-            }
-        } )
-        if (openSpiderId >= 0){
-            console.log('local open graph');
-            dispatch(act(actions.OPEN_GRAPH, openSpiderId));
-        }else{
-            console.log('server get graph id: ', index);
-            dispatch(thunks.getGraph(index))
-        }
+        // let openSpiderId = -1;
+        // openedSpiders.forEach((openSpider, openId) => {
+        //     if (openSpider.id === serverId){
+        //         openSpiderId = openId;
+        //         console.log('spider is open, saved Id + openedId:', serverId, openSpiderId);
+        //     }
+        // } )
+        console.log('local open graph');
+        dispatch(act(actions.OPEN_GRAPH, serverId));
+    
+        console.log('server get graph id: ', serverId);
+        dispatch(thunks.getGraph(serverId))
     }
 
     const deleteGraph = (e, serverId) => {

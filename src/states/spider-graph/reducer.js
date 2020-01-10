@@ -85,6 +85,10 @@ const reducer = (state = initialState, action) => {
   let newLabels = [];
   let newDatasets = [];
   let newData = [];
+
+  let openSpiderIndex = -1;
+  let savedSpiderIndex = -1
+  let serverGraphId = -1;
   /// do it! ///
   try {
     /// actions ///
@@ -109,10 +113,26 @@ const reducer = (state = initialState, action) => {
 
       case (actions.OPEN_GRAPH) :
         // payload : index of openedopenedSpiders
-        return (seqSetIn (state,
-          ['currentSpider'],
-          payload,
-        ))
+        openSpiderIndex = getIndexOfSpiderWithServerId(state.openedSpiders, payload);
+        savedSpiderIndex = getIndexOfSpiderWithServerId(state.savedSpiders, payload);
+        console.log('openup open id: ', openSpiderIndex);
+        console.log('openup save id: ', savedSpiderIndex);
+
+
+        if (openSpiderIndex !== -1){
+          return (seqSetIn (state,
+            ['currentSpider'],
+            openSpiderIndex,
+            ['currentSavedSpider'],
+            savedSpiderIndex
+          ))
+        } else{
+          return (seqSetIn (state,
+            ['currentSavedSpider'],
+            savedSpiderIndex
+          ))
+        }
+        
 
       case (actions.CLOSE_GRAPH) :
         // payload : index of openedopenedSpiders
@@ -576,13 +596,13 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.DELETE_GRAPH) :
-        const serverGraphId = payload;
+        serverGraphId = payload;
         console.log('delete server id: ', serverGraphId);
         
-        const savedSpiderIndex = getIndexOfSpiderWithServerId(state.savedSpiders, serverGraphId);
+        savedSpiderIndex = getIndexOfSpiderWithServerId(state.savedSpiders, serverGraphId);
         console.log('delete saved id: ', savedSpiderIndex);
 
-        const openSpiderIndex = getIndexOfSpiderWithServerId(state.openedSpiders, serverGraphId);
+        openSpiderIndex = getIndexOfSpiderWithServerId(state.openedSpiders, serverGraphId);
         console.log('delete open id: ', openSpiderIndex);
 
         return (seqUpdateIn (state,

@@ -3,10 +3,10 @@ export const serverToFront = (serverGraph) => {
         id: serverGraph.id,
         title: serverGraph.name,
         labels: serverGraph.axis,
-        datasets: serverGraph.layer.map((dataset, index) => {
+        datasets: serverGraph.layer.map((dataset, layerIndex) => {
             return{
                 label: dataset,
-                data: serverGraph.data[index],
+                data: serverGraph.axis.map((axis, axisIndex) => serverGraph.data[axisIndex][layerIndex])
             }
         }),
         notes: serverGraph.notes,
