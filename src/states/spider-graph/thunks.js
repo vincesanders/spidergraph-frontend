@@ -31,6 +31,28 @@ const serverRequest = (dispatch) => (actionPrefix, requestType, requestPath, ...
     })
 }
 
+const fakeRequest = (dispatch) => (actionPrefix, requestType, requestPath, ...args) => {
+  const flag = (...rest) => _flag ('fakeRequest', actionPrefix, ...rest)
+
+  flag ('try')
+  dispatch (act (actions[actionPrefix + '_TRY']))
+
+  try {
+    const res = { status : 'ok' }
+
+    flag ('success')
+    console.log (res)
+
+    dispatch (act (actions[actionPrefix + '_SUCCESS'], res))
+  }
+  catch (err) {
+    flag ('failure')
+    console.log (err)
+
+    dispatch (act (actions[actionPrefix + '_FAILURE'], err))
+  }
+}
+
 /***************************************
   MAIN
 ***************************************/
@@ -46,7 +68,8 @@ export const signIn = (data) => (dispatch) => {
 }
 
 export const signOut = (data) => (dispatch) => {
-  serverRequest (dispatch) ('SIGN_OUT', 'post', server.ends.signout.POST (), data)
+  /// this isn't a real serverRequest -- yet? ///
+  fakeRequest (dispatch) ('SIGN_OUT', 'post', server.ends.signout.POST (), data)
 }
 
 /// all users -- stretch ///
