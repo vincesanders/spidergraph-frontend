@@ -17,8 +17,8 @@ const FormContainer = styled.div`
 const Form = styled.form``
 
 const LabelDiv = styled.div`
-  width:100%;
-  margin: 10px
+  width: 100%;
+  margin: 10px;
 `
 
 const SubmitButton = styled.button`

@@ -92,14 +92,14 @@ const SignOut = (props) => {
     console.log (events)
     switch (events.signOut) {
       case ('success') :
-          routeToHome ()
-          break
+        routeToHome ()
+        break
       case ('failure') :
-          console.log ('error on sign out')
-          break
+        console.log ('error on sign out')
+        break
       default :
-          console.log ('doing nothing')
-          break
+        console.log ('doing nothing')
+        break
     }
   }, [events.signOut])
 

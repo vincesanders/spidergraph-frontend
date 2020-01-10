@@ -128,14 +128,14 @@ const SignIn = (props) => {
   useEffect (() => {
     switch (events.signIn) {
       case ('success') :
-          routeToHome ()
-          break
+        routeToHome ()
+        break
       case ('failure') :
-          console.log ('error on sign in')
-          break
+        console.log ('error on sign in')
+        break
       default :
-          console.log ('doing nothing')
-          break
+        console.log ('doing nothing')
+        break
     }
   }, [events.signIn])
 
