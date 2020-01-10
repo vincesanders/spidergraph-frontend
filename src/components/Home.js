@@ -15,7 +15,7 @@ const Home = (props) => {
   const dispatch = useDispatch ()
 
   useEffect (() => {
-    dispatch (getUserGraphs (currentUser.id))
+    currentUser && dispatch (getUserGraphs (currentUser.id))
   }, [currentUser, dispatch])
 
   return (
