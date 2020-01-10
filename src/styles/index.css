@@ -23,7 +23,7 @@ box-sizing: border-box;
 border-radius: 5px;
 }
 
-.sign-in-form{
+.sign-x-form{
   width: 100%;
   display: flex;
   justify-content: center;
@@ -33,7 +33,7 @@ border-radius: 5px;
   margin:auto 50px;
 }
 
-.sign-in-label{
+.sign-x-label{
   font-family: Open Sans;
 font-style: normal;
 font-weight: 600;

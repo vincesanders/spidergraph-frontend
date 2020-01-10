@@ -8,35 +8,35 @@ import styled from 'styled-components'
 ***************************************/
 
 const FormContainer = styled.div`
-width: 70%;
-height: 10%
-margin: 10px 20px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+    width: 70%;
+    height: 10%
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `
 
 const LabelDiv = styled.div`
-width: 100%;
-margin: 10px;
+    width: 100%;
+    margin: 10px;
 `
 
-const Submit = styled.button`
-width: 60%;
-background: #4054B2;
-border-radius: 5px;
+const SubmitButton = styled.button`
+    width: 60%;
+    background: #4054B2;
+    border-radius: 5px;
 
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 38px;
-/* or 271% */
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 38px;
+    /* or 271% */
 
-text-align: center;
+    text-align: center;
 
-color: #FFFFFF;
+    color: #FFFFFF;
 `
 
 /***************************************
@@ -52,8 +52,8 @@ export default withFormik({
             retypedPassword: ''
         }
     },
-    handleSubmit(values, formikBag) {
-        formikBag.props.trySubmit (values, formikBag)
+    handleSubmitButton(values, formikBag) {
+        formikBag.props.trySubmitButton (values, formikBag)
     },
     validationSchema: Yup.object().shape({
         username: Yup.string()
@@ -71,21 +71,21 @@ export default withFormik({
 })(({ errors, touched }) => {
     return (
         <FormContainer className='SignUpForm'>
-            <Form className='sign-in-form'>
+            <Form className='sign-x-form'>
                 <LabelDiv>
-                    <label className='sign-in-label'>Username:
+                    <label className='sign-x-label'>Username:
                     <Field type='text' name='username' className='form-input' />
                         {touched.username && errors.username && (<p>{errors.username}</p>)}
                     </label>
                 </LabelDiv>
                 <LabelDiv>
-                    <label className='sign-in-label'>Email:
+                    <label className='sign-x-label'>Email:
                         <Field type='text' name='email' className='form-input' />
                         {touched.email && errors.email && (<p>{errors.email}</p>)}
                     </label>
                 </LabelDiv>
                 <LabelDiv>
-                    <label className='sign-in-label'>Password:
+                    <label className='sign-x-label'>Password:
                         <Field type='password' name='password' className='form-input' />
                         {touched.password && errors.password && (<p>{errors.password}</p>)}
                         Confirm Password:
@@ -93,7 +93,7 @@ export default withFormik({
                             {touched.retypedPassword && errors.retypedPassword && (<p>{errors.retypedPassword}</p>)}
                     </label>
                 </LabelDiv>
-                <Submit type='submit'>Submit</Submit>
+                <SubmitButton type='submit'>Sign Up</SubmitButton>
             </Form>
         </FormContainer>
     );
