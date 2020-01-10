@@ -19,7 +19,7 @@ const PageContainer = styled.div`
   margin: 5px;
 `
 
-const H3 = styled.h3`
+const PageTitle = styled.h3`
   @media (max-width: 768px) {
     margin: 40% 9px;
   }
@@ -29,7 +29,7 @@ const H3 = styled.h3`
   height: 51px;
   margin: 20% 9px;
 
-  /* H3 Text */
+  /* PageTitle Text */
 
   font-family: Open Sans;
   font-style: normal;
@@ -141,14 +141,12 @@ const SignIn = (props) => {
 
   return (
     <PageContainer className='SignIn'>
-      <H3>
-        Log In
-      </H3>
+      <PageTitle>Sign In</PageTitle>
       <FormContainer>
+        <Logo onClick={routeToSignUp}>Spider.Graph</Logo>
         <SignInForm
         trySubmit={trySubmit}
         />
-        <Logo onClick={routeToSignUp}>Spider.Graph</Logo>
         <RedirectContainer>
           Need an account?
           <SignUpButton onClick={routeToSignUp}>Sign Up</SignUpButton>
