@@ -1,11 +1,12 @@
 /// external modules ///
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 
 import { SignInForm } from 'components/AuthForms'
 import { signIn } from 'states/spider-graph/thunks'
 import { client } from 'routes'
+import { useRouteOnSuccess } from 'hooks'
 
 /***************************************
   COMPONENTS
@@ -126,16 +127,7 @@ const SignIn = (props) => {
     dispatch (signIn (values))
   }
 
-  useEffect (() => {
-    console.log (`--- sign in : ${events.signIn} ---`)
-    switch (events.signIn) {
-      case ('success') :
-        routeToHome ()
-        break
-      default :
-        break
-    }
-  }, [events.signIn])
+  useRouteOnSuccess ('sign in', routeToHome, [events.signIn])
 
   return (
     <PageContainer className='SignIn'>

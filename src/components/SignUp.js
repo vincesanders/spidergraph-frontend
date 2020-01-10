@@ -1,5 +1,5 @@
 /// external modules ///
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import _ from 'lodash'
 import styled from 'styled-components'
@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { SignUpForm } from 'components/AuthForms'
 import { signUp } from 'states/spider-graph/thunks'
 import { client } from 'routes'
+import { useRouteOnSuccess } from 'hooks'
 
 /***************************************
   COMPONENTS
@@ -117,16 +118,7 @@ const SignUp = (props) => {
     dispatch (signUp (_.omit (values, ['retypedPassword'])))
   }
 
-  useEffect (() => {
-    console.log (`--- sign up : ${events.signUp} ---`)
-    switch (events.signUp) {
-      case ('success') :
-        routeToHome ()
-        break
-      default :
-        break
-    }
-  }, [events.signUp])
+  useRouteOnSuccess ('sign up', routeToHome, [events.signUp])
 
   return (
     <PageContainer className='SignUp'>

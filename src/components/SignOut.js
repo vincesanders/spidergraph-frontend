@@ -1,5 +1,5 @@
 /// external ///
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 
@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { SignOutForm } from 'components/AuthForms'
 import { signOut } from 'states/spider-graph/thunks'
 import { landing, client } from 'routes'
+import { useRouteOnSuccess } from 'hooks'
 
 /***************************************
   COMPONENTS
@@ -93,16 +94,7 @@ const SignOut = (props) => {
     dispatch (signOut (values))
   }
 
-  useEffect (() => {
-    console.log (`--- sign out : ${events.signOut} ---`)
-    switch (events.signOut) {
-      case ('success') :
-        routeToLanding ()
-        break
-      default :
-        break
-    }
-  }, [events.signOut])
+  useRouteOnSuccess ('sign out', routeToLanding, [events.signOut])
 
   return (
     <PageContainer className='SignOut'>
