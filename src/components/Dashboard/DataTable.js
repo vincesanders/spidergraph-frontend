@@ -102,8 +102,8 @@ const DataTable = () => {
     const currentUser = user.data.get ();
     const categoryInputRef = useRef('');
     const currentSpider = useSelector(state => state.currentSpider);
-    const spider = useSelector(state => state.openedSpiders[currentSpider]);
-    const firstEntry = useSelector(state => state.openedSpiders[currentSpider].datasets[0].data[0])
+    const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
+    const firstEntry = useSelector(state => state.openedSpiders[state.currentSpider].datasets[0].data[0])
     const dispatch = useDispatch();
 
     let convertedData = [['Categories']];
@@ -149,13 +149,13 @@ const DataTable = () => {
     // console.log('rerender with data: ');
     // console.log(data);
 
-    useEffect(() => {
-        const id = spider.id;
+    // useEffect(() => {
+    //     const id = spider.id;
 
-        const serverNewGraph = frontToServer(spider, currentUser.id);
+    //     const serverNewGraph = frontToServer(spider, currentUser.id);
 
-        dispatch(thunks.putGraph(id, serverNewGraph));
-    },[spider])
+    //     dispatch(thunks.putGraph(id, serverNewGraph));
+    // },[spider])
 
     function addNewCategory() {
         dispatch(act(actions.ADD_GRAPH_ARM));
