@@ -6,7 +6,7 @@ import styled from 'styled-components'
 /// internal ///
 import { SignOutForm } from 'components/AuthForms'
 import { signOut } from 'states/spider-graph/thunks'
-import { client } from 'routes'
+import { landing, client } from 'routes'
 
 /***************************************
   COMPONENTS
@@ -84,15 +84,18 @@ const SignOut = (props) => {
     props.history.push (client.ends.home ())
   }
 
+  const routeToLanding = () => {
+    window.location.assign (landing.base)
+  }
+
   const trySubmit = (values, formikBag) => {
     dispatch (signOut (values))
   }
 
   useEffect (() => {
-    console.log (events)
     switch (events.signOut) {
       case ('success') :
-        routeToHome ()
+        routeToLanding ()
         break
       case ('failure') :
         console.log ('error on sign out')
