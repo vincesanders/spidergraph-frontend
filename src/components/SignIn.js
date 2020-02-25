@@ -10,58 +10,43 @@ import { client } from 'routes'
 
 
 const SignInCont = styled.div`
+  width: 100%;
   background: #FFFFFF;
-  height: 100vh;
   display:flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin: 5px;
 `
 
 const H3 = styled.h3`
-@media (max-width: 768px) {
-  margin: 40% 9px;
-}
+  @media (max-width: 768px) {
+    margin: 40% 9px 0 9px;
+  }
 
-
-position: absolute;
-width: 684px;
-height: 51px;
-margin: 20% 9px;
-
-/* H3 Text */
-
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 48px;
-line-height: 167%;
-
-text-align: center;
-
-color: #4054B2;`
+  margin-top: 15%;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  text-align: center;
+  color: #4054B2;
+`
 
 const Formcont = styled.div`
-width: 100%;
-margin: 10px 20px;
-display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-	align-content: stretch;
+  width: 100%;
+  margin: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const Logo = styled.button`
 
-@media (max-width: 768px) {
-
-}
-
 position: absolute;
 left:20%;
-top: 20%;
+top: 5%;
 
-border:none;
+border: none;
 background-color: #FFFFFF;
 color:#4054B2;
 font-family: Open Sans;
@@ -72,39 +57,27 @@ line-height: 38px;
 `
 
 const DivToSignUp = styled.div`
-position: absolute;
-bottom: 30%;
-border: none;
-background-color: #FFFFFF;
-width: 300px;
-margin: 5px;
-
-color: #0D1124;
-
-@media (max-width: 768px) {
-  bottom: 20%;
-  right: 25%;
-}
+  border: none;
+  background-color: #FFFFFF;
+  width: 300px;
+  text-align: center;
+  color: #0D1124;
 `
 
 const SignUp = styled.button`
-width: 100px;
-background-color: #FFFFFF;
-border: none;
-margin-left: 10%;
+  width: 100px;
+  background-color: #FFFFFF;
+  border: none;
+  margin-left: 10%;
 
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 38px;
-/* or 271% */
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 38px;
 
-text-align: center;
-
-color:#4054B2 ;
-
-
+  text-align: center;
+  color:#4054B2 ;
 `
 
 /***************************************
@@ -144,20 +117,18 @@ const SignIn = (props) => {
 
 
     <SignInCont>
+      <a href="https://spidergraph.alexmiller26.now.sh/">
+        <Logo>Spider.Graph</Logo>
+      </a>
       <H3>
         Log In
       </H3>
       <Formcont>
-      <SignInForm
-      trySubmit={trySubmit}
-      />
-      <a href="https://spidergraph.alexmiller26.now.sh/">
-      <Logo>Spider.Graph</Logo>
-      </a>
-      <DivToSignUp>
-        Need an account?
-        <SignUp onClick={routeToSignUp}>Sign Up</SignUp>
-      </DivToSignUp>
+      <SignInForm trySubmit={trySubmit} />
+        <DivToSignUp>
+          Need an account?
+          <SignUp onClick={routeToSignUp}>Sign Up</SignUp>
+        </DivToSignUp>
       </Formcont>
     </SignInCont>
 

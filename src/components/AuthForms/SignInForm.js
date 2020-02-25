@@ -6,34 +6,40 @@ import styled from 'styled-components'
 
 
 const FormContainer = styled.div`
-width: 70%;
-height: 10%
-margin: 10px 20px;
-display: flex;
-justify-content: center;
-
-
+    width: 100%;
+    height: 10%;
+    margin: 10px 20px 10px 20px;
+    display: flex;
+    justify-content: center;
 `
 
 const LabelDiv = styled.div`
-width:100%;
-margin: 10px`
+    width:380px;
+    margin: 10px;
+    label {
+        input {
+            width: 100%;
+        }
+    }
+`
 
 const GettingStarted = styled.button`
-width: 60%;
-background: #4054B2;
-border-radius: 5px;
+    width: 380px;
+    background: #4054B2;
+    border-radius: 5px;
 
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 38px;
-/* or 271% */
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 38px;
+    /* or 271% */
+    margin-top: 20px;
 
-text-align: center;
+    text-align: center;
 
-color: #FFFFFF;`
+    color: #FFFFFF;
+`
 
 
 export default withFormik({
@@ -61,12 +67,12 @@ export default withFormik({
             <FormContainer>
             <Form className='sign-in-form'>
                 <LabelDiv>
-                <label className='sign-in-label'>
-                    <div>Username:
-                    </div>
-                    <Field type='text' name='username' className="form-input" />
-                    {touched.username && errors.username && (<p>{errors.username}</p>)}
-                </label>
+                    <label className='sign-in-label'>
+                        <div>Username:
+                        </div>
+                        <Field type='text' name='username' className="form-input" />
+                        {touched.username && errors.username && (<p>{errors.username}</p>)}
+                    </label>
                 </LabelDiv>
                 <LabelDiv>
                 <label className='sign-in-label'>
