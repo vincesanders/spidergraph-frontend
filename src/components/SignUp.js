@@ -10,52 +10,40 @@ import { signUp } from 'states/spider-graph/thunks'
 import { client } from 'routes'
 
 const SignUpCont = styled.div`
+  width: 100%;
   background: #FFFFFF;
-  height: 100vh;
   display:flex;
-  justify-content: center;
-  margin: 5px;
+  flex-direction: column;
+  align-items: center;
 `
 
 const H3 = styled.h3`
+  @media (max-width: 768px) {
+    margin: 40% 9px 0 9px;
+  }
 
-@media (max-width: 768px) {
-  margin: 30% 9px;
-}
-
-position: absolute;
-width: 684px;
-height: 51px;
-margin: 15% 9px;
-
-/* H3 Text */
-
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 48px;
-line-height: 167%;
-
-text-align: center;
-
-color: #4054B2;`
+  margin-top: 10%;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  text-align: center;
+  color: #4054B2;
+`
 
 const Formcont = styled.div`
-width: 100%;
-margin: 10px 20px;
-display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-	align-content: stretch;
+  width: 100%;
+  margin: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const Logo = styled.button`
 
 position: absolute;
 left:20%;
-top: 20%
+top: 5%;
 
 border:none;
 background-color: #FFFFFF;
@@ -67,30 +55,26 @@ font-size: 16px;
 line-height: 38px;`
 
 const DivToSignIn = styled.div`
-position: absolute;
-bottom: 20%;
-border: none;
-background-color: #FFFFFF;
-width: 300px;
-margin: 5px;
-margin-left: 20px;
+  border: none;
+  background-color: #FFFFFF;
+  width: 300px;
+  text-align: center;
+  color: #0D1124;
 `
 
 const Signin = styled.button`
-width: 100px;
-background-color: #FFFFFF;
-border: none
+  background-color: #FFFFFF;
+  border: none;
+  margin-left: 10%;
 
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 38px;
-/* or 271% */
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 38px;
 
-text-align: center;
-
-color:#4054B2 ;
+  text-align: center;
+  color:#4054B2 ;
 `
 
 

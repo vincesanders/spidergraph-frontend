@@ -15,7 +15,7 @@ const SignInCont = styled.div`
   display:flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px;
+  overflow-x: hidden;
 `
 
 const H3 = styled.h3`
@@ -78,6 +78,7 @@ const SignUp = styled.button`
 
   text-align: center;
   color:#4054B2 ;
+  /* overflow-x: hidden; */
 `
 
 /***************************************
@@ -117,7 +118,7 @@ const SignIn = (props) => {
 
 
     <SignInCont>
-      <a href="https://spidergraph.alexmiller26.now.sh/">
+      <a href="https://vincesanders.github.io/spidergraph-marketing-page/index.html">
         <Logo>Spider.Graph</Logo>
       </a>
       <H3>

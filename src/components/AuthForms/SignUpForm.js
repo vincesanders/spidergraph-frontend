@@ -4,34 +4,40 @@ import * as Yup from 'yup'
 import styled from 'styled-components'
 
 const FormContainer = styled.div`
-width: 70%;
-height: 10%
-margin: 10px 20px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+    width: 100%;
+    height: 10%;
+    margin: 10px 20px 10px 20px;
+    display: flex;
+    justify-content: center;
 `
 
 const LabelDiv = styled.div`
-width:100%;
-margin: 10px`
+    width:380px;
+    margin: 10px;
+    label {
+        input {
+            width: 100%;
+        }
+    }
+`
 
 const Submit = styled.button`
-width: 60%;
-background: #4054B2;
-border-radius: 5px;
+    width: 380px;
+    background: #4054B2;
+    border-radius: 5px;
 
-font-family: Open Sans;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 38px;
-/* or 271% */
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 38px;
+    /* or 271% */
+    margin-top: 20px;
 
-text-align: center;
+    text-align: center;
 
-color: #FFFFFF;`
+    color: #FFFFFF;
+`
 
 
 
