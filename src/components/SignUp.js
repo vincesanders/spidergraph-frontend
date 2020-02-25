@@ -119,7 +119,7 @@ const SignUp = (props) => {
       <SignUpForm
       trySubmit={trySubmit}
       />
-      <a href="https://spidergraph.alexmiller26.now.sh/">
+      <a href="https://vincesanders.github.io/spidergraph-marketing-page/index.html">
       <Logo>Spider.Graph</Logo>
       </a>
       <DivToSignIn>
