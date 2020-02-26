@@ -4,7 +4,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import {actions, thunks} from 'states/spider-graph';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import {frontToServer} from 'states/spider-graph/converter';
+import {initSpider} from 'states/spider-graph/initialState';
+import {getIndexOfSpiderWithServerId} from 'states/spider-graph/utils';
 import act from 'states/act';
+import { user } from 'tools/auth';
 
 const Container = styled.div`
     button {
@@ -59,13 +63,61 @@ const TitleInput = styled.input`
 
 export default () => {
     const dispatch = useDispatch();
-    const title = useSelector(state => state.openedSpiders[state.currentSpider].title);
+    /************** prevents race condition on title when deleting spiders ***************/
+    const currentOpenSpider = useSelector(state => state.openedSpiders[state.currentSpider]);
+    let title;
+    if (currentOpenSpider) {
+        title = useSelector(state => state.openedSpiders[state.currentSpider].title);
+    } else {
+        title = 'Loading...';
+    }
+    /**************************************************************************************** */
+    const currentUser = user.data.get ();
+    const openedSpiders = useSelector(state => state.openedSpiders);
     const graphId = useSelector(state => state.openedSpiders[state.currentSpider].id);
+    const firstGraphId = useSelector(state => {
+        if (state.savedSpiders.length > 0) {
+            return state.savedSpiders[0].id;
+        } else {
+            return -1;
+        }
+    });
 
+    const addNewGraph = () => {
+        // add new front template graph to open graphs, switch to that one now
+        // call post to add this template to the server, 
+        // on POST graph success, set this graph to have the ID in reply from server
+        dispatch(act(actions.ADD_GRAPH));
+
+        const serverNewGraph = frontToServer(initSpider(), currentUser.id);
+
+        dispatch(thunks.postGraph(serverNewGraph));
+    }
+
+    //TODO finish this deleteGraph function
+    //should mirror function in TopBar
     const deleteGraph = e => {
         e.stopPropagation();
         dispatch(act(actions.DELETE_GRAPH, graphId));
         dispatch(thunks.deleteGraph(graphId));
+
+        //open a different graph
+        //check if there is a previous spider
+        if (firstGraphId >= 0) {
+            //if yes, open that spider
+            //check if first spider is in openedSpiders
+            const openSpiderIndex = getIndexOfSpiderWithServerId(openedSpiders, firstGraphId);
+            // if graph is in openedSpiders, open it locally, else call server get and open it locally
+            if (openSpiderIndex >= 0){
+                dispatch(act(actions.OPEN_GRAPH, firstGraphId));
+            } else {
+                dispatch(act(actions.OPEN_GRAPH, firstGraphId));
+                dispatch(thunks.getGraph(firstGraphId));
+            }
+        } else {
+            //if no, open new default spider (addSpider)
+            addNewGraph();
+        }
     }
 
     const handleChange = e => {

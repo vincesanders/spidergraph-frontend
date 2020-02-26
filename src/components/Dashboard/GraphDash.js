@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components'
 import { Radar } from 'react-chartjs-2';
-import {useSelector} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { actions } from 'states/spider-graph';
+import act from 'states/act';
 
-const GraphField = styled.div`
-    
-`
+let initialRender = true;
 
 function GraphDash() {
+  const dispatch = useDispatch();
+  const savedSpiders = useSelector(state => state.savedSpiders);
   const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
   const [data, setData] = useState(spider);
   const [forceRender, setForceRender] = useState(0)
+
+  //if there are savedSpiders on users account,
+  //opens the first spider
+  if (initialRender) {
+    if (savedSpiders.length > 0) {
+      dispatch(act(actions.OPEN_GRAPH, 0));
+    }
+    initialRender = false;
+  }
 
   useEffect(() => {
     setForceRender(forceRender + 1);
@@ -20,7 +30,7 @@ function GraphDash() {
   const theme = useSelector(state => state.openedSpiders[state.currentSpider].theme);
 
   return (
-    <GraphField>
+    <div>
       <div style={{height: '20px'}}></div>
       <Radar
         
@@ -40,7 +50,7 @@ function GraphDash() {
             dummyKeyThatForcesRerender: forceRender,
           },
         }} />
-    </GraphField>
+    </div>
   );
 }
 

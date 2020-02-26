@@ -115,9 +115,6 @@ const reducer = (state = initialState, action) => {
         // payload : index of openedopenedSpiders
         openSpiderIndex = getIndexOfSpiderWithServerId(state.openedSpiders, payload);
         savedSpiderIndex = getIndexOfSpiderWithServerId(state.savedSpiders, payload);
-        console.log('openup open id: ', openSpiderIndex);
-        console.log('openup save id: ', savedSpiderIndex);
-
 
         if (openSpiderIndex !== -1){
           return (seqSetIn (state,
@@ -150,13 +147,15 @@ const reducer = (state = initialState, action) => {
 
       case (actions.EDIT_GRAPH_TITLE) :
         // payload : {id: graph id, title: edited title}
-        // return (seqSetIn (state,
-        //   ['openedSpiders', state.currentSpider, 'title'],
-        //   payload,
-        // ))
-        return {
-          ...state,
-          openedSpiders: state.openedSpiders.map(spider => {
+        if (!payload.id) {
+          return (seqSetIn (state,
+            ['openedSpiders', state.currentSpider, 'title'],
+            payload,
+          ));
+        } else {
+          return {
+            ...state,
+            openedSpiders: state.openedSpiders.map(spider => {
               if (spider.id === payload.id) {
                 spider.title = payload.title;
                 return spider;
@@ -172,6 +171,7 @@ const reducer = (state = initialState, action) => {
                 return spider;
               }
             })
+          }
         }
 
       case (actions.EDIT_GRAPH_NOTES) :
@@ -183,7 +183,6 @@ const reducer = (state = initialState, action) => {
 
       case (actions.EDIT_GRAPH_THEME) :
         // payload : edited theme
-        console.log('SET THEME TO ID: ', payload)
         return (seqSetIn (state,
           ['openedSpiders', state.currentSpider, 'theme'],
           payload,
@@ -246,7 +245,6 @@ const reducer = (state = initialState, action) => {
               datasets: state.openedSpiders[state.currentSpider].datasets.map((dataset) => {
                 const newDataset = dataset.data;
                 newDataset.splice(payload, 1);
-                console.log('spliced dataset')
                 return {
                 ...dataset,
                 data: newDataset,
@@ -631,8 +629,6 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.DELETE_GRAPH_SUCCESS) :
-          console.log('SERVER DELETE SUCCESS');
-          console.log(payload.data);
 
         // return (seqUpdateIn (state,
         //   ['currentSpider'],
@@ -660,7 +656,6 @@ const reducer = (state = initialState, action) => {
       // else
       default :
         hi.flag ('warn', 'action not defined')
-        console.log (action)
         return (state)
     }
   }

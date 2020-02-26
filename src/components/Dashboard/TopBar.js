@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 import {actions, thunks} from 'states/spider-graph';
 import act from 'states/act';
-import { user } from 'tools/auth'
+import { user } from 'tools/auth';
 import {frontToServer, serverToFront} from 'states/spider-graph/converter';
 import {initSpider} from 'states/spider-graph/initialState';
 import {getIndexOfSpiderWithServerId} from 'states/spider-graph/utils';
@@ -136,16 +136,34 @@ const TopBar = () => {
         // if graph is in openedSpiders, open it locally, else call server get and open it locally
         if (openSpiderIndex >= 0){
             dispatch(act(actions.OPEN_GRAPH, serverId));
-        }else{
+        } else {
             dispatch(act(actions.OPEN_GRAPH, serverId));
             dispatch(thunks.getGraph(serverId))
         }
     }
 
-    const deleteGraph = (e, serverId) => {
+    const deleteGraph = (e, serverId, prevSpiderId) => {
         e.stopPropagation();
         dispatch(act(actions.DELETE_GRAPH, serverId));
         dispatch(thunks.deleteGraph(serverId));
+
+        //open a different graph
+        //check if there is a previous spider
+        if (prevSpiderId >= 0) {
+            //if yes, open that spider
+            //check if previous spider is in openedSpiders
+            const openSpiderIndex = getIndexOfSpiderWithServerId(openedSpiders, prevSpiderId);
+            // if graph is in openedSpiders, open it locally, else call server get and open it locally
+            if (openSpiderIndex >= 0){
+                dispatch(act(actions.OPEN_GRAPH, prevSpiderId));
+            } else {
+                dispatch(act(actions.OPEN_GRAPH, prevSpiderId));
+                dispatch(thunks.getGraph(prevSpiderId))
+            }
+        } else {
+            //if no, open new default spider (addSpider)
+            addNewGraph();
+        }
     }
 
 
@@ -183,7 +201,7 @@ const TopBar = () => {
                 <GraphButton openGraph={(e) => openGraph(e, index)} deleteGraph={(e) => deleteGraph(e, index)} content={spider.title} active={index === currentGraph} key={index}/>
             ))} */}
             {savedSpiders.map((savedSpider, index) => (
-                <GraphButton openGraph={(e) => openGraph(e, savedSpider.id)} deleteGraph={(e) => deleteGraph(e, savedSpider.id)} 
+                <GraphButton openGraph={(e) => openGraph(e, savedSpider.id)} deleteGraph={(e) => deleteGraph(e, savedSpider.id, (index === 0 ? -1 : savedSpiders[index - 1].id))} 
                 content={savedSpider.title} active={index === currentSavedSpider} key={index}/>
             ))}
             <NewGraphButton onClick={addNewGraph}><FontAwesomeIcon icon={faPlus} /></NewGraphButton>

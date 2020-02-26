@@ -76,7 +76,11 @@ export const putGraph = (id, data) => (dispatch) => {
 
 export const deleteGraph = (id) => (dispatch) => {
   console.log('DELETE GRAPH THUNK CALLED')
-  serverRequest (dispatch) ('delete', 'DELETE_GRAPH', server.ends.graph.DELETE (id))
+  if (typeof id === 'string') {
+    console.log('The spider you deleted was not saved in the database.\nNo delete necessary.')
+  } else {
+    serverRequest (dispatch) ('delete', 'DELETE_GRAPH', server.ends.graph.DELETE (id));
+  }
 }
 
 /**************************************/
