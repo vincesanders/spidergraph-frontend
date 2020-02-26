@@ -19,17 +19,16 @@ import {frontToServer, serverToFront} from 'states/spider-graph/converter';
 
 const DashboardCont = styled.div`
     background: #ECEEF7;
-    height: 100vh;
+    /* height: 100vh; */
 `
 
 const DashboardBody = styled.div`
-    margin: 10px 20px;
+    margin: 0 20px;
 `
 const CardCont = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    /* height: 80vh; */
 `
 
 const Row = styled.div`
@@ -50,6 +49,24 @@ const Card = styled.div`
 
 const GraphCard = styled(Card)`
     width: 60%;
+    display: flex;
+    flex-direction: column;
+    div {
+        display: flex;
+        flex-direction: row-reverse;
+        button {
+            width: 50px;
+            color: #2e3c82;
+            font-size: 36px;
+            border: none;
+            background: transparent;
+            margin-right: 8px;
+            margin-top: 8px;
+            &:hover {
+                color: #1A2247;
+            }
+        }
+    }
 `
 
 const DataDesignCard = styled(Card)`
@@ -70,9 +87,6 @@ const Dashboard = () => {
     const spider = useSelector(state => state.openedSpiders[state.currentSpider]);
     const dispatch = useDispatch();
 
-    console.log('DASH LOADED, current spider: ');
-    console.log(openedSpiders);
-
     const putGraphToServer = () => {
         const id = spider.id;
 
@@ -85,32 +99,34 @@ const Dashboard = () => {
     return (
         <DashboardCont>
             <TopBar />
-                <DashboardBody>
-                    {/* <div style={{display: 'flex', justifyContent:'space-between'}}> */}
-                        <TitleInput />
-                    {/* </div> */}
-                    <CardCont>
-                        <Row>
-                            <GraphCard>
-                            <FontAwesomeIcon icon={faSave} style={{fontSize: '40px', marginLeft:'90%', marginTop:'30px'}} onClick={putGraphToServer}/>
-
-                                <GraphDash />
-                            </GraphCard>
-                            <DataDesignCard>
-                                <DataDesignTabs />
-                            </DataDesignCard>
-                        </Row>
-                        <Row>
-                            <NotesDiv>
-                                <NotesInput />
-                            </NotesDiv>
-                            <ButtonPanel>
-                                <ExportButtonsPanel />
-                            </ButtonPanel>
-                        </Row>
-                    </CardCont>
-                </DashboardBody>
-            }
+            <DashboardBody>
+                {/* <div style={{display: 'flex', justifyContent:'space-between'}}> */}
+                    <TitleInput />
+                {/* </div> */}
+                <CardCont>
+                    <Row>
+                        <GraphCard>
+                            <div>
+                            <button>
+                            <FontAwesomeIcon id='icon' icon={faSave} onClick={putGraphToServer}/>
+                            </button>
+                            </div>
+                            <GraphDash />
+                        </GraphCard>
+                        <DataDesignCard>
+                            <DataDesignTabs />
+                        </DataDesignCard>
+                    </Row>
+                    <Row>
+                        <NotesDiv>
+                            <NotesInput />
+                        </NotesDiv>
+                        <ButtonPanel>
+                            <ExportButtonsPanel />
+                        </ButtonPanel>
+                    </Row>
+                </CardCont>
+            </DashboardBody>
         </DashboardCont>
         
     );

@@ -20,6 +20,7 @@ const SignUpCont = styled.div`
 const H3 = styled.h3`
   @media (max-width: 768px) {
     margin: 40% 9px 0 9px;
+    font-size: 36px;
   }
 
   margin-top: 10%;

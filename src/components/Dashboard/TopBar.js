@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import {useSelector, useDispatch} from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 import {actions, thunks} from 'states/spider-graph';
 import act from 'states/act';
 import { user } from 'tools/auth'
@@ -38,15 +40,20 @@ const TopBarButton = styled.div`
 `
 
 const NewGraphButton = styled(TopBarButton)`
-    border-radius: 50px;
-    width: 1rem;
-    height: 4rem;
-    font-size: 3rem;
+    border-radius: 50%;
+    width: 32px;
+    height: 30px;
+    font-size: 20px;
     margin-left: 10px;
+    border: 1px solid #2e3c82;
+    padding: 0 2px;
+    background: #7282cc;
+    color: #2e3c82;
+    cursor: pointer;
     &:hover{
-        background: #7282cc;
+        border-color: white;
+        color: white;
     }
-
 `
 
 // const SavedGraphsDropDown = styled.div`
@@ -59,9 +66,10 @@ const GraphButton = (props) => {
     const GraphButtonStyled = styled(TopBarButton)`
         height: 100%;
         margin-right: 1px;
-        background: ${props.active? '#2e3c82' : '#1A2247'};
+        background: ${props.active ? '#1A2247' : '#2e3c82'};
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
+        cursor: pointer;
 
         &:hover{
             box-shadow: inset 0px 0px 0px 1px #7282cc;
@@ -69,19 +77,27 @@ const GraphButton = (props) => {
     `
 
     const DeleteGraphButton = styled(TopBarButton)`
-        border-radius: 50px;
-        width: 1rem;
-        height: 4rem;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
         margin-left: 10px;
+        border: 1px solid #2e3c82;
+        padding: 0 2px;
+        background: #7282cc;
+        color: #2e3c82;
 
         &:hover{
-            background: #7282cc;
+            border-color: white;
+            color: white;
         }
     `
+
     return (
         <GraphButtonStyled onClick={props.openGraph}>
             {props.content}
-            <DeleteGraphButton onClick={props.deleteGraph}>X</DeleteGraphButton>
+            <DeleteGraphButton onClick={props.deleteGraph}>
+                <FontAwesomeIcon icon={faTimes} />
+            </DeleteGraphButton>
         </GraphButtonStyled>
     )
 }
@@ -109,8 +125,6 @@ const TopBar = () => {
         dispatch(act(actions.ADD_GRAPH));
 
         const serverNewGraph = frontToServer(initSpider(), currentUser.id);
-        // console.log('SERVER FORMNAT GRAPH')
-        // console.log(serverNewGraph);
 
         dispatch(thunks.postGraph(serverNewGraph));
     }
@@ -121,10 +135,8 @@ const TopBar = () => {
         const openSpiderIndex = getIndexOfSpiderWithServerId(openedSpiders, serverId);
         // if graph is in openedSpiders, open it locally, else call server get and open it locally
         if (openSpiderIndex >= 0){
-            // console.log('local open graph');
             dispatch(act(actions.OPEN_GRAPH, serverId));
         }else{
-            // console.log('server get graph id: ', serverId);
             dispatch(act(actions.OPEN_GRAPH, serverId));
             dispatch(thunks.getGraph(serverId))
         }
@@ -132,9 +144,8 @@ const TopBar = () => {
 
     const deleteGraph = (e, serverId) => {
         e.stopPropagation();
-        // console.log('delete graph putton pressed, server id: ', serverId);
         dispatch(act(actions.DELETE_GRAPH, serverId));
-        dispatch(thunks.deleteGraph(serverId))
+        dispatch(thunks.deleteGraph(serverId));
     }
 
 
@@ -160,8 +171,8 @@ const TopBar = () => {
 
     return(
         <Topbar>
-            <a href="https://spidergraph.alexmiller26.now.sh/">
-            <AppTitle >Spider.Graph</AppTitle>
+            <a href="https://vincesanders.github.io/spidergraph-marketing-page/index.html">
+                <AppTitle >Spider.Graph</AppTitle>
             </a>
             {/* <OpenGraphButton onClick={addNewGraph}>Open</OpenGraphButton> */}
             {/* <SavedGraphsDropDown onClick={toggleSavedGraphsMenu}>
@@ -175,8 +186,8 @@ const TopBar = () => {
                 <GraphButton openGraph={(e) => openGraph(e, savedSpider.id)} deleteGraph={(e) => deleteGraph(e, savedSpider.id)} 
                 content={savedSpider.title} active={index === currentSavedSpider} key={index}/>
             ))}
-            <NewGraphButton onClick={addNewGraph}>+</NewGraphButton>
-            <span>uid: {currentUser.id}</span>
+            <NewGraphButton onClick={addNewGraph}><FontAwesomeIcon icon={faPlus} /></NewGraphButton>
+            {/* <span>uid: {currentUser.id}</span> */}
         </Topbar>
     )
 }

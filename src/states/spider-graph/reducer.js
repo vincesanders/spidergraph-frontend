@@ -149,11 +149,30 @@ const reducer = (state = initialState, action) => {
       /// CLIENT / CURRENT GRAPH ///
 
       case (actions.EDIT_GRAPH_TITLE) :
-        // payload : edited title
-        return (seqSetIn (state,
-          ['openedSpiders', state.currentSpider, 'title'],
-          payload,
-        ))
+        // payload : {id: graph id, title: edited title}
+        // return (seqSetIn (state,
+        //   ['openedSpiders', state.currentSpider, 'title'],
+        //   payload,
+        // ))
+        return {
+          ...state,
+          openedSpiders: state.openedSpiders.map(spider => {
+              if (spider.id === payload.id) {
+                spider.title = payload.title;
+                return spider;
+              } else {
+                return spider;
+              }
+            }),
+            savedSpiders: state.savedSpiders.map(spider => {
+              if (spider.id === payload.id) {
+                spider.title = payload.title;
+                return spider;
+              } else {
+                return spider;
+              }
+            })
+        }
 
       case (actions.EDIT_GRAPH_NOTES) :
         // payload : edited notes
@@ -486,8 +505,6 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.GET_USER_GRAPHS_SUCCESS) :
-        console.log('user graphs get success payload data: ');
-        console.log(payload.data);
 
         const frontFormatSavedSpiders = payload.data.map(savedSpider => {
           return{
@@ -521,8 +538,6 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.POST_GRAPH_SUCCESS) :
-        console.log('graph post success payload data: ');
-        console.log(payload.data);
 
         return (seqSetIn (state,
           // needs ID
@@ -548,13 +563,8 @@ const reducer = (state = initialState, action) => {
         ))
 
       case (actions.GET_GRAPH_SUCCESS) :
-        // console.log('graph get success payload data: ');
-        // console.log(payload.data);
-
         // convert graph from server to frontend format, and add to openedSpiders array at end
-        // console.log('server to front conversion:');
         const graphFrontendFormat = serverToFront(payload.data);
-        // console.log(graphFrontendFormat);
 
         return (seqUpdateIn (state,
           ['currentSpider'],
@@ -598,13 +608,10 @@ const reducer = (state = initialState, action) => {
 
       case (actions.DELETE_GRAPH) :
         serverGraphId = payload;
-        console.log('delete server id: ', serverGraphId);
         
         savedSpiderIndex = getIndexOfSpiderWithServerId(state.savedSpiders, serverGraphId);
-        console.log('delete saved id: ', savedSpiderIndex);
 
         openSpiderIndex = getIndexOfSpiderWithServerId(state.openedSpiders, serverGraphId);
-        console.log('delete open id: ', openSpiderIndex);
 
         return (seqUpdateIn (state,
           // ['currentSpider'],

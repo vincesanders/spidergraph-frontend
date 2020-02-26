@@ -97,7 +97,7 @@ const SignIn = (props) => {
   }
 
   const trySubmit = (values, formikBag) => {
-    dispatch (signIn (values))
+    dispatch (signIn (values));
   }
 
   useEffect (() => {
